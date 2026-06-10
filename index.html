@@ -3,59 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiniela Mundial 2026</title>
+<title>🏆 Quiniela Mundial 2026</title>
 
 <style>
+
+:root{
+    --verde:#00c853;
+    --verde2:#00e676;
+    --azul:#071426;
+    --azul2:#10233d;
+    --gris:#dce3ea;
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:'Segoe UI',sans-serif;
 }
-<script>
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
 
-fetch(csvUrl)
-  .then(response => response.text())
-  .then(csv => {
-    console.log(csv);
-  });
-</script>
-    
 body{
-    background:linear-gradient(135deg,#0f172a,#1e293b);
+    background:#08111f;
     color:white;
 }
 
 .hero{
-    padding:60px;
+    min-height:50vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
+    background:
+    linear-gradient(
+    135deg,
+    #08111f,
+    #10233d);
 }
 
 .hero h1{
-    font-size:60px;
-    margin-bottom:10px;
+    font-size:70px;
+    margin-bottom:15px;
 }
 
 .hero p{
+    font-size:22px;
     color:#cbd5e1;
-    font-size:20px;
 }
 
-.btns{
-    margin-top:30px;
+.buttons{
+    margin-top:35px;
 }
 
 .btn{
     display:inline-block;
-    padding:15px 30px;
     margin:10px;
-    background:#22c55e;
-    color:white;
+    padding:16px 28px;
+    border-radius:14px;
     text-decoration:none;
-    border-radius:12px;
-    font-weight:bold;
+    font-weight:700;
     transition:.3s;
+}
+
+.btn-primary{
+    background:var(--verde);
+    color:white;
+}
+
+.btn-secondary{
+    background:white;
+    color:#08111f;
 }
 
 .btn:hover{
@@ -63,126 +80,181 @@ body{
 }
 
 .cards{
+    max-width:1400px;
+    margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
     padding:40px;
 }
 
 .card{
-    background:#1e293b;
+    background:#12213a;
+    border-radius:20px;
     padding:25px;
-    border-radius:18px;
-    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+
+.card small{
+    color:#9fb2c8;
 }
 
 .card h2{
-    margin-bottom:10px;
+    margin-top:10px;
+    font-size:40px;
 }
 
-.ranking{
-    padding:40px;
+.section{
+    max-width:1400px;
+    margin:auto;
+    padding:20px 40px 60px;
+}
+
+.section h2{
+    margin-bottom:20px;
+    font-size:34px;
+}
+
+.table-container{
+    overflow:auto;
+    border-radius:18px;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    background:#1e293b;
-    border-radius:15px;
-    overflow:hidden;
+    background:#12213a;
+}
+
+thead{
+    background:var(--verde);
 }
 
 th{
-    background:#22c55e;
-    padding:15px;
+    padding:18px;
+    text-align:left;
 }
 
 td{
-    padding:12px;
-    border-bottom:1px solid #334155;
+    padding:16px;
+    border-bottom:1px solid #203452;
+}
+
+tr:hover{
+    background:#172947;
 }
 
 .footer{
     text-align:center;
     padding:30px;
-    color:#94a3b8;
+    color:#9fb2c8;
 }
+
 </style>
 
 </head>
 
 <body>
 
-<div class="hero">
+<section class="hero">
+
     <h1>🏆 QUINIELA MUNDIAL 2026</h1>
-    <p>Predice los resultados y compite por el primer lugar</p>
 
-    <div class="btns">
-        <a href="#" class="btn">⚽ Registrar Pronósticos</a>
-        <a href="#" class="btn">📊 Ver Ranking</a>
+    <p>
+        Predice los resultados y compite por el primer lugar
+    </p>
+
+    <div class="buttons">
+
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=964365348&single=true&output=csv"
+        target="_blank"
+        class="btn btn-primary">
+        🌎 World Cup
+        </a>
+
+        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=405538692&single=true&output=csv"
+        target="_blank"
+        class="btn btn-secondary">
+        ⚽ Predictions
+        </a>
+
     </div>
-</div>
 
-<div class="cards">
+</section>
+
+<section class="cards">
 
     <div class="card">
-        <h2>🥇 Líder Actual</h2>
-        <h1>Jorge López</h1>
+        <small>🥇 Líder Actual</small>
+        <h2>Jorge López</h2>
         <p>0 puntos</p>
     </div>
 
     <div class="card">
-        <h2>⚽ Próximo Partido</h2>
-        <h1>Brasil vs Argentina</h1>
-        <p>20 Junio 2026</p>
-    </div>
-
-    <div class="card">
-        <h2>👥 Participantes</h2>
-        <h1>13</h1>
+        <small>👥 Participantes</small>
+        <h2>13</h2>
         <p>Jugadores registrados</p>
     </div>
 
-</div>
+    <div class="card">
+        <small>⚽ Mundial</small>
+        <h2>2026</h2>
+        <p>Estados Unidos, México y Canadá</p>
+    </div>
 
-<div class="ranking">
-    <h2 style="margin-bottom:20px;">🏅 Ranking General</h2>
+</section>
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Participante</th>
-                <th>Puntos</th>
-            </tr>
-        </thead>
+<section class="section">
 
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Jorge López</td>
-                <td>0</td>
-            </tr>
+    <h2>🏅 Ranking General</h2>
 
-            <tr>
-                <td>2</td>
-                <td>Jesús Urmeneta</td>
-                <td>0</td>
-            </tr>
+    <div class="table-container">
 
-            <tr>
-                <td>3</td>
-                <td>Enimer Rivera</td>
-                <td>0</td>
-            </tr>
-        </tbody>
+        <table>
 
-    </table>
-</div>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Participante</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+
+            <tbody id="rankingBody">
+
+                <tr>
+                    <td colspan="3">
+                        Cargando ranking...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
 
 <div class="footer">
     Mundial 2026 © Quiniela Oficial
 </div>
+
+<script>
+
+const rankingCSV =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
+
+fetch(rankingCSV)
+.then(r => r.text())
+.then(data => {
+
+    console.log(data);
+
+})
+.catch(err => console.error(err));
+
+</script>
 
 </body>
 </html>
