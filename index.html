@@ -94,41 +94,9 @@ tr:hover{background:#172947}
 const rankingCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
 
 function parseCSV(text) {
-    const rows = [];
-    let row = [];
-    let cell = "";
-    let insideQuotes = false;
-
-    for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        const next = text[i + 1];
-
-        if (char === '"' && insideQuotes && next === '"') {
-            cell += '"';
-            i++;
-        } else if (char === '"') {
-            insideQuotes = !insideQuotes;
-        } else if (char === "," && !insideQuotes) {
-            row.push(cell.trim());
-            cell = "";
-        } else if ((char === "\n" || char === "\r") && !insideQuotes) {
-            if (cell || row.length) {
-                row.push(cell.trim());
-                rows.push(row);
-                row = [];
-                cell = "";
-            }
-        } else {
-            cell += char;
-        }
-    }
-
-    if (cell || row.length) {
-        row.push(cell.trim());
-        rows.push(row);
-    }
-
-    return rows;
+    return text.trim().split(/\r?\n/).map(row =>
+        row.split(",").map(cell => cell.replaceAll('"', '').trim())
+    );
 }
 
 fetch(rankingCSV + "&cache=" + Date.now())
@@ -136,11 +104,17 @@ fetch(rankingCSV + "&cache=" + Date.now())
 .then(csv => {
     const rows = parseCSV(csv);
 
-    const data = rows
-        .filter(row => row[1] && row[1].toLowerCase() !== "nombre")
+    const headerIndex = rows.findIndex(row =>
+        row.includes("Nombre") && row.includes("Total")
+    );
+
+    const dataRows = rows.slice(headerIndex + 1);
+
+    const data = dataRows
         .map(row => ({
-            nombre: row[1],
-            puntos: Number(row[2]) || 0
+            posicion: row[1],
+            nombre: row[2],
+            puntos: Number(row[3]) || 0
         }))
         .filter(item => item.nombre && item.nombre.trim() !== "");
 
@@ -150,7 +124,7 @@ fetch(rankingCSV + "&cache=" + Date.now())
     data.forEach((item, index) => {
         rankingBody.innerHTML += `
             <tr>
-                <td>${index + 1}</td>
+                <td>${item.posicion || index + 1}</td>
                 <td>${item.nombre}</td>
                 <td>${item.puntos}</td>
             </tr>
@@ -163,16 +137,7 @@ fetch(rankingCSV + "&cache=" + Date.now())
         document.getElementById("liderNombre").textContent = data[0].nombre;
         document.getElementById("liderPuntos").textContent = data[0].puntos + " puntos";
     }
-})
-.catch(error => {
-    document.getElementById("rankingBody").innerHTML = `
-        <tr>
-            <td colspan="3">No se pudo cargar el ranking.</td>
-        </tr>
-    `;
-    console.error(error);
 });
 </script>
-
 </body>
 </html>
