@@ -12,7 +12,16 @@
     box-sizing:border-box;
     font-family:'Segoe UI',sans-serif;
 }
+<script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
 
+fetch(csvUrl)
+  .then(response => response.text())
+  .then(csv => {
+    console.log(csv);
+  });
+</script>
+    
 body{
     background:linear-gradient(135deg,#0f172a,#1e293b);
     color:white;
