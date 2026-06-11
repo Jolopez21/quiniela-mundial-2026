@@ -237,7 +237,7 @@ tr:hover{background:#172947}
 
 <script>
 const rankingCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
-const worldCupCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=964365348&single=true&output=csv";
+const matchesCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=1588347595&single=true&output=csv";
 
 function parseCSV(text){
 return text.trim().split(/\r?\n/).map(row =>
@@ -347,45 +347,61 @@ document.getElementById("tickerText").textContent =
 }
 });
 
-fetch(worldCupCSV + "&cache=" + Date.now())
+fetch(matchesCSV + "&cache=" + Date.now())
 .then(response => response.text())
 .then(csv => {
 const rows = parseCSV(csv);
-let partidos = [];
 
-for(let r=0;r<rows.length-4;r++){
-for(let c=0;c<rows[r].length;c++){
-const matchNo = rows[r][c];
+/*
+Columnas según tu hoja Matches:
+A = TRUE/FALSE
+B = Match No.
+G = Date (my time) - fecha
+H = hora
+J = Venue
+K = Team 1
+L = Team 2
+*/
 
-if(isNumber(matchNo) && Number(matchNo)>=1 && Number(matchNo)<=150){
-const estadio = rows[r][c+1] || "";
-const fecha = rows[r+1]?.[c+1] || "";
-const hora = rows[r+1]?.[c+2] || "";
-const local = rows[r+2]?.[c+1] || "";
-const visitante = rows[r+2]?.[c+2] || "";
-const golLocal = rows[r+3]?.[c+1] || "";
-const golVisitante = rows[r+3]?.[c+2] || "";
-
-if(local && visitante && fecha && hora){
-partidos.push({numero:Number(matchNo),estadio,fecha,hora,local,visitante,golLocal,golVisitante});
-}
-}
-}
-}
-
-partidos.sort((a,b)=>a.numero-b.numero);
-
-const siguiente = partidos.find(p =>
-!isNumber(p.golLocal) || !isNumber(p.golVisitante)
+const partidosHoy = rows.map(row => ({
+activo: String(row[0] || "").trim().toUpperCase(),
+numero: String(row[1] || "").trim(),
+fecha: String(row[6] || "").trim(),
+hora: String(row[7] || "").trim(),
+estadio: String(row[9] || "").trim(),
+local: String(row[10] || "").trim(),
+visitante: String(row[11] || "").trim()
+})).filter(p =>
+p.activo === "TRUE" &&
+p.numero &&
+p.local &&
+p.visitante
 );
 
-if(siguiente){
+if(partidosHoy.length > 0){
+
+document.getElementById("proximoPartido").innerHTML =
+partidosHoy.map(p =>
+`${p.local} vs ${p.visitante}`
+).join("<br>");
+
+document.getElementById("proximoDetalle").innerHTML =
+partidosHoy.map(p =>
+`Partido #${p.numero} · ${p.fecha} · ${p.hora} · ${p.estadio}`
+).join("<br>");
+
+} else {
 document.getElementById("proximoPartido").textContent =
-`${siguiente.local} vs ${siguiente.visitante}`;
+"No hay partido marcado como TRUE";
 
 document.getElementById("proximoDetalle").textContent =
-`Partido #${siguiente.numero} · ${siguiente.fecha} · ${siguiente.hora} · ${siguiente.estadio}`;
+"Revisa la columna A de la hoja Matches.";
 }
+})
+.catch(error => {
+console.error("Error leyendo Matches:", error);
+document.getElementById("proximoPartido").textContent = "No se pudo leer Matches";
+document.getElementById("proximoDetalle").textContent = "Revisa el enlace publicado como CSV.";
 });
 </script>
 
