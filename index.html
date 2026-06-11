@@ -7,28 +7,150 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#08111f;color:white}
-.hero{padding:90px 20px;text-align:center;background:linear-gradient(135deg,#08111f,#10233d)}
-.hero h1{font-size:64px;margin-bottom:15px}
-.hero p{font-size:22px;color:#cbd5e1}
-.buttons{margin-top:35px}
-.btn{display:inline-block;padding:16px 32px;margin:10px;border-radius:14px;text-decoration:none;font-weight:800;transition:.3s}
-.btn:hover{transform:translateY(-4px)}
-.btn-primary{background:#00c853;color:white}
-.btn-secondary{background:white;color:#08111f}
-.cards{max-width:1400px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding:40px}
-.card{background:#12213a;border-radius:20px;padding:25px;box-shadow:0 10px 25px rgba(0,0,0,.35)}
-.card small{color:#9fb2c8}
-.card h2{font-size:42px;margin-top:10px}
-.section{max-width:1400px;margin:auto;padding:20px 40px 60px}
-.section h2{margin-bottom:20px;font-size:34px}
-.table-container{overflow:auto;border-radius:18px}
-table{width:100%;border-collapse:collapse;background:#12213a}
-thead{background:#00c853}
-th,td{padding:16px;text-align:left;border-bottom:1px solid #203452}
-tr:hover{background:#172947}
-.footer{text-align:center;padding:30px;color:#9fb2c8}
-@media(max-width:700px){.hero h1{font-size:38px}.hero p{font-size:18px}}
+
+body{
+    background:#08111f;
+    color:white;
+}
+
+.hero{
+    padding:85px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#08111f,#10233d);
+}
+
+.hero h1{
+    font-size:64px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:22px;
+    color:#cbd5e1;
+}
+
+.contador{
+    margin-top:25px;
+    display:inline-block;
+    padding:12px 26px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:999px;
+    font-weight:800;
+    color:#e2e8f0;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:16px 32px;
+    margin:10px;
+    border-radius:14px;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.btn-primary{
+    background:#00c853;
+    color:white;
+}
+
+.btn-secondary{
+    background:white;
+    color:#08111f;
+}
+
+.cards{
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    padding:45px 40px;
+}
+
+.card{
+    background:#12213a;
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+.card small{
+    color:#cbd5e1;
+    font-weight:700;
+}
+
+.card h2{
+    font-size:38px;
+    margin-top:14px;
+    line-height:1.25;
+}
+
+.card p{
+    margin-top:8px;
+    font-size:18px;
+}
+
+.gold{border-top:6px solid #facc15}
+.silver{border-top:6px solid #cbd5e1}
+.bronze{border-top:6px solid #d97706}
+
+.section{
+    max-width:1400px;
+    margin:auto;
+    padding:20px 40px 60px;
+}
+
+.section h2{
+    margin-bottom:20px;
+    font-size:34px;
+}
+
+.table-container{
+    overflow:auto;
+    border-radius:18px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#12213a;
+}
+
+thead{
+    background:#00c853;
+}
+
+th,td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid #203452;
+}
+
+tr:hover{
+    background:#172947;
+}
+
+.footer{
+    text-align:center;
+    padding:30px;
+    color:#9fb2c8;
+}
+
+@media(max-width:700px){
+    .hero h1{font-size:38px}
+    .hero p{font-size:18px}
+    .card h2{font-size:30px}
+}
 </style>
 </head>
 
@@ -38,6 +160,10 @@ tr:hover{background:#172947}
     <h1>🏆 QUINIELA MUNDIAL 2026</h1>
     <p>Predice los resultados y compite por el primer lugar</p>
 
+    <div class="contador">
+        👥 <span id="totalParticipantes">0</span> participantes activos
+    </div>
+
     <div class="buttons">
         <a href="worldcup.html" class="btn btn-primary">🌎 World Cup</a>
         <a href="predictions.html" class="btn btn-secondary">⚽ Predictions</a>
@@ -45,23 +171,25 @@ tr:hover{background:#172947}
 </section>
 
 <section class="cards">
-    <div class="card">
-        <small>🥇 Líder Actual</small>
+
+    <div class="card gold">
+        <small>🥇 Primer Lugar</small>
         <h2 id="liderNombre">Cargando...</h2>
         <p id="liderPuntos">0 puntos</p>
     </div>
 
-    <div class="card">
-        <small>👥 Participantes</small>
-        <h2 id="totalParticipantes">0</h2>
-        <p>Jugadores registrados</p>
+    <div class="card silver">
+        <small>🥈 Segundo Lugar</small>
+        <h2 id="segundoNombre">Cargando...</h2>
+        <p id="segundoPuntos">0 puntos</p>
     </div>
 
-    <div class="card">
-        <small>⚽ Mundial</small>
-        <h2>2026</h2>
-        <p>Estados Unidos, México y Canadá</p>
+    <div class="card bronze">
+        <small>🥉 Tercer Lugar</small>
+        <h2 id="terceroNombre">Cargando...</h2>
+        <p id="terceroPuntos">0 puntos</p>
     </div>
+
 </section>
 
 <section class="section">
@@ -137,7 +265,18 @@ fetch(rankingCSV + "&cache=" + Date.now())
         document.getElementById("liderNombre").textContent = data[0].nombre;
         document.getElementById("liderPuntos").textContent = data[0].puntos + " puntos";
     }
+
+    if (data.length > 1) {
+        document.getElementById("segundoNombre").textContent = data[1].nombre;
+        document.getElementById("segundoPuntos").textContent = data[1].puntos + " puntos";
+    }
+
+    if (data.length > 2) {
+        document.getElementById("terceroNombre").textContent = data[2].nombre;
+        document.getElementById("terceroPuntos").textContent = data[2].puntos + " puntos";
+    }
 });
 </script>
+
 </body>
 </html>
