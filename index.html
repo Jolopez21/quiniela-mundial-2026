@@ -39,7 +39,14 @@ background-size:cover;background-position:center;
 }
 
 .hero-content{position:relative;z-index:2}
-.ball{position:absolute;right:8%;top:65px;font-size:80px;animation:floatBall 4s ease-in-out infinite;z-index:2}
+.ball{
+position:absolute;right:8%;top:65px;width:95px;height:95px;
+animation:floatBall 4s ease-in-out infinite;z-index:2;
+}
+.ball img{
+width:100%;height:100%;object-fit:contain;
+filter:drop-shadow(0 0 22px rgba(255,255,255,.45));
+}
 
 @keyframes floatBall{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-22px) rotate(16deg)}}
 
@@ -112,6 +119,41 @@ border:1px solid rgba(255,255,255,.15);
 .match-box h2{margin-top:8px;font-size:34px}
 .match-box p{margin-top:8px;color:#dbeafe;font-size:18px}
 
+.today-match{
+margin-top:16px;
+padding:16px 18px;
+background:rgba(6,17,31,.55);
+border:1px solid rgba(255,255,255,.18);
+border-radius:16px;
+backdrop-filter:blur(4px);
+}
+.today-match strong{
+display:block;
+font-size:27px;
+line-height:1.2;
+color:white;
+}
+.today-match span{
+display:block;
+margin-top:8px;
+font-size:17px;
+color:#dbeafe;
+}
+.fifa-btn{
+display:inline-block;
+margin-top:12px;
+padding:10px 16px;
+background:#00c853;
+color:#06111f;
+font-weight:900;
+text-decoration:none;
+border-radius:12px;
+box-shadow:0 0 18px rgba(0,200,83,.45);
+}
+.fifa-btn:hover{
+transform:translateY(-2px);
+}
+
 .qr-box{display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap}
 .qr-box img{width:130px;background:white;padding:8px;border-radius:14px}
 .qr-box h2{font-size:30px;margin-top:8px}
@@ -137,7 +179,7 @@ tr:hover{background:#172947}
 
 @media(max-width:700px){
 .hero h1{font-size:38px}.cup{font-size:58px}.hero p{font-size:18px}
-.ball{font-size:48px;right:20px;top:25px}.card h2{font-size:28px}
+.ball{width:58px;height:58px;right:20px;top:25px}.card h2{font-size:28px}
 .intro-card h2{font-size:30px}.intro-cup{font-size:85px}
 }
 </style>
@@ -164,7 +206,9 @@ tr:hover{background:#172947}
 </div>
 
 <section class="hero">
-<div class="ball">⚽</div>
+<div class="ball">
+  <img src="ball.png?v=4" alt="Balón Mundial 2026">
+</div>
 <div class="hero-content">
 <h1><span class="cup">🏆</span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
@@ -237,6 +281,7 @@ tr:hover{background:#172947}
 
 <script>
 const rankingCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
+const rankingAnteriorCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=959130951&single=true&output=csv";
 const matchesCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=1588347595&single=true&output=csv";
 
 function parseCSV(text){
@@ -256,35 +301,57 @@ if(pos===3)return "🥉";
 return pos;
 }
 
-function getMovimiento(nombre,posicionActual,rankingAnterior){
-if(!rankingAnterior[nombre]) return `<span class="move-new">🆕 Nuevo</span>`;
-const anterior = rankingAnterior[nombre];
-const dif = anterior - posicionActual;
-if(dif>0) return `<span class="move-up">▲ Subió ${dif}</span>`;
-if(dif<0) return `<span class="move-down">▼ Bajó ${Math.abs(dif)}</span>`;
-return `<span class="move-equal">═ Igual</span>`;
-}
-
-fetch(rankingCSV + "&cache=" + Date.now())
-.then(response => response.text())
-.then(csv => {
+function obtenerRankingDesdeCSV(csv){
 const rows = parseCSV(csv);
 
 const headerIndex = rows.findIndex(row =>
 row.includes("Nombre") && row.includes("Total")
 );
 
+if(headerIndex === -1) return [];
+
 const dataRows = rows.slice(headerIndex + 1);
 
-const data = dataRows.map(row => ({
+return dataRows.map(row => ({
 posicion:Number(row[1]) || 0,
 nombre:row[2],
 puntos:Number(row[3]) || 0
 })).filter(item => item.nombre && item.nombre.trim() !== "");
+}
 
-const rankingAnterior = JSON.parse(localStorage.getItem("rankingAnteriorQuiniela") || "{}");
-const liderAnterior = localStorage.getItem("liderAnteriorQuiniela");
-const rankingActual = {};
+function crearMapaRankingAnterior(dataAnterior){
+const mapa = {};
+
+dataAnterior.forEach((item,index) => {
+const posicion = item.posicion || index + 1;
+mapa[item.nombre] = posicion;
+});
+
+return mapa;
+}
+
+function getMovimiento(nombre,posicionActual,rankingAnterior){
+if(!rankingAnterior[nombre]) return `<span class="move-new">🆕 Nuevo</span>`;
+
+const anterior = rankingAnterior[nombre];
+const dif = anterior - posicionActual;
+
+if(dif>0) return `<span class="move-up">▲ Subió ${dif}</span>`;
+if(dif<0) return `<span class="move-down">▼ Bajó ${Math.abs(dif)}</span>`;
+return `<span class="move-equal">═ Igual</span>`;
+}
+
+Promise.all([
+fetch(rankingCSV + "&cache=" + Date.now()).then(response => response.text()),
+fetch(rankingAnteriorCSV + "&cache=" + Date.now()).then(response => response.text())
+])
+.then(([csvActual,csvAnterior]) => {
+
+const data = obtenerRankingDesdeCSV(csvActual);
+const dataAnterior = obtenerRankingDesdeCSV(csvAnterior);
+const rankingAnterior = crearMapaRankingAnterior(dataAnterior);
+
+const liderAnterior = dataAnterior.length > 0 ? dataAnterior[0].nombre : "";
 const maxPuntos = Math.max(...data.map(x => x.puntos),1);
 
 const rankingBody = document.getElementById("rankingBody");
@@ -292,7 +359,6 @@ rankingBody.innerHTML = "";
 
 data.forEach((item,index) => {
 const posicionActual = item.posicion || index + 1;
-rankingActual[item.nombre] = posicionActual;
 const progreso = Math.round((item.puntos / maxPuntos) * 100);
 
 rankingBody.innerHTML += `
@@ -310,8 +376,6 @@ rankingBody.innerHTML += `
 `;
 });
 
-localStorage.setItem("rankingAnteriorQuiniela", JSON.stringify(rankingActual));
-
 document.getElementById("totalParticipantes").textContent = data.length;
 
 if(data.length > 0){
@@ -327,8 +391,6 @@ const nl = document.getElementById("newLeader");
 nl.style.display = "flex";
 setTimeout(()=>{nl.style.display="none"},3500);
 }
-
-localStorage.setItem("liderAnteriorQuiniela", data[0].nombre);
 }
 
 if(data.length > 1){
@@ -345,6 +407,11 @@ if(data.length >= 3){
 document.getElementById("tickerText").textContent =
 `🔥 Tabla actual: 🥇 ${data[0].nombre} (${data[0].puntos} pts) | 🥈 ${data[1].nombre} (${data[1].puntos} pts) | 🥉 ${data[2].nombre} (${data[2].puntos} pts) | 👥 ${data.length} participantes activos`;
 }
+})
+.catch(error => {
+console.error("Error leyendo ranking:", error);
+document.getElementById("rankingBody").innerHTML =
+`<tr><td colspan="5">No se pudo cargar el ranking.</td></tr>`;
 });
 
 fetch(matchesCSV + "&cache=" + Date.now())
@@ -361,6 +428,7 @@ H = hora
 J = Venue
 K = Team 1
 L = Team 2
+P = FIFA Link
 */
 
 const partidosHoy = rows.map(row => ({
@@ -370,7 +438,8 @@ fecha: String(row[6] || "").trim(),
 hora: String(row[7] || "").trim(),
 estadio: String(row[9] || "").trim(),
 local: String(row[10] || "").trim(),
-visitante: String(row[11] || "").trim()
+visitante: String(row[11] || "").trim(),
+fifaLink: (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim()
 })).filter(p =>
 p.activo === "TRUE" &&
 p.numero &&
@@ -380,15 +449,23 @@ p.visitante
 
 if(partidosHoy.length > 0){
 
-document.getElementById("proximoPartido").innerHTML =
-partidosHoy.map(p =>
-`${p.local} vs ${p.visitante}`
-).join("<br>");
+document.getElementById("proximoPartido").textContent =
+partidosHoy.length > 1 ? "Partidos de Hoy" : "Próximo Partido";
 
 document.getElementById("proximoDetalle").innerHTML =
-partidosHoy.map(p =>
-`Partido #${p.numero} · ${p.fecha} · ${p.hora} · ${p.estadio}`
-).join("<br>");
+partidosHoy.map(p => {
+const boton = p.fifaLink
+? `<a class="fifa-btn" href="${p.fifaLink}" target="_blank" rel="noopener noreferrer">📊 Ver resultado FIFA</a>`
+: "";
+
+return `
+<div class="today-match">
+<strong>${p.local} vs ${p.visitante}</strong>
+<span>Partido #${p.numero} · ${p.fecha} · ${p.hora} · ${p.estadio}</span>
+${boton}
+</div>
+`;
+}).join("");
 
 } else {
 document.getElementById("proximoPartido").textContent =
