@@ -9,6 +9,61 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{background:#06111f;color:white}
 
+.intro-champion{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,#1f2937,#020617);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:introOut 1s ease forwards;
+    animation-delay:3.2s;
+}
+
+.intro-card{
+    text-align:center;
+    padding:45px;
+    border-radius:30px;
+    background:rgba(18,33,58,.88);
+    border:1px solid rgba(250,204,21,.45);
+    box-shadow:0 0 70px rgba(250,204,21,.60);
+    animation:introPop 1.2s ease;
+}
+
+.intro-cup{
+    font-size:115px;
+    animation:superCup 1s infinite alternate;
+}
+
+.intro-card small{
+    color:#facc15;
+    font-weight:900;
+    text-transform:uppercase;
+}
+
+.intro-card h2{
+    font-size:42px;
+    margin:15px 0 5px;
+}
+
+.intro-card p{
+    font-size:22px;
+}
+
+@keyframes introPop{
+    from{transform:scale(.6);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes introOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+}
+
 .hero{
     position:relative;overflow:hidden;padding:95px 20px;text-align:center;
     background:
@@ -142,11 +197,22 @@ tr:hover{background:#172947}
     .hero p{font-size:18px}
     .ball{font-size:48px;right:20px;top:25px}
     .card h2{font-size:28px}
+    .intro-card h2{font-size:30px}
+    .intro-cup{font-size:85px}
 }
 </style>
 </head>
 
 <body>
+
+<div id="introChampion" class="intro-champion">
+    <div class="intro-card">
+        <div class="intro-cup">🏆</div>
+        <small>Campeón actual</small>
+        <h2 id="introLider">Cargando líder...</h2>
+        <p id="introPuntos">0 puntos</p>
+    </div>
+</div>
 
 <section class="hero">
     <div class="ball">⚽</div>
@@ -304,6 +370,9 @@ fetch(rankingCSV + "&cache=" + Date.now())
     if (data.length > 0) {
         document.getElementById("liderNombre").textContent = data[0].nombre;
         document.getElementById("liderPuntos").textContent = data[0].puntos + " puntos";
+
+        document.getElementById("introLider").textContent = data[0].nombre;
+        document.getElementById("introPuntos").textContent = data[0].puntos + " puntos";
     }
 
     if (data.length > 1) {
