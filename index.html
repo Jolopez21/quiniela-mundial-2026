@@ -7,65 +7,87 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-
-body{
-    background:#08111f;
-    color:white;
-}
+body{background:#06111f;color:white}
 
 .hero{
-    padding:85px 20px;
+    position:relative;
+    overflow:hidden;
+    padding:95px 20px;
     text-align:center;
-    background:linear-gradient(135deg,#08111f,#10233d);
+    background:
+        linear-gradient(rgba(3,10,24,.58),rgba(3,10,24,.92)),
+        url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2000&q=80");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{position:relative;z-index:2}
+.ball{position:absolute;right:8%;top:65px;font-size:80px;animation:floatBall 4s ease-in-out infinite;z-index:2}
+
+@keyframes floatBall{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-22px) rotate(16deg)}
 }
 
 .hero h1{
-    font-size:64px;
+    font-size:66px;
     margin-bottom:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    text-shadow:0 8px 25px rgba(0,0,0,.75);
 }
 
-.hero p{
-    font-size:22px;
-    color:#cbd5e1;
-}
+.hero h1 .cup{font-size:90px}
+.hero p{font-size:22px;color:#e0f2fe}
 
 .contador{
     margin-top:25px;
     display:inline-block;
-    padding:12px 26px;
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.22);
+    padding:12px 28px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.30);
     border-radius:999px;
-    font-weight:800;
-    color:#e2e8f0;
+    font-weight:900;
+    backdrop-filter:blur(8px);
 }
 
-.buttons{
-    margin-top:30px;
-}
+.buttons{margin-top:30px}
 
 .btn{
     display:inline-block;
-    padding:16px 32px;
+    padding:16px 34px;
     margin:10px;
     border-radius:14px;
     text-decoration:none;
-    font-weight:800;
+    font-weight:900;
     transition:.3s;
 }
 
-.btn:hover{
-    transform:translateY(-4px);
-}
+.btn:hover{transform:translateY(-4px) scale(1.03)}
+.btn-primary{background:#00c853;color:white;box-shadow:0 0 25px rgba(0,200,83,.50)}
+.btn-secondary{background:white;color:#08111f}
 
-.btn-primary{
+.ticker{
+    overflow:hidden;
     background:#00c853;
-    color:white;
+    color:#06111f;
+    font-weight:900;
+    padding:12px 0;
+    white-space:nowrap;
 }
 
-.btn-secondary{
-    background:white;
-    color:#08111f;
+.ticker span{
+    display:inline-block;
+    padding-left:100%;
+    animation:tickerMove 24s linear infinite;
+}
+
+@keyframes tickerMove{
+    from{transform:translateX(0)}
+    to{transform:translateX(-100%)}
 }
 
 .cards{
@@ -78,78 +100,61 @@ body{
 }
 
 .card{
-    background:#12213a;
+    background:linear-gradient(145deg,#12213a,#0d1a30);
     border-radius:22px;
     padding:28px;
-    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    box-shadow:0 14px 35px rgba(0,0,0,.45);
+    transition:.3s;
 }
 
-.card small{
-    color:#cbd5e1;
-    font-weight:700;
-}
+.card:hover{transform:translateY(-6px)}
+.card small{color:#cbd5e1;font-weight:800}
+.card h2{font-size:36px;margin-top:14px;line-height:1.25}
+.card p{margin-top:8px;font-size:18px}
 
-.card h2{
-    font-size:38px;
-    margin-top:14px;
-    line-height:1.25;
-}
+.gold{border-top:6px solid #facc15;animation:glowGold 2.4s infinite alternate}
+.silver{border-top:6px solid #cbd5e1;animation:glowSilver 2.4s infinite alternate}
+.bronze{border-top:6px solid #d97706;animation:glowBronze 2.4s infinite alternate}
 
-.card p{
-    margin-top:8px;
-    font-size:18px;
-}
+@keyframes glowGold{from{box-shadow:0 12px 25px rgba(250,204,21,.18)}to{box-shadow:0 0 38px rgba(250,204,21,.65)}}
+@keyframes glowSilver{from{box-shadow:0 12px 25px rgba(203,213,225,.14)}to{box-shadow:0 0 34px rgba(203,213,225,.5)}}
+@keyframes glowBronze{from{box-shadow:0 12px 25px rgba(217,119,6,.14)}to{box-shadow:0 0 34px rgba(217,119,6,.55)}}
 
-.gold{border-top:6px solid #facc15}
-.silver{border-top:6px solid #cbd5e1}
-.bronze{border-top:6px solid #d97706}
+.match-card{max-width:1400px;margin:0 auto 20px;padding:0 40px}
 
-.section{
-    max-width:1400px;
-    margin:auto;
-    padding:20px 40px 60px;
-}
-
-.section h2{
-    margin-bottom:20px;
-    font-size:34px;
-}
-
-.table-container{
-    overflow:auto;
-    border-radius:18px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:#12213a;
-}
-
-thead{
-    background:#00c853;
-}
-
-th,td{
-    padding:16px;
-    text-align:left;
-    border-bottom:1px solid #203452;
-}
-
-tr:hover{
-    background:#172947;
-}
-
-.footer{
-    text-align:center;
+.match-box{
+    background:
+        linear-gradient(rgba(0,0,0,.38),rgba(0,0,0,.58)),
+        url("https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+    border-radius:24px;
     padding:30px;
-    color:#9fb2c8;
+    box-shadow:0 14px 35px rgba(0,0,0,.45);
+    border:1px solid rgba(255,255,255,.15);
 }
+
+.match-box small{color:#a7f3d0;font-weight:900}
+.match-box h2{margin-top:8px;font-size:34px}
+.match-box p{margin-top:8px;color:#dbeafe;font-size:18px}
+
+.section{max-width:1400px;margin:auto;padding:20px 40px 60px}
+.section h2{margin-bottom:20px;font-size:34px}
+
+.table-container{overflow:auto;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+table{width:100%;border-collapse:collapse;background:#12213a}
+thead{background:#00c853}
+th,td{padding:16px;text-align:left;border-bottom:1px solid #203452}
+tr:hover{background:#172947}
+
+.footer{text-align:center;padding:30px;color:#9fb2c8}
 
 @media(max-width:700px){
     .hero h1{font-size:38px}
+    .hero h1 .cup{font-size:58px}
     .hero p{font-size:18px}
-    .card h2{font-size:30px}
+    .ball{font-size:48px;right:20px;top:25px}
+    .card h2{font-size:28px}
 }
 </style>
 </head>
@@ -157,21 +162,28 @@ tr:hover{
 <body>
 
 <section class="hero">
-    <h1>🏆 QUINIELA MUNDIAL 2026</h1>
-    <p>Predice los resultados y compite por el primer lugar</p>
+    <div class="ball">⚽</div>
 
-    <div class="contador">
-        👥 <span id="totalParticipantes">0</span> participantes activos
-    </div>
+    <div class="hero-content">
+        <h1><span class="cup">🏆</span><span>QUINIELA MUNDIAL 2026</span></h1>
+        <p>Predice los resultados y compite por el primer lugar</p>
 
-    <div class="buttons">
-        <a href="worldcup.html" class="btn btn-primary">🌎 World Cup</a>
-        <a href="predictions.html" class="btn btn-secondary">⚽ Predictions</a>
+        <div class="contador">
+            👥 <span id="totalParticipantes">0</span> participantes activos
+        </div>
+
+        <div class="buttons">
+            <a href="worldcup.html" class="btn btn-primary">🌎 World Cup</a>
+            <a href="predictions.html" class="btn btn-secondary">⚽ Predictions</a>
+        </div>
     </div>
 </section>
 
-<section class="cards">
+<div class="ticker">
+    <span id="tickerText">🏆 Cargando líderes de la quiniela...</span>
+</div>
 
+<section class="cards">
     <div class="card gold">
         <small>🥇 Primer Lugar</small>
         <h2 id="liderNombre">Cargando...</h2>
@@ -189,7 +201,14 @@ tr:hover{
         <h2 id="terceroNombre">Cargando...</h2>
         <p id="terceroPuntos">0 puntos</p>
     </div>
+</section>
 
+<section class="match-card">
+    <div class="match-box">
+        <small>⚽ Próximo Partido</small>
+        <h2 id="proximoPartido">Cargando próximo partido...</h2>
+        <p id="proximoDetalle">Leyendo calendario World Cup...</p>
+    </div>
 </section>
 
 <section class="section">
@@ -220,11 +239,16 @@ tr:hover{
 
 <script>
 const rankingCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=2107455128&single=true&output=csv";
+const worldCupCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=964365348&single=true&output=csv";
 
 function parseCSV(text) {
     return text.trim().split(/\r?\n/).map(row =>
         row.split(",").map(cell => cell.replaceAll('"', '').trim())
     );
+}
+
+function isNumber(value){
+    return value !== "" && !isNaN(Number(value));
 }
 
 fetch(rankingCSV + "&cache=" + Date.now())
@@ -275,6 +299,66 @@ fetch(rankingCSV + "&cache=" + Date.now())
         document.getElementById("terceroNombre").textContent = data[2].nombre;
         document.getElementById("terceroPuntos").textContent = data[2].puntos + " puntos";
     }
+
+    if (data.length >= 3) {
+        document.getElementById("tickerText").textContent =
+        `🔥 Tabla actual: 🥇 ${data[0].nombre} (${data[0].puntos} pts) | 🥈 ${data[1].nombre} (${data[1].puntos} pts) | 🥉 ${data[2].nombre} (${data[2].puntos} pts) | 👥 ${data.length} participantes activos`;
+    }
+});
+
+fetch(worldCupCSV + "&cache=" + Date.now())
+.then(response => response.text())
+.then(csv => {
+    const rows = parseCSV(csv);
+    let partidos = [];
+
+    for (let r = 0; r < rows.length - 4; r++) {
+        for (let c = 0; c < rows[r].length; c++) {
+
+            const matchNo = rows[r][c];
+
+            if (isNumber(matchNo) && Number(matchNo) >= 1 && Number(matchNo) <= 150) {
+                const estadio = rows[r][c + 1] || "";
+                const fecha = rows[r + 1]?.[c + 1] || "";
+                const hora = rows[r + 1]?.[c + 2] || "";
+                const local = rows[r + 2]?.[c + 1] || "";
+                const visitante = rows[r + 2]?.[c + 2] || "";
+                const golLocal = rows[r + 3]?.[c + 1] || "";
+                const golVisitante = rows[r + 3]?.[c + 2] || "";
+
+                if (local && visitante && fecha && hora) {
+                    partidos.push({
+                        numero: Number(matchNo),
+                        estadio,
+                        fecha,
+                        hora,
+                        local,
+                        visitante,
+                        golLocal,
+                        golVisitante
+                    });
+                }
+            }
+        }
+    }
+
+    partidos.sort((a,b) => a.numero - b.numero);
+
+    const siguiente = partidos.find(p =>
+        !isNumber(p.golLocal) || !isNumber(p.golVisitante)
+    );
+
+    if (siguiente) {
+        document.getElementById("proximoPartido").textContent =
+            `${siguiente.local} vs ${siguiente.visitante}`;
+
+        document.getElementById("proximoDetalle").textContent =
+            `Partido #${siguiente.numero} · ${siguiente.fecha} · ${siguiente.hora} · ${siguiente.estadio}`;
+    }
+})
+.catch(() => {
+    document.getElementById("proximoPartido").textContent = "Rep. de Corea vs Rep. Checa";
+    document.getElementById("proximoDetalle").textContent = "Partido #2 · 11/06/2026 · 20:00 · Guadalajara";
 });
 </script>
 
