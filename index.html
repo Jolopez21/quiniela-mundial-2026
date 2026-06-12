@@ -58,8 +58,57 @@ gap:20px;flex-wrap:wrap;text-shadow:0 8px 25px rgba(0,0,0,.75);
 
 .cup{display:inline-flex;align-items:center;justify-content:center;animation:superCup 1.4s infinite alternate;filter:drop-shadow(0 0 20px #facc15)}
 .cup img{height:96px;width:auto;object-fit:contain}
-.trophy-img{transition:transform .8s ease, filter .8s ease, opacity .5s ease}
-.trophy-img.evolving{transform:scale(1.16) rotate(3deg);filter:drop-shadow(0 0 35px rgba(250,204,21,.95)) drop-shadow(0 0 55px rgba(0,200,83,.45))}
+
+/* TROFEO EVOLUTIVO - AURA SUPER SAIYAJIN */
+.trophy-img{
+transition:transform .8s ease, filter .8s ease, opacity .5s ease;
+filter:
+drop-shadow(0 0 14px rgba(250,204,21,.75))
+drop-shadow(0 0 28px rgba(250,204,21,.45));
+}
+
+.trophy-img.level-1{
+filter:
+drop-shadow(0 0 14px rgba(250,204,21,.75))
+drop-shadow(0 0 28px rgba(250,204,21,.45));
+}
+
+.trophy-img.level-2{
+filter:
+drop-shadow(0 0 18px rgba(0,174,255,.85))
+drop-shadow(0 0 38px rgba(0,174,255,.65))
+drop-shadow(0 0 58px rgba(250,204,21,.45));
+animation:auraBlue 1.8s ease-in-out infinite alternate;
+}
+
+.trophy-img.level-3{
+filter:
+drop-shadow(0 0 18px rgba(255,215,0,.95))
+drop-shadow(0 0 42px rgba(255,234,0,.85))
+drop-shadow(0 0 70px rgba(0,174,255,.85))
+drop-shadow(0 0 95px rgba(255,255,255,.45));
+animation:auraSSJ 1.15s ease-in-out infinite alternate;
+}
+
+.trophy-img.evolving{
+transform:scale(1.22) rotate(3deg);
+filter:
+drop-shadow(0 0 28px #ffd700)
+drop-shadow(0 0 60px #fff200)
+drop-shadow(0 0 95px #00c8ff);
+}
+
+@keyframes auraBlue{
+from{transform:scale(1);filter:drop-shadow(0 0 16px rgba(0,174,255,.75)) drop-shadow(0 0 35px rgba(0,174,255,.50))}
+to{transform:scale(1.04);filter:drop-shadow(0 0 28px rgba(0,174,255,1)) drop-shadow(0 0 65px rgba(0,174,255,.80)) drop-shadow(0 0 35px rgba(250,204,21,.55))}
+}
+
+@keyframes auraSSJ{
+0%{transform:scale(1) rotate(-1deg);filter:drop-shadow(0 0 18px rgba(255,215,0,.9)) drop-shadow(0 0 42px rgba(255,234,0,.70)) drop-shadow(0 0 70px rgba(0,174,255,.65))}
+50%{transform:scale(1.055) rotate(1deg);filter:drop-shadow(0 0 28px rgba(255,215,0,1)) drop-shadow(0 0 70px rgba(255,234,0,.95)) drop-shadow(0 0 95px rgba(0,174,255,.95))}
+100%{transform:scale(1.025) rotate(-1deg);filter:drop-shadow(0 0 22px rgba(255,215,0,.95)) drop-shadow(0 0 55px rgba(255,234,0,.8)) drop-shadow(0 0 80px rgba(255,255,255,.55))}
+}
+
 @keyframes superCup{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.16) rotate(2deg)}}
 
 .hero p{font-size:22px;color:#e0f2fe}
@@ -194,7 +243,7 @@ tr:hover{background:#172947}
 <div id="introChampion" class="intro-champion">
 <div class="intro-card">
 <div class="intro-cup">
-<img id="introTrophy" class="trophy-img" src="trophy-level-1.png?v=20" alt="Trofeo Mundial 2026">
+<img id="introTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=21" alt="Trofeo Mundial 2026">
 </div>
 <small>Campeón actual</small>
 <h2 id="introLider">Cargando líder...</h2>
@@ -213,10 +262,10 @@ tr:hover{background:#172947}
 
 <section class="hero">
 <div class="ball">
-  <img src="ball.png?v=20" alt="Balón Mundial 2026">
+  <img src="ball.png?v=21" alt="Balón Mundial 2026">
 </div>
 <div class="hero-content">
-<h1><span class="cup"><img id="heroTrophy" class="trophy-img" src="trophy-level-1.png?v=20" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
+<h1><span class="cup"><img id="heroTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=21" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
 
 <div class="contador">👥 <span id="totalParticipantes">0</span> participantes activos</div>
@@ -351,14 +400,18 @@ function actualizarTrofeo(puntosLider){
 const heroTrophy = document.getElementById("heroTrophy");
 const introTrophy = document.getElementById("introTrophy");
 
-let trophySrc = "trophy-level-1.png?v=20";
+let trophySrc = "trophy-level-1.png?v=21";
+let trophyLevel = "level-1";
 
 if(Number(puntosLider) >= 50){
-  trophySrc = "trophy-level-2.png?v=20";
+  trophySrc = "trophy-level-3.png?v=21";
+  trophyLevel = "level-3";
 }
 
 [heroTrophy, introTrophy].forEach(img => {
   if(!img) return;
+  img.classList.remove("level-1","level-2","level-3","evolving");
+  img.classList.add(trophyLevel);
   img.classList.add("evolving");
   img.src = trophySrc;
   setTimeout(() => img.classList.remove("evolving"), 1800);
