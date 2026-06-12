@@ -210,7 +210,7 @@ tr:hover{background:#172947}
 
 <div id="introChampion" class="intro-champion">
 <div class="intro-card">
-<div class="intro-cup"><img id="introTrophy" src="trofeo-nivel-1.png?v=1" alt="Trofeo evolutivo"></div>
+<div class="intro-cup"><img id="introTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Trofeo evolutivo"></div>
 <small>Campeón actual</small>
 <h2 id="introLider">Cargando líder...</h2>
 <p id="introPuntos">0 puntos</p>
@@ -219,7 +219,7 @@ tr:hover{background:#172947}
 
 <div id="newLeader" class="new-leader">
 <div class="intro-card">
-<div class="intro-cup"><img id="newLeaderTrophy" src="trofeo-nivel-1.png?v=1" alt="Nuevo líder"></div>
+<div class="intro-cup"><img id="newLeaderTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Nuevo líder"></div>
 <small>Nuevo líder</small>
 <h2 id="newLeaderName">Cargando...</h2>
 <p id="newLeaderPoints">0 puntos</p>
@@ -228,10 +228,10 @@ tr:hover{background:#172947}
 
 <section class="hero">
 <div class="ball">
-  <img src="pelota.png?v=6" alt="Balón Mundial 2026">
+  <img src="ball.png?v=8" onerror="this.onerror=null;this.src='pelota.png?v=8';" alt="Balón Mundial 2026">
 </div>
 <div class="hero-content">
-<h1><span class="cup"><img id="heroTrophy" src="trofeo-nivel-1.png?v=1" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
+<h1><span class="cup"><img id="heroTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
 
 <div class="contador">👥 <span id="totalParticipantes">0</span> participantes activos</div>
@@ -365,11 +365,16 @@ return `<span class="move-equal">═ Igual</span>`;
 function actualizarTrofeo(puntosLider){
 const puntos = Number(puntosLider || 0);
 const nivel = puntos >= 50 ? 2 : 1;
-const archivo = nivel === 2 ? "trofeo-nivel-2.png?v=1" : "trofeo-nivel-1.png?v=1";
+const archivo = nivel === 2 ? "trophy-level-2.png?v=8" : "trophy-level-1.png?v=8";
+const respaldo = nivel === 2 ? "trofeo-nivel-2.png?v=8" : "trofeo-nivel-1.png?v=8";
 
 ["heroTrophy", "introTrophy", "newLeaderTrophy"].forEach(id => {
 const img = document.getElementById(id);
 if(img){
+img.onerror = function(){
+this.onerror = null;
+this.src = respaldo;
+};
 img.src = archivo;
 img.classList.add("trophy-evolve");
 setTimeout(() => img.classList.remove("trophy-evolve"), 1800);
