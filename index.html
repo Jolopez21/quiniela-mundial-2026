@@ -23,14 +23,8 @@ border:1px solid rgba(250,204,21,.45);box-shadow:0 0 70px rgba(250,204,21,.6);
 animation:introPop 1.2s ease;
 }
 
-.intro-cup{font-size:115px;animation:superCup 1s infinite alternate}
-.intro-cup img{
-width:150px;
-max-width:70vw;
-height:auto;
-object-fit:contain;
-filter:drop-shadow(0 0 35px rgba(250,204,21,.75));
-}
+.intro-cup{animation:superCup 1s infinite alternate}
+.intro-cup img{width:150px;max-width:70vw;filter:drop-shadow(0 0 30px rgba(250,204,21,.75))}
 .intro-card small{color:#facc15;font-weight:900;text-transform:uppercase}
 .intro-card h2{font-size:42px;margin:15px 0 5px}
 .intro-card p{font-size:22px}
@@ -62,21 +56,10 @@ font-size:66px;margin-bottom:15px;display:flex;justify-content:center;align-item
 gap:20px;flex-wrap:wrap;text-shadow:0 8px 25px rgba(0,0,0,.75);
 }
 
-.cup{font-size:90px;animation:superCup 1.4s infinite alternate;filter:drop-shadow(0 0 20px #facc15)}
-.cup img{
-width:105px;
-height:auto;
-object-fit:contain;
-vertical-align:middle;
-filter:drop-shadow(0 0 25px rgba(250,204,21,.8));
-}
-.trophy-evolve{
-animation:trophyPulse 1.4s ease-in-out infinite alternate;
-}
-@keyframes trophyPulse{
-from{transform:scale(1);filter:drop-shadow(0 0 18px rgba(250,204,21,.55))}
-to{transform:scale(1.08);filter:drop-shadow(0 0 38px rgba(250,204,21,.95))}
-}
+.cup{display:inline-flex;align-items:center;justify-content:center;animation:superCup 1.4s infinite alternate;filter:drop-shadow(0 0 20px #facc15)}
+.cup img{height:96px;width:auto;object-fit:contain}
+.trophy-img{transition:transform .8s ease, filter .8s ease, opacity .5s ease}
+.trophy-img.evolving{transform:scale(1.16) rotate(3deg);filter:drop-shadow(0 0 35px rgba(250,204,21,.95)) drop-shadow(0 0 55px rgba(0,200,83,.45))}
 @keyframes superCup{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.16) rotate(2deg)}}
 
 .hero p{font-size:22px;color:#e0f2fe}
@@ -199,9 +182,9 @@ tr:hover{background:#172947}
 .footer{text-align:center;padding:30px;color:#9fb2c8}
 
 @media(max-width:700px){
-.hero h1{font-size:38px}.cup{font-size:58px}.cup img{width:72px}.hero p{font-size:18px}
+.hero h1{font-size:38px}.cup img{height:64px}.hero p{font-size:18px}
 .ball{width:58px;height:58px;right:20px;top:25px}.card h2{font-size:28px}
-.intro-card h2{font-size:30px}.intro-cup{font-size:85px}.intro-cup img{width:115px}
+.intro-card h2{font-size:30px}.intro-cup{font-size:85px}
 }
 </style>
 </head>
@@ -210,7 +193,9 @@ tr:hover{background:#172947}
 
 <div id="introChampion" class="intro-champion">
 <div class="intro-card">
-<div class="intro-cup"><img id="introTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Trofeo evolutivo"></div>
+<div class="intro-cup">
+<img id="introTrophy" class="trophy-img" src="trophy-level-1.png?v=20" alt="Trofeo Mundial 2026">
+</div>
 <small>Campeón actual</small>
 <h2 id="introLider">Cargando líder...</h2>
 <p id="introPuntos">0 puntos</p>
@@ -219,7 +204,7 @@ tr:hover{background:#172947}
 
 <div id="newLeader" class="new-leader">
 <div class="intro-card">
-<div class="intro-cup"><img id="newLeaderTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Nuevo líder"></div>
+<div class="intro-cup">🎉🏆</div>
 <small>Nuevo líder</small>
 <h2 id="newLeaderName">Cargando...</h2>
 <p id="newLeaderPoints">0 puntos</p>
@@ -228,10 +213,10 @@ tr:hover{background:#172947}
 
 <section class="hero">
 <div class="ball">
-  <img src="ball.png?v=8" onerror="this.onerror=null;this.src='pelota.png?v=8';" alt="Balón Mundial 2026">
+  <img src="ball.png?v=20" alt="Balón Mundial 2026">
 </div>
 <div class="hero-content">
-<h1><span class="cup"><img id="heroTrophy" src="trophy-level-1.png?v=8" onerror="this.onerror=null;this.src='trofeo-nivel-1.png?v=8';" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
+<h1><span class="cup"><img id="heroTrophy" class="trophy-img" src="trophy-level-1.png?v=20" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
 
 <div class="contador">👥 <span id="totalParticipantes">0</span> participantes activos</div>
@@ -363,22 +348,20 @@ return `<span class="move-equal">═ Igual</span>`;
 }
 
 function actualizarTrofeo(puntosLider){
-const puntos = Number(puntosLider || 0);
-const nivel = puntos >= 50 ? 2 : 1;
-const archivo = nivel === 2 ? "trophy-level-2.png?v=8" : "trophy-level-1.png?v=8";
-const respaldo = nivel === 2 ? "trofeo-nivel-2.png?v=8" : "trofeo-nivel-1.png?v=8";
+const heroTrophy = document.getElementById("heroTrophy");
+const introTrophy = document.getElementById("introTrophy");
 
-["heroTrophy", "introTrophy", "newLeaderTrophy"].forEach(id => {
-const img = document.getElementById(id);
-if(img){
-img.onerror = function(){
-this.onerror = null;
-this.src = respaldo;
-};
-img.src = archivo;
-img.classList.add("trophy-evolve");
-setTimeout(() => img.classList.remove("trophy-evolve"), 1800);
+let trophySrc = "trophy-level-1.png?v=20";
+
+if(Number(puntosLider) >= 50){
+  trophySrc = "trophy-level-2.png?v=20";
 }
+
+[heroTrophy, introTrophy].forEach(img => {
+  if(!img) return;
+  img.classList.add("evolving");
+  img.src = trophySrc;
+  setTimeout(() => img.classList.remove("evolving"), 1800);
 });
 }
 
@@ -420,11 +403,11 @@ rankingBody.innerHTML += `
 document.getElementById("totalParticipantes").textContent = data.length;
 
 if(data.length > 0){
+actualizarTrofeo(data[0].puntos);
 document.getElementById("liderNombre").textContent = data[0].nombre;
 document.getElementById("liderPuntos").textContent = data[0].puntos + " puntos";
 document.getElementById("introLider").textContent = data[0].nombre;
 document.getElementById("introPuntos").textContent = data[0].puntos + " puntos";
-actualizarTrofeo(data[0].puntos);
 
 if(liderAnterior && liderAnterior !== data[0].nombre){
 document.getElementById("newLeaderName").textContent = data[0].nombre;
@@ -481,7 +464,7 @@ hora: String(row[7] || "").trim(),
 estadio: String(row[9] || "").trim(),
 local: String(row[10] || "").trim(),
 visitante: String(row[11] || "").trim(),
-fifaLink: (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim()
+fifaLink: (String(row[15] || "").trim() || (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim())
 })).filter(p =>
 p.activo === "TRUE" &&
 p.numero &&
