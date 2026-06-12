@@ -15,7 +15,118 @@ z-index:9999;display:flex;align-items:center;justify-content:center;
 animation:introOut 1s ease forwards;animation-delay:3.2s;
 }
 
-.new-leader{display:none}
+.new-leader{display:none;animation:none;opacity:1;visibility:visible;pointer-events:auto}
+
+.new-leader.show{display:flex}
+
+.leader-card{
+position:relative;
+text-align:center;
+padding:44px 54px;
+border-radius:34px;
+background:
+radial-gradient(circle at top,rgba(255,234,0,.22),transparent 38%),
+linear-gradient(145deg,rgba(18,33,58,.96),rgba(6,17,31,.98));
+border:1px solid rgba(250,204,21,.65);
+box-shadow:
+0 0 45px rgba(250,204,21,.45),
+0 0 90px rgba(0,174,255,.22),
+inset 0 0 35px rgba(255,215,0,.08);
+overflow:hidden;
+animation:leaderUnlock .7s ease both, leaderPulse 1.4s ease-in-out infinite alternate;
+}
+
+.leader-card::before{
+content:"";
+position:absolute;
+inset:-45%;
+background:
+conic-gradient(from 90deg,transparent,rgba(255,215,0,.28),transparent,rgba(0,174,255,.22),transparent);
+animation:leaderSpin 3s linear infinite;
+}
+
+.leader-card::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 50% 25%,rgba(255,255,255,.22),transparent 18%),
+linear-gradient(120deg,transparent 25%,rgba(255,255,255,.14),transparent 45%);
+animation:leaderShine 2s ease-in-out infinite;
+}
+
+.leader-content{position:relative;z-index:2}
+
+.leader-title{
+font-size:20px;
+font-weight:1000;
+letter-spacing:.8px;
+color:#fff7ad;
+text-shadow:
+0 0 12px rgba(255,215,0,.95),
+0 0 28px rgba(255,234,0,.75);
+margin-bottom:14px;
+}
+
+.leader-trophy{
+width:165px;
+max-width:60vw;
+margin:0 auto 12px;
+display:block;
+filter:
+drop-shadow(0 0 20px rgba(255,215,0,.95))
+drop-shadow(0 0 45px rgba(255,234,0,.8))
+drop-shadow(0 0 75px rgba(0,174,255,.65));
+animation:leaderTrophyPower 1.05s ease-in-out infinite alternate;
+}
+
+.leader-card h2{
+font-size:44px;
+margin:8px 0 4px;
+color:white;
+text-shadow:
+0 0 12px rgba(255,255,255,.45),
+0 0 25px rgba(255,215,0,.65);
+}
+
+.leader-card p{
+font-size:24px;
+font-weight:900;
+color:#e0f2fe;
+text-shadow:0 0 18px rgba(0,174,255,.65);
+}
+
+.leader-sub{
+margin-top:10px;
+font-size:15px;
+font-weight:900;
+color:#a7f3d0;
+letter-spacing:.5px;
+}
+
+@keyframes leaderUnlock{
+from{transform:scale(.72);opacity:0;filter:blur(6px)}
+to{transform:scale(1);opacity:1;filter:blur(0)}
+}
+
+@keyframes leaderPulse{
+from{box-shadow:0 0 35px rgba(250,204,21,.35),0 0 70px rgba(0,174,255,.18)}
+to{box-shadow:0 0 70px rgba(250,204,21,.75),0 0 120px rgba(0,174,255,.42)}
+}
+
+@keyframes leaderSpin{
+to{transform:rotate(360deg)}
+}
+
+@keyframes leaderShine{
+0%,100%{opacity:.25;transform:translateX(-35%)}
+50%{opacity:.65;transform:translateX(35%)}
+}
+
+@keyframes leaderTrophyPower{
+from{transform:scale(1) rotate(-2deg)}
+to{transform:scale(1.08) rotate(2deg)}
+}
 
 .intro-card{
 text-align:center;padding:45px;border-radius:30px;background:rgba(18,33,58,.9);
@@ -243,7 +354,7 @@ tr:hover{background:#172947}
 <div id="introChampion" class="intro-champion">
 <div class="intro-card">
 <div class="intro-cup">
-<img id="introTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=21" alt="Trofeo Mundial 2026">
+<img id="introTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=22" alt="Trofeo Mundial 2026">
 </div>
 <small>Campeón actual</small>
 <h2 id="introLider">Cargando líder...</h2>
@@ -252,20 +363,23 @@ tr:hover{background:#172947}
 </div>
 
 <div id="newLeader" class="new-leader">
-<div class="intro-card">
-<div class="intro-cup">🎉🏆</div>
-<small>Nuevo líder</small>
+<div class="leader-card">
+<div class="leader-content">
+<div class="leader-title">🔥⚡ NUEVO LÍDER DE LA QUINIELA ⚡🔥</div>
+<img id="leaderTrophy" class="leader-trophy trophy-img level-1" src="trophy-level-1.png?v=22" alt="Trofeo líder quiniela">
 <h2 id="newLeaderName">Cargando...</h2>
 <p id="newLeaderPoints">0 puntos</p>
+<div class="leader-sub">👑 Liderando la clasificación</div>
+</div>
 </div>
 </div>
 
 <section class="hero">
 <div class="ball">
-  <img src="ball.png?v=21" alt="Balón Mundial 2026">
+  <img src="ball.png?v=22" alt="Balón Mundial 2026">
 </div>
 <div class="hero-content">
-<h1><span class="cup"><img id="heroTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=21" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
+<h1><span class="cup"><img id="heroTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=22" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
 
 <div class="contador">👥 <span id="totalParticipantes">0</span> participantes activos</div>
@@ -400,13 +514,16 @@ function actualizarTrofeo(puntosLider){
 const heroTrophy = document.getElementById("heroTrophy");
 const introTrophy = document.getElementById("introTrophy");
 
-let trophySrc = "trophy-level-1.png?v=21";
+let trophySrc = "trophy-level-1.png?v=22";
 let trophyLevel = "level-1";
 
 if(Number(puntosLider) >= 50){
-  trophySrc = "trophy-level-3.png?v=21";
+  trophySrc = "trophy-level-3.png?v=22";
   trophyLevel = "level-3";
 }
+
+window.currentTrophySrc = trophySrc;
+window.currentTrophyLevel = trophyLevel;
 
 [heroTrophy, introTrophy].forEach(img => {
   if(!img) return;
@@ -465,9 +582,19 @@ document.getElementById("introPuntos").textContent = data[0].puntos + " puntos";
 if(liderAnterior && liderAnterior !== data[0].nombre){
 document.getElementById("newLeaderName").textContent = data[0].nombre;
 document.getElementById("newLeaderPoints").textContent = data[0].puntos + " puntos";
+
+const leaderTrophy = document.getElementById("leaderTrophy");
+if(leaderTrophy){
+  leaderTrophy.src = window.currentTrophySrc || "trophy-level-1.png?v=22";
+  leaderTrophy.classList.remove("level-1","level-2","level-3","evolving");
+  leaderTrophy.classList.add(window.currentTrophyLevel || "level-1");
+  leaderTrophy.classList.add("evolving");
+  setTimeout(() => leaderTrophy.classList.remove("evolving"), 1800);
+}
+
 const nl = document.getElementById("newLeader");
-nl.style.display = "flex";
-setTimeout(()=>{nl.style.display="none"},3500);
+nl.classList.add("show");
+setTimeout(()=>{nl.classList.remove("show")},4800);
 }
 }
 
