@@ -229,6 +229,23 @@ margin-top:25px;display:inline-block;padding:12px 28px;background:rgba(255,255,2
 border:1px solid rgba(255,255,255,.30);border-radius:999px;font-weight:900;backdrop-filter:blur(8px);
 }
 
+.hall-link{
+text-decoration:none;
+color:white;
+font-weight:900;
+transition:.35s;
+cursor:pointer;
+display:inline-block;
+}
+
+.hall-link:hover{
+transform:translateY(-3px) scale(1.04);
+box-shadow:
+0 0 25px rgba(250,204,21,.35),
+0 0 55px rgba(250,204,21,.20);
+border-color:rgba(250,204,21,.65);
+}
+
 .buttons{margin-top:30px}
 .btn{
 display:inline-block;padding:16px 34px;margin:10px;border-radius:14px;text-decoration:none;
@@ -520,7 +537,9 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
 <h1><span class="cup"><img id="heroTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=22" alt="Trofeo Mundial 2026"></span><span>QUINIELA MUNDIAL 2026</span></h1>
 <p>Predice los resultados y compite por el primer lugar</p>
 
-<div class="contador">👥 <span id="totalParticipantes">0</span> participantes activos</div>
+<a href="hof.html" class="contador hall-link">
+🏛️ Hall of Fame · 👥 <span id="totalParticipantes">0</span> Participantes
+</a>
 
 <div class="buttons">
 <a href="worldcup.html" class="btn btn-primary">🌎 World Cup</a>
