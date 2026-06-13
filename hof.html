@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏛️ Hall of Fame Mundial 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#06111f;color:white;min-height:100vh}
+.hero{
+  position:relative;text-align:center;padding:90px 20px 70px;overflow:hidden;
+  background:linear-gradient(rgba(3,10,24,.55),rgba(3,10,24,.96)),
+  url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2000&q=80");
+  background-size:cover;background-position:center;
+}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(250,204,21,.22),transparent 34%);pointer-events:none}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:64px;line-height:1.1;text-shadow:0 0 30px rgba(250,204,21,.45),0 8px 25px rgba(0,0,0,.8)}
+.hero p{font-size:22px;margin-top:16px;color:#dbeafe}
+.nav{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 26px;border-radius:14px;text-decoration:none;font-weight:900;transition:.25s}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:#00c853;color:white;box-shadow:0 0 22px rgba(0,200,83,.35)}
+.btn-secondary{background:white;color:#06111f}
+.section{max-width:1400px;margin:auto;padding:42px 34px}
+.section h2{font-size:36px;margin-bottom:24px;text-shadow:0 0 18px rgba(255,255,255,.12)}
+.podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;align-items:stretch}
+.card{
+  background:linear-gradient(145deg,#12213a,#0d1a30);border-radius:24px;padding:30px;
+  box-shadow:0 16px 40px rgba(0,0,0,.42);position:relative;overflow:hidden;transition:.3s;
+}
+.card:hover{transform:translateY(-6px)}
+.card.gold{border-top:6px solid #facc15;box-shadow:0 0 34px rgba(250,204,21,.25)}
+.card.silver{border-top:6px solid #cbd5e1;box-shadow:0 0 30px rgba(203,213,225,.18)}
+.card.bronze{border-top:6px solid #d97706;box-shadow:0 0 30px rgba(217,119,6,.18)}
+.card.gold::after{content:"";position:absolute;inset:-55%;background:conic-gradient(transparent,rgba(250,204,21,.14),transparent);animation:spin 5s linear infinite}
+.card>*{position:relative;z-index:2}
+@keyframes spin{to{transform:rotate(360deg)}}
+.card small{font-weight:1000;color:#cbd5e1;letter-spacing:.2px}
+.card h3{font-size:36px;margin:16px 0 18px;line-height:1.15}
+.gold h3{color:#fff7ad;text-shadow:0 0 18px rgba(250,204,21,.65)}
+.stat{font-size:18px;color:#e5eefc;margin:10px 0;display:flex;gap:10px;align-items:center}
+.hof-points{display:inline-flex;margin-top:18px;padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-weight:1000;font-size:18px;box-shadow:0 0 16px rgba(255,255,255,.08)}
+.info-card{
+  margin-top:28px;background:linear-gradient(145deg,rgba(18,33,58,.95),rgba(6,17,31,.95));
+  border:1px solid rgba(250,204,21,.28);border-radius:24px;padding:28px;
+  box-shadow:0 0 34px rgba(250,204,21,.12);
+}
+.info-card h3{font-size:28px;margin-bottom:14px;color:#fde68a}
+.formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+.formula div{padding:16px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-weight:800}
+.quote{margin-top:18px;color:#a7f3d0;font-weight:900;font-style:italic}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.legend-card{border-top:4px solid rgba(0,200,83,.75)}
+.legend-card h3{font-size:24px;margin-bottom:16px}
+.badge{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(0,200,83,.14);border:1px solid rgba(0,200,83,.25);color:#86efac;font-weight:900;margin-top:14px}
+.timeline{overflow:auto;border-radius:20px;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+table{width:100%;border-collapse:collapse;background:#12213a;min-width:760px}
+th{background:#00c853;color:#06111f;text-align:left;padding:15px;font-weight:1000}
+td{padding:14px;border-bottom:1px solid #203452;color:#e5eefc}
+tr:hover{background:#172947}.leader-cell{color:#fde68a;font-weight:1000;text-shadow:0 0 12px rgba(250,204,21,.5)}
+.loading,.error{padding:24px;background:#12213a;border-radius:18px;color:#cbd5e1}
+.footer{text-align:center;padding:32px;color:#9fb2c8}
+@media(max-width:700px){.hero h1{font-size:42px}.hero p{font-size:18px}.section{padding:34px 20px}.card h3{font-size:30px}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-content">
+    <h1>🏛️ Hall of Fame Mundial 2026</h1>
+    <p>El registro histórico de líderes, leyendas y rendimiento de la quiniela.</p>
+    <div class="nav">
+      <a class="btn btn-primary" href="index.html">🏆 Volver a la Quiniela</a>
+      <a class="btn btn-secondary" href="worldcup.html">🌎 World Cup</a>
+      <a class="btn btn-secondary" href="predictions.html">⚽ Predictions</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>👑 Podio Histórico</h2>
+  <div id="podium" class="podium"><div class="loading">Cargando Hall of Fame...</div></div>
+
+  <div class="info-card">
+    <h3>⚡ ¿Cómo se calculan los Pts HoF?</h3>
+    <p>El Hall of Fame premia el rendimiento histórico, la constancia y la capacidad de mantenerse arriba durante todo el Mundial.</p>
+    <div class="formula">
+      <div>⭐ Score máximo<br><small>Base principal del puntaje.</small></div>
+      <div>👑 Día como líder<br><small>+3 pts por cada día.</small></div>
+      <div>🥇🥈🥉 Día en Top 3<br><small>+2 pts por cada día.</small></div>
+      <div>📈 Día en Top 10<br><small>+1 pt por cada día.</small></div>
+    </div>
+    <p class="quote">“No gana quien lidera un día. Entra al Hall of Fame quien hace historia.”</p>
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎴 Cartas de Leyenda</h2>
+  <div id="legendCards" class="legend-grid"><div class="loading">Cargando cartas...</div></div>
+</section>
+
+<section class="section">
+  <h2>📜 Línea de Tiempo de Líderes</h2>
+  <div id="timeline" class="timeline"><div class="loading">Cargando línea de tiempo...</div></div>
+</section>
+
+<div class="footer">Hall of Fame Mundial 2026 © Quiniela Oficial</div>
+
+<script>
+const hofCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pub?gid=1257951687&single=true&output=csv";
+
+function parseCSV(text){
+  const rows=[]; let row=[], cell='', inQuotes=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i], n=text[i+1];
+    if(c==='"' && inQuotes && n==='"'){cell+='"'; i++; continue;}
+    if(c==='"'){inQuotes=!inQuotes; continue;}
+    if(c===',' && !inQuotes){row.push(cell.trim()); cell=''; continue;}
+    if((c==='\n'||c==='\r') && !inQuotes){
+      if(c==='\r' && n==='\n') i++;
+      row.push(cell.trim());
+      if(row.some(x=>x!=='')) rows.push(row);
+      row=[]; cell=''; continue;
+    }
+    cell+=c;
+  }
+  row.push(cell.trim());
+  if(row.some(x=>x!=='')) rows.push(row);
+  return rows;
+}
+
+function normalizarNombre(n){return String(n||'').trim();}
+function num(v){const n=Number(String(v||'').replace(/[^0-9.-]/g,''));return isNaN(n)?null:n;}
+function esFechaValida(h){return h && h.toLowerCase() !== 'inicio' && /\d/.test(h);}
+
+function extraerTablas(rows){
+  const headers=[];
+  rows.forEach((r,i)=>{
+    const lower=r.map(x=>String(x||'').toLowerCase().trim());
+    if(lower.includes('nombre') && lower.some(x=>x.includes('inicio'))) headers.push(i);
+  });
+
+  const rankingHeader=headers[0];
+  const scoreHeader=headers[1];
+
+  return {
+    ranking: leerTabla(rows, rankingHeader, scoreHeader),
+    score: leerTabla(rows, scoreHeader, rows.length)
+  };
+}
+
+function leerTabla(rows, headerIndex, endIndex){
+  if(headerIndex === undefined || headerIndex < 0) return {fechas:[], data:[]};
+
+  const header=rows[headerIndex];
+  const nombreCol=header.findIndex(h=>String(h).toLowerCase().trim()==='nombre');
+  const mejorRankingCol=header.findIndex(h=>{
+    const clean=String(h||'').toLowerCase().trim();
+    return clean==='mejor ranking' || clean==='mejor-ranking' || clean==='mejor_ranking';
+  });
+
+  // Se ignora siempre la columna Inicio y solo se usan columnas de fechas reales.
+  // La columna Mejor Ranking se lee aparte directamente desde Excel.
+  const fechas=header
+    .map((h,i)=>({h:String(h||'').trim(),i}))
+    .filter(x=>x.i>nombreCol && x.i!==mejorRankingCol && esFechaValida(x.h));
+
+  const data=[];
+  const limite = endIndex || rows.length;
+
+  for(let i=headerIndex+1;i<limite;i++){
+    const r=rows[i];
+    const nombre=normalizarNombre(r[nombreCol]);
+
+    if(!nombre) continue;
+    if(nombre.toLowerCase()==='nombre') continue;
+    if(nombre.toLowerCase().includes('hall of fame')) break;
+
+    const valores={};
+    fechas.forEach(f=>{ valores[f.h]=num(r[f.i]); });
+
+    const tieneDatos = Object.values(valores).some(v=>v!==null && v!==undefined);
+    const mejorRanking = mejorRankingCol >= 0 ? num(r[mejorRankingCol]) : null;
+
+    if(tieneDatos || mejorRanking !== null){
+      data.push({nombre, mejorRanking, valores});
+    }
+  }
+
+  return {fechas:fechas.map(x=>x.h),data};
+}
+
+function calcularStats(rankingTable, scoreTable){
+  const nombres=new Set();
+  rankingTable.data.forEach(x=>nombres.add(x.nombre));
+  scoreTable.data.forEach(x=>nombres.add(x.nombre));
+
+  const scoreMap=Object.fromEntries(scoreTable.data.map(x=>[x.nombre,x.valores]));
+  const rankingMap=Object.fromEntries(rankingTable.data.map(x=>[x.nombre,x.valores]));
+  const mejorRankingMap=Object.fromEntries(rankingTable.data.map(x=>[x.nombre,x.mejorRanking]));
+  const fechas=[...new Set([...rankingTable.fechas,...scoreTable.fechas])];
+
+  return [...nombres].map(nombre=>{
+    const rankings=rankingMap[nombre]||{};
+    const scores=scoreMap[nombre]||{};
+    const mejorRanking=mejorRankingMap[nombre] ?? null;
+    let scoreMax=0, diasLider=0, diasTop3=0, diasTop10=0;
+
+    fechas.forEach(f=>{
+      const r=rankings[f];
+      const s=scores[f];
+      if(r!==null && r!==undefined){
+        if(r===1) diasLider++;
+        if(r>=1 && r<=3) diasTop3++;
+        if(r>=1 && r<=10) diasTop10++;
+      }
+      if(s!==null && s!==undefined && s>scoreMax) scoreMax=s;
+    });
+
+    const hofPts=scoreMax + (diasLider*3) + (diasTop3*2) + (diasTop10*1);
+    return {nombre,mejorRanking,scoreMax,diasLider,diasTop3,diasTop10,hofPts,rankings,scores};
+  }).filter(x=>x.scoreMax>0 || x.mejorRanking!==null)
+    .sort((a,b)=> b.hofPts-a.hofPts || b.scoreMax-a.scoreMax || (a.mejorRanking||999)-(b.mejorRanking||999));
+}
+
+function clasePodio(i){return i===0?'gold':i===1?'silver':'bronze'}
+function tituloPodio(i){return i===0?'👑 Rey del Hall of Fame':i===1?'🥈 Leyenda de Plata':'🥉 Maestro del Podio'}
+function iconoPodio(i){return i===0?'👑':i===1?'🥈':'🥉'}
+
+function renderPodio(stats){
+  const top=stats.slice(0,3);
+  document.getElementById('podium').innerHTML=top.map((p,i)=>`
+    <div class="card ${clasePodio(i)}">
+      <small>${tituloPodio(i)}</small>
+      <h3>${iconoPodio(i)} ${p.nombre}</h3>
+      <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
+      <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
+      <div class="stat">🔥 Días como líder: <b>${p.diasLider}</b></div>
+      <div class="stat">🥇 Días en Top 3: <b>${p.diasTop3}</b></div>
+      <div class="stat">📈 Días en Top 10: <b>${p.diasTop10}</b></div>
+      <div class="hof-points">⚡ ${p.hofPts} pts HoF</div>
+    </div>
+  `).join('');
+}
+
+function renderCartas(stats){
+  document.getElementById('legendCards').innerHTML=stats.map((p,i)=>`
+    <div class="card legend-card">
+      <small>#${i+1} Hall of Fame</small>
+      <h3>${i<3?iconoPodio(i):'🎴'} ${p.nombre}</h3>
+      <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
+      <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
+      <div class="stat">👑 Días líder: <b>${p.diasLider}</b></div>
+      <div class="stat">🥇 Top 3: <b>${p.diasTop3}</b></div>
+      <div class="stat">📈 Top 10: <b>${p.diasTop10}</b></div>
+      <span class="badge">⚡ ${p.hofPts} pts HoF</span>
+    </div>
+  `).join('');
+}
+
+function renderTimeline(rankingTable, stats){
+  const fechas=rankingTable.fechas;
+  const lideres=fechas.map(f=>{
+    let lider=null;
+    rankingTable.data.forEach(p=>{
+      const r=p.valores[f];
+      if(r===1) lider=p.nombre;
+    });
+    return {fecha:f,lider:lider||'Sin líder'};
+  });
+  document.getElementById('timeline').innerHTML=`
+  <table>
+    <thead><tr><th>Fecha</th><th>Líder histórico</th></tr></thead>
+    <tbody>${lideres.map(x=>`<tr><td>${x.fecha}</td><td class="leader-cell">👑 ${x.lider}</td></tr>`).join('')}</tbody>
+  </table>`;
+}
+
+fetch(hofCSV + '&cache=' + Date.now())
+.then(r=>r.text())
+.then(csv=>{
+  const rows=parseCSV(csv);
+  const tablas=extraerTablas(rows);
+  const stats=calcularStats(tablas.ranking, tablas.score);
+  if(!stats.length) throw new Error('No se encontraron datos HoF');
+  renderPodio(stats);
+  renderCartas(stats);
+  renderTimeline(tablas.ranking, stats);
+})
+.catch(err=>{
+  console.error(err);
+  document.getElementById('podium').innerHTML='<div class="error">No se pudo cargar el Hall of Fame.</div>';
+  document.getElementById('legendCards').innerHTML='<div class="error">No se pudieron cargar las cartas.</div>';
+  document.getElementById('timeline').innerHTML='<div class="error">No se pudo cargar la línea de tiempo.</div>';
+});
+</script>
+</body>
+</html>
