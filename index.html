@@ -256,6 +256,74 @@ box-shadow:0 14px 35px rgba(0,0,0,.45);transition:.3s;
 .card h2{font-size:36px;margin-top:14px;line-height:1.25}
 .card p{margin-top:8px;font-size:18px}
 
+.card-rank-meta{
+margin-top:16px;
+display:flex;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.card-move{
+display:none;
+}
+
+.card-status{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:8px 14px;
+border-radius:999px;
+font-size:14px;
+font-weight:1000;
+letter-spacing:.2px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.14);
+box-shadow:0 0 16px rgba(255,255,255,.08);
+}
+
+.card-name-king{
+color:#fff7ad;
+text-shadow:
+0 0 12px rgba(250,204,21,.75),
+0 0 28px rgba(250,204,21,.45);
+}
+
+.card-name-silver{
+color:#eef6ff;
+text-shadow:
+0 0 10px rgba(203,213,225,.70),
+0 0 24px rgba(148,163,184,.55);
+}
+
+.card-name-bronze{
+color:#fff1df;
+text-shadow:
+0 0 10px rgba(217,119,6,.70),
+0 0 24px rgba(245,158,11,.55);
+}
+
+.card.gold.top-leader{
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at top left,rgba(250,204,21,.28),transparent 34%),
+linear-gradient(145deg,#12213a,#0d1a30);
+}
+
+.card.gold.top-leader::after{
+content:"";
+position:absolute;
+inset:-45%;
+background:conic-gradient(from 90deg,transparent,rgba(250,204,21,.18),transparent,rgba(255,255,255,.10),transparent);
+animation:cardLeaderSpin 4s linear infinite;
+pointer-events:none;
+}
+
+.card.gold.top-leader > *{position:relative;z-index:2}
+
+@keyframes cardLeaderSpin{to{transform:rotate(360deg)}}
+
 .gold{border-top:6px solid #facc15;animation:glowGold 2.4s infinite alternate}
 .silver{border-top:6px solid #cbd5e1;animation:glowSilver 2.4s infinite alternate}
 .bronze{border-top:6px solid #d97706;animation:glowBronze 2.4s infinite alternate}
@@ -466,22 +534,34 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
 </div>
 
 <section class="cards">
-<div class="card gold">
+<div id="cardLider" class="card gold">
 <small>🥇 Primer Lugar</small>
 <h2 id="liderNombre">Cargando...</h2>
 <p id="liderPuntos">0 puntos</p>
+<div class="card-rank-meta">
+<span id="liderMovimiento" class="card-move move-equal">═ Igual</span>
+<span id="liderEstado" class="card-status">👑 Líder</span>
+</div>
 </div>
 
-<div class="card silver">
+<div id="cardSegundo" class="card silver">
 <small>🥈 Segundo Lugar</small>
 <h2 id="segundoNombre">Cargando...</h2>
 <p id="segundoPuntos">0 puntos</p>
+<div class="card-rank-meta">
+<span id="segundoMovimiento" class="card-move move-equal">═ Igual</span>
+<span id="segundoEstado" class="card-status">➖ Se mantiene</span>
+</div>
 </div>
 
-<div class="card bronze">
+<div id="cardTercero" class="card bronze">
 <small>🥉 Tercer Lugar</small>
 <h2 id="terceroNombre">Cargando...</h2>
 <p id="terceroPuntos">0 puntos</p>
+<div class="card-rank-meta">
+<span id="terceroMovimiento" class="card-move move-equal">═ Igual</span>
+<span id="terceroEstado" class="card-status">➖ Se mantiene</span>
+</div>
 </div>
 </section>
 
@@ -611,20 +691,29 @@ rowClass:"leader-row"
 };
 }
 
+if(index === 1){
+return {
+iconoNombre:"⚔️",
+claseNombre:"silver",
+estado:`<span class="status-badge status-hunter">⚔️ Cazador del Líder</span>`,
+rowClass:""
+};
+}
+
+if(index === 2){
+return {
+iconoNombre:"🥉",
+claseNombre:"bronze",
+estado:`<span class="status-badge status-top">🥉 Podio Mundial</span>`,
+rowClass:""
+};
+}
+
 if(posicionActual <= 3 && posicionAnterior && posicionAnterior > 3){
 return {
 iconoNombre:"🚀",
 claseNombre:"",
 estado:`<span class="status-badge status-top">🚀 Top 3 Debut</span>`,
-rowClass:""
-};
-}
-
-if(index === 1 && diferenciaLider <= 3){
-return {
-iconoNombre:"⚔️",
-claseNombre:"",
-estado:`<span class="status-badge status-hunter">⚔️ Cazador del Líder</span>`,
 rowClass:""
 };
 }
@@ -657,7 +746,57 @@ rowClass:""
 
 function renderNombreConLogro(nombre,logro){
 const icono = logro.iconoNombre ? logro.iconoNombre + " " : "";
-return `<span class="participant-name ${logro.claseNombre || ""}">${icono}${nombre}</span>`;
+/* En el Ranking General solo mantenemos estilo especial para el líder.
+   Segundo y tercero quedan limpios, solo con su icono. */
+const claseRanking = logro.claseNombre === "king" ? "king" : "";
+return `<span class="participant-name ${claseRanking}">${icono}${nombre}</span>`;
+}
+
+function textoPlanoMovimiento(nombre,posicionActual,rankingAnterior){
+if(!rankingAnterior[nombre]) return {texto:"🆕 Nuevo", clase:"move-new"};
+const anterior = rankingAnterior[nombre];
+const dif = anterior - posicionActual;
+if(dif>0) return {texto:`▲ Subió ${dif}`, clase:"move-up"};
+if(dif<0) return {texto:`▼ Bajó ${Math.abs(dif)}`, clase:"move-down"};
+return {texto:"═ Igual", clase:"move-equal"};
+}
+
+function textoEstadoCard(logro){
+const tmp = document.createElement("div");
+tmp.innerHTML = logro.estado;
+return tmp.textContent || tmp.innerText || "➖ Se mantiene";
+}
+
+function actualizarCardTop(prefix,item,index,data,rankingAnterior,liderAnterior,cardId){
+const posicionActual = item.posicion || index + 1;
+const logro = obtenerLogro(item,index,data,rankingAnterior,liderAnterior);
+const mov = textoPlanoMovimiento(item.nombre,posicionActual,rankingAnterior);
+
+const nombreEl = document.getElementById(prefix + "Nombre");
+const puntosEl = document.getElementById(prefix + "Puntos");
+const movEl = document.getElementById(prefix + "Movimiento");
+const estadoEl = document.getElementById(prefix + "Estado");
+const card = document.getElementById(cardId);
+
+if(nombreEl){
+  nombreEl.textContent = (logro.iconoNombre ? logro.iconoNombre + " " : "") + item.nombre;
+  if(logro.claseNombre === "king") nombreEl.className = "card-name-king";
+  else if(logro.claseNombre === "silver") nombreEl.className = "card-name-silver";
+  else if(logro.claseNombre === "bronze") nombreEl.className = "card-name-bronze";
+  else nombreEl.className = "";
+}
+if(puntosEl) puntosEl.textContent = item.puntos + " puntos";
+if(movEl){
+  movEl.className = "card-move";
+  movEl.textContent = "";
+}
+if(estadoEl){
+  estadoEl.className = "card-status";
+  estadoEl.textContent = textoEstadoCard(logro);
+}
+if(card){
+  card.classList.toggle("top-leader", index === 0);
+}
 }
 
 function actualizarTrofeo(puntosLider){
@@ -720,8 +859,7 @@ document.getElementById("totalParticipantes").textContent = data.length;
 
 if(data.length > 0){
 actualizarTrofeo(data[0].puntos);
-document.getElementById("liderNombre").textContent = data[0].nombre;
-document.getElementById("liderPuntos").textContent = data[0].puntos + " puntos";
+actualizarCardTop("lider",data[0],0,data,rankingAnterior,liderAnterior,"cardLider");
 document.getElementById("introLider").textContent = data[0].nombre;
 document.getElementById("introPuntos").textContent = data[0].puntos + " puntos";
 
@@ -745,13 +883,11 @@ setTimeout(()=>{nl.classList.remove("show")},4800);
 }
 
 if(data.length > 1){
-document.getElementById("segundoNombre").textContent = data[1].nombre;
-document.getElementById("segundoPuntos").textContent = data[1].puntos + " puntos";
+actualizarCardTop("segundo",data[1],1,data,rankingAnterior,liderAnterior,"cardSegundo");
 }
 
 if(data.length > 2){
-document.getElementById("terceroNombre").textContent = data[2].nombre;
-document.getElementById("terceroPuntos").textContent = data[2].puntos + " puntos";
+actualizarCardTop("tercero",data[2],2,data,rankingAnterior,liderAnterior,"cardTercero");
 }
 
 if(data.length >= 3){
