@@ -104,6 +104,10 @@ color:#a7f3d0;
 letter-spacing:.5px;
 }
 
+
+.leader-card h2 br{display:block;margin:4px 0}
+.leader-card h2{max-width:760px}
+
 @keyframes leaderUnlock{
 from{transform:scale(.72);opacity:0;filter:blur(6px)}
 to{transform:scale(1);opacity:1;filter:blur(0)}
@@ -651,18 +655,38 @@ if(headerIndex === -1) return [];
 
 const dataRows = rows.slice(headerIndex + 1);
 
-return dataRows.map(row => ({
-posicion:Number(row[1]) || 0,
+const data = dataRows.map(row => ({
+posicionOriginal:Number(row[1]) || 0,
 nombre:row[2],
 puntos:Number(row[3]) || 0
 })).filter(item => item.nombre && item.nombre.trim() !== "");
+
+/* Ranking competitivo automático:
+   Si varios tienen el mismo puntaje, todos comparten la misma posición.
+   Ejemplo: 135,135,135,135,130 = posiciones 1,1,1,1,5. */
+let posicionCompetitiva = 0;
+let puntajeAnterior = null;
+
+data.forEach((item,index) => {
+  if(puntajeAnterior === null || item.puntos !== puntajeAnterior){
+    posicionCompetitiva = index + 1;
+    puntajeAnterior = item.puntos;
+  }
+  item.posicion = posicionCompetitiva;
+});
+
+return data;
 }
 
 function crearMapaRankingAnterior(dataAnterior){
 const mapa = {};
 
+/* Para el movimiento usamos la posición REAL publicada en Ranking_Anterior.
+   No recalculamos empates aquí, porque esta hoja representa cómo estaba
+   guardada la tabla al cierre anterior. Ejemplo: si Kelvin era #1 y
+   Valentina #2, el movimiento debe comparar contra 1 y 2 respectivamente. */
 dataAnterior.forEach((item,index) => {
-const posicion = item.posicion || index + 1;
+const posicion = Number(item.posicionOriginal || item.posicion || index + 1);
 mapa[item.nombre] = posicion;
 });
 
@@ -685,14 +709,26 @@ if(!rankingAnterior[nombre]) return null;
 return rankingAnterior[nombre] - posicionActual;
 }
 
-function obtenerLogro(item,index,data,rankingAnterior,liderAnterior){
+function obtenerLogro(item,index,data,rankingAnterior,lideresAnteriores){
 const posicionActual = item.posicion || index + 1;
 const posicionAnterior = rankingAnterior[item.nombre] || null;
 const movimiento = obtenerMovimientoNumero(item.nombre,posicionActual,rankingAnterior);
-const liderActual = data.length > 0 ? data[0] : null;
-const diferenciaLider = liderActual ? liderActual.puntos - item.puntos : 0;
 
-if(index === 0 && liderAnterior && liderAnterior !== item.nombre){
+const posicionesValidas = data
+  .map((x,i) => Number(x.posicion || i + 1))
+  .filter(p => p && p > 0);
+
+const primeraPosicionDespuesDelLider = posicionesValidas
+  .filter(p => p > 1)
+  .sort((a,b) => a-b)[0] || null;
+
+const lideresAnterioresSet = new Set(lideresAnteriores || []);
+
+/* Ranking competitivo:
+   Si hay empate en primer lugar: 1,1,1,1 y luego 5.
+   Todos los puesto #1 son líderes.
+   El siguiente escalón real después del #1 es el Cazador del Líder. */
+if(posicionActual === 1 && !lideresAnterioresSet.has(item.nombre)){
 return {
 iconoNombre:"👑",
 claseNombre:"king",
@@ -701,7 +737,7 @@ rowClass:"leader-row"
 };
 }
 
-if(index === 0){
+if(posicionActual === 1){
 return {
 iconoNombre:"👑",
 claseNombre:"king",
@@ -710,7 +746,7 @@ rowClass:"leader-row"
 };
 }
 
-if(index === 1){
+if(primeraPosicionDespuesDelLider && posicionActual === primeraPosicionDespuesDelLider){
 return {
 iconoNombre:"⚔️",
 claseNombre:"silver",
@@ -719,7 +755,7 @@ rowClass:""
 };
 }
 
-if(index === 2){
+if(posicionActual > 1 && posicionActual <= 3){
 return {
 iconoNombre:"🥉",
 claseNombre:"bronze",
@@ -786,9 +822,9 @@ tmp.innerHTML = logro.estado;
 return tmp.textContent || tmp.innerText || "➖ Se mantiene";
 }
 
-function actualizarCardTop(prefix,item,index,data,rankingAnterior,liderAnterior,cardId){
+function actualizarCardTop(prefix,item,index,data,rankingAnterior,lideresAnteriores,cardId){
 const posicionActual = item.posicion || index + 1;
-const logro = obtenerLogro(item,index,data,rankingAnterior,liderAnterior);
+const logro = obtenerLogro(item,index,data,rankingAnterior,lideresAnteriores);
 const mov = textoPlanoMovimiento(item.nombre,posicionActual,rankingAnterior);
 
 const nombreEl = document.getElementById(prefix + "Nombre");
@@ -796,6 +832,20 @@ const puntosEl = document.getElementById(prefix + "Puntos");
 const movEl = document.getElementById(prefix + "Movimiento");
 const estadoEl = document.getElementById(prefix + "Estado");
 const card = document.getElementById(cardId);
+const labelCard = posicionActual === 1 ? "🥇 Primer Lugar" :
+                  posicionActual === 2 ? "🥈 Segundo Lugar" :
+                  posicionActual === 3 ? "🥉 Tercer Lugar" :
+                  `#${posicionActual} Lugar`;
+
+if(card){
+  const small = card.querySelector("small");
+  if(small) small.textContent = labelCard;
+  card.classList.remove("gold","silver","bronze","top-leader");
+  if(posicionActual === 1) card.classList.add("gold","top-leader");
+  else if(posicionActual === 2) card.classList.add("silver");
+  else if(posicionActual === 3) card.classList.add("bronze");
+  else card.classList.add("bronze");
+}
 
 if(nombreEl){
   nombreEl.textContent = (logro.iconoNombre ? logro.iconoNombre + " " : "") + item.nombre;
@@ -812,9 +862,6 @@ if(movEl){
 if(estadoEl){
   estadoEl.className = "card-status";
   estadoEl.textContent = textoEstadoCard(logro);
-}
-if(card){
-  card.classList.toggle("top-leader", index === 0);
 }
 }
 
@@ -835,6 +882,12 @@ window.currentTrophyLevel = trophyLevel;
 
 [heroTrophy, introTrophy].forEach(img => {
   if(!img) return;
+  img.onerror = function(){
+    if(!this.dataset.fallback){
+      this.dataset.fallback = "1";
+      this.src = "trophy-level-1.png?v=22";
+    }
+  };
   img.classList.remove("level-1","level-2","level-3","evolving");
   img.classList.add(trophyLevel);
   img.classList.add("evolving");
@@ -853,7 +906,10 @@ const data = obtenerRankingDesdeCSV(csvActual);
 const dataAnterior = obtenerRankingDesdeCSV(csvAnterior);
 const rankingAnterior = crearMapaRankingAnterior(dataAnterior);
 
-const liderAnterior = dataAnterior.length > 0 ? dataAnterior[0].nombre : "";
+const lideresAnteriores = dataAnterior
+  .filter((x,i) => Number(x.posicionOriginal || x.posicion || i + 1) === 1)
+  .map(x => x.nombre);
+const liderAnterior = lideresAnteriores[0] || "";
 const maxPuntos = Math.max(...data.map(x => x.puntos),1);
 
 const rankingBody = document.getElementById("rankingBody");
@@ -861,7 +917,7 @@ rankingBody.innerHTML = "";
 
 data.forEach((item,index) => {
 const posicionActual = item.posicion || index + 1;
-const logro = obtenerLogro(item,index,data,rankingAnterior,liderAnterior);
+const logro = obtenerLogro(item,index,data,rankingAnterior,lideresAnteriores);
 
 rankingBody.innerHTML += `
 <tr class="${logro.rowClass}">
@@ -878,16 +934,33 @@ document.getElementById("totalParticipantes").textContent = data.length;
 
 if(data.length > 0){
 actualizarTrofeo(data[0].puntos);
-actualizarCardTop("lider",data[0],0,data,rankingAnterior,liderAnterior,"cardLider");
+actualizarCardTop("lider",data[0],0,data,rankingAnterior,lideresAnteriores,"cardLider");
 document.getElementById("introLider").textContent = data[0].nombre;
 document.getElementById("introPuntos").textContent = data[0].puntos + " puntos";
 
-if(liderAnterior && liderAnterior !== data[0].nombre){
-document.getElementById("newLeaderName").textContent = data[0].nombre;
+const lideresActuales = data.filter((x,i) => Number(x.posicion || i + 1) === 1);
+const nuevosLideres = lideresActuales.filter(x => !lideresAnteriores.includes(x.nombre));
+
+if(nuevosLideres.length > 0){
+const tituloLeader = document.querySelector(".leader-title");
+if(tituloLeader){
+  tituloLeader.textContent = nuevosLideres.length > 1
+    ? "🔥⚡ NUEVOS LÍDERES DE LA QUINIELA ⚡🔥"
+    : "🔥⚡ NUEVO LÍDER DE LA QUINIELA ⚡🔥";
+}
+
+const nombresNuevos = nuevosLideres.map(x => x.nombre).join("<br>");
+document.getElementById("newLeaderName").innerHTML = nombresNuevos;
 document.getElementById("newLeaderPoints").textContent = data[0].puntos + " puntos";
 
 const leaderTrophy = document.getElementById("leaderTrophy");
 if(leaderTrophy){
+  leaderTrophy.onerror = function(){
+    if(!this.dataset.fallback){
+      this.dataset.fallback = "1";
+      this.src = "trophy-level-1.png?v=22";
+    }
+  };
   leaderTrophy.src = window.currentTrophySrc || "trophy-level-1.png?v=22";
   leaderTrophy.classList.remove("level-1","level-2","level-3","evolving");
   leaderTrophy.classList.add(window.currentTrophyLevel || "level-1");
@@ -897,16 +970,16 @@ if(leaderTrophy){
 
 const nl = document.getElementById("newLeader");
 nl.classList.add("show");
-setTimeout(()=>{nl.classList.remove("show")},4800);
+setTimeout(()=>{nl.classList.remove("show")},5200);
 }
 }
 
 if(data.length > 1){
-actualizarCardTop("segundo",data[1],1,data,rankingAnterior,liderAnterior,"cardSegundo");
+actualizarCardTop("segundo",data[1],1,data,rankingAnterior,lideresAnteriores,"cardSegundo");
 }
 
 if(data.length > 2){
-actualizarCardTop("tercero",data[2],2,data,rankingAnterior,liderAnterior,"cardTercero");
+actualizarCardTop("tercero",data[2],2,data,rankingAnterior,lideresAnteriores,"cardTercero");
 }
 
 if(data.length >= 3){
