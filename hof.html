@@ -78,24 +78,24 @@ tr:hover{background:#172947}.leader-cell{color:#fde68a;font-weight:1000;text-sha
 </section>
 
 <section class="section">
-  <h2>👑 Podio Histórico</h2>
+  <h2>⚡ Podio Hall of Fame</h2>
   <div id="podium" class="podium"><div class="loading">Cargando Hall of Fame...</div></div>
 
   <div class="info-card">
-    <h3>⚡ ¿Cómo se calculan los Pts HoF?</h3>
-    <p>El Hall of Fame premia el rendimiento histórico, la constancia y la capacidad de mantenerse arriba durante todo el Mundial.</p>
+    <h3>🪙 ¿Cómo se calculan los Pts HoF?</h3>
+    <p>El Hall of Fame usa los Puntos Oro como desempate histórico. Cada fecha como #1 suma 1 Punto Oro al score máximo.</p>
     <div class="formula">
-      <div>⭐ Score máximo<br><small>Base principal del puntaje.</small></div>
-      <div>👑 Día como líder<br><small>+3 pts por cada día.</small></div>
-      <div>🥇🥈🥉 Día en Top 3<br><small>+2 pts por cada día.</small></div>
-      <div>📈 Día en Top 10<br><small>+1 pt por cada día.</small></div>
+      <div>⭐ Score máximo<br><small>Base principal del Hall of Fame.</small></div>
+      <div>👑 Fecha como #1<br><small>+1 Punto Oro por cada fecha liderando.</small></div>
+      <div>⚡ Total HoF<br><small>Score máximo + Puntos Oro.</small></div>
+      <div>🏆 Mejor ranking<br><small>Se toma desde la columna Mejor Ranking de la hoja HoF.</small></div>
     </div>
-    <p class="quote">“No gana quien lidera un día. Entra al Hall of Fame quien hace historia.”</p>
+    <p class="quote">“Cuando el score empata, el oro separa a las leyendas.”</p>
   </div>
 </section>
 
 <section class="section">
-  <h2>🎴 Cartas de Leyenda</h2>
+  <h2>🎴 Cartas de Leyenda HoF</h2>
   <div id="legendCards" class="legend-grid"><div class="loading">Cargando cartas...</div></div>
 </section>
 
@@ -204,23 +204,24 @@ function calcularStats(rankingTable, scoreTable){
     const rankings=rankingMap[nombre]||{};
     const scores=scoreMap[nombre]||{};
     const mejorRanking=mejorRankingMap[nombre] ?? null;
-    let scoreMax=0, diasLider=0, diasTop3=0, diasTop10=0;
+    let scoreMax=0, puntosOro=0;
 
     fechas.forEach(f=>{
       const r=rankings[f];
       const s=scores[f];
-      if(r!==null && r!==undefined){
-        if(r===1) diasLider++;
-        if(r>=1 && r<=3) diasTop3++;
-        if(r>=1 && r<=10) diasTop10++;
-      }
+
+      // Puntos Oro: únicamente suma cuando llega al primer lugar.
+      if(r!==null && r!==undefined && r===1) puntosOro++;
+
+      // Score máximo se conserva solo como estadística visual.
       if(s!==null && s!==undefined && s>scoreMax) scoreMax=s;
     });
 
-    const hofPts=scoreMax + (diasLider*3) + (diasTop3*2) + (diasTop10*1);
-    return {nombre,mejorRanking,scoreMax,diasLider,diasTop3,diasTop10,hofPts,rankings,scores};
-  }).filter(x=>x.scoreMax>0 || x.mejorRanking!==null)
-    .sort((a,b)=> b.hofPts-a.hofPts || b.scoreMax-a.scoreMax || (a.mejorRanking||999)-(b.mejorRanking||999));
+    // Total HoF: el Score máximo es la base y los Puntos Oro funcionan como desempate.
+    const hofPts=scoreMax + puntosOro;
+    return {nombre,mejorRanking,scoreMax,puntosOro,hofPts,rankings,scores};
+  }).filter(x=>x.scoreMax>0 || x.mejorRanking!==null || x.puntosOro>0)
+    .sort((a,b)=> b.hofPts-a.hofPts || b.scoreMax-a.scoreMax || b.puntosOro-a.puntosOro || (a.mejorRanking||999)-(b.mejorRanking||999));
 }
 
 function clasePodio(i){return i===0?'gold':i===1?'silver':'bronze'}
@@ -235,9 +236,9 @@ function renderPodio(stats){
       <h3>${iconoPodio(i)} ${p.nombre}</h3>
       <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
       <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
-      <div class="stat">🔥 Días como líder: <b>${p.diasLider}</b></div>
-      <div class="stat">🥇 Días en Top 3: <b>${p.diasTop3}</b></div>
-      <div class="stat">📈 Días en Top 10: <b>${p.diasTop10}</b></div>
+      <div class="stat">🪙 Puntos Oro: <b>${p.puntosOro}</b></div>
+      <div class="stat">👑 Fechas como #1: <b>${p.puntosOro}</b></div>
+      <div class="stat">⚡ Total HoF: <b>${p.scoreMax} + ${p.puntosOro} = ${p.hofPts}</b></div>
       <div class="hof-points">⚡ ${p.hofPts} pts HoF</div>
     </div>
   `).join('');
@@ -250,9 +251,9 @@ function renderCartas(stats){
       <h3>${i<3?iconoPodio(i):'🎴'} ${p.nombre}</h3>
       <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
       <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
-      <div class="stat">👑 Días líder: <b>${p.diasLider}</b></div>
-      <div class="stat">🥇 Top 3: <b>${p.diasTop3}</b></div>
-      <div class="stat">📈 Top 10: <b>${p.diasTop10}</b></div>
+      <div class="stat">🪙 Puntos Oro: <b>${p.puntosOro}</b></div>
+      <div class="stat">👑 Fechas como #1: <b>${p.puntosOro}</b></div>
+      <div class="stat">⚡ Total HoF: <b>${p.scoreMax} + ${p.puntosOro} = ${p.hofPts}</b></div>
       <span class="badge">⚡ ${p.hofPts} pts HoF</span>
     </div>
   `).join('');
@@ -261,17 +262,17 @@ function renderCartas(stats){
 function renderTimeline(rankingTable, stats){
   const fechas=rankingTable.fechas;
   const lideres=fechas.map(f=>{
-    let lider=null;
+    const lideresDia=[];
     rankingTable.data.forEach(p=>{
       const r=p.valores[f];
-      if(r===1) lider=p.nombre;
+      if(r===1) lideresDia.push(p.nombre);
     });
-    return {fecha:f,lider:lider||'Sin líder'};
+    return {fecha:f,lideres:lideresDia.length ? lideresDia : ['Sin líder']};
   });
   document.getElementById('timeline').innerHTML=`
   <table>
-    <thead><tr><th>Fecha</th><th>Líder histórico</th></tr></thead>
-    <tbody>${lideres.map(x=>`<tr><td>${x.fecha}</td><td class="leader-cell">👑 ${x.lider}</td></tr>`).join('')}</tbody>
+    <thead><tr><th>Fecha</th><th>Líder(es) histórico(s)</th><th>Puntos Oro entregados</th></tr></thead>
+    <tbody>${lideres.map(x=>`<tr><td>${x.fecha}</td><td class="leader-cell">👑 ${x.lideres.join(' · ')}</td><td>🪙 ${x.lideres[0]==='Sin líder'?0:x.lideres.length}</td></tr>`).join('')}</tbody>
   </table>`;
 }
 
