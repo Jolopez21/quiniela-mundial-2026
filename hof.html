@@ -50,6 +50,288 @@ body{background:#06111f;color:white;min-height:100vh}
 .formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
 .formula div{padding:16px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);font-weight:800}
 .quote{margin-top:18px;color:#a7f3d0;font-weight:900;font-style:italic}
+
+/* ADN de Predicciones - versión con alma */
+.adn-dashboard{
+  background:linear-gradient(145deg,#12213a,#0d1a30);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:26px;
+  padding:28px;
+  box-shadow:0 18px 44px rgba(0,0,0,.40);
+  overflow:hidden;
+}
+
+.adn-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+
+.adn-header h3{
+  font-size:30px;
+  color:#fff;
+  margin-bottom:8px;
+}
+
+.adn-header p{
+  color:#cbd5e1;
+  font-weight:750;
+  max-width:780px;
+  line-height:1.45;
+}
+
+.adn-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.adn-tab{
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
+  color:#e5eefc;
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:1000;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.adn-tab:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.13);
+}
+
+.adn-tab.active{
+  background:#00c853;
+  color:white;
+  box-shadow:0 0 22px rgba(0,200,83,.35);
+}
+
+.adn-kings{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+  margin-bottom:24px;
+}
+
+.king-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 10px 24px rgba(0,0,0,.22);
+}
+
+.king-card small{
+  display:block;
+  color:#9fb2c8;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:8px;
+  font-size:11px;
+}
+
+.king-card strong{
+  display:block;
+  color:#fde68a;
+  font-size:18px;
+  line-height:1.25;
+  text-shadow:0 0 14px rgba(250,204,21,.25);
+}
+
+.king-card span{
+  display:inline-flex;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(250,204,21,.15);
+  color:#fde68a;
+  font-weight:1000;
+}
+
+.adn-main{
+  display:grid;
+  grid-template-columns:minmax(280px,360px) 1fr;
+  gap:22px;
+  align-items:start;
+}
+
+.adn-feature{
+  background:
+    radial-gradient(circle at top left,rgba(250,204,21,.22),transparent 36%),
+    linear-gradient(145deg,#172947,#0d1a30);
+  border-top:5px solid #facc15;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 0 28px rgba(250,204,21,.14);
+}
+
+.adn-feature .label{
+  color:#fde68a;
+  font-weight:1000;
+  margin-bottom:14px;
+}
+
+.adn-feature h3{
+  font-size:28px;
+  line-height:1.1;
+  margin-bottom:14px;
+}
+
+.adn-feature .big-number{
+  font-size:72px;
+  line-height:1;
+  font-weight:1000;
+  color:#fff7ad;
+  text-shadow:0 0 22px rgba(250,204,21,.65);
+}
+
+.adn-feature .caption{
+  margin-top:12px;
+  color:#dbeafe;
+  font-weight:800;
+}
+
+.ranking-bars{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+
+  height:520px;          /* mismo alto visual */
+  overflow-y:auto;       /* scroll vertical */
+  padding-right:8px;
+}
+
+/* Scroll premium */
+.ranking-bars::-webkit-scrollbar{
+  width:10px;
+}
+
+.ranking-bars::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+}
+
+.ranking-bars::-webkit-scrollbar-thumb{
+  background:linear-gradient(
+    180deg,
+    #00c853,
+    #facc15
+  );
+  border-radius:999px;
+}
+
+.ranking-bars::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(
+    180deg,
+    #00e676,
+    #fde047
+  );
+}
+
+.rank-row{
+  display:grid;
+  grid-template-columns:34px minmax(160px,280px) 1fr 44px;
+  gap:12px;
+  align-items:center;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.09);
+  padding:11px 12px;
+  border-radius:16px;
+  transition:.25s;
+}
+
+.rank-row:hover{
+  transform:translateX(4px);
+  background:rgba(255,255,255,.10);
+}
+
+.rank-num{
+  font-weight:1000;
+  color:#fde68a;
+  text-align:center;
+}
+
+.rank-name{
+  font-weight:1000;
+  color:white;
+  line-height:1.18;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bar-track{
+  height:16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  overflow:hidden;
+  position:relative;
+}
+
+.bar-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#00c853,#facc15);
+  box-shadow:0 0 18px rgba(0,200,83,.32);
+  min-width:4px;
+}
+
+.rank-value{
+  font-weight:1000;
+  text-align:right;
+  color:#a7f3d0;
+}
+
+.adn-box{
+  margin-top:16px;
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.adn-title{
+  font-weight:1000;
+  color:#fde68a;
+  margin-bottom:10px;
+}
+
+.adn-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+}
+
+.adn-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.06);
+  color:#e5eefc;
+  font-weight:800;
+}
+
+.adn-item b{
+  color:white;
+}
+
+@media(max-width:850px){
+  .adn-main{
+    grid-template-columns:1fr;
+  }
+  .rank-row{
+    grid-template-columns:30px minmax(120px,1fr) 1fr 36px;
+    gap:8px;
+  }
+}
+
 .legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
 .legend-card{border-top:4px solid rgba(0,200,83,.75)}
 .legend-card h3{font-size:24px;margin-bottom:16px}
@@ -68,7 +350,7 @@ tr:hover{background:#172947}.leader-cell{color:#fde68a;font-weight:1000;text-sha
 <section class="hero">
   <div class="hero-content">
     <h1>🏛️ Hall of Fame Mundial 2026</h1>
-    <p>El registro histórico de líderes, leyendas y rendimiento de la quiniela.</p>
+    <p>El ADN histórico de predicciones, leyendas y líderes de la quiniela.</p>
     <div class="nav">
       <a class="btn btn-primary" href="index.html">🏆 Volver a la Quiniela</a>
       <a class="btn btn-secondary" href="worldcup.html">🌎 World Cup</a>
@@ -78,19 +360,35 @@ tr:hover{background:#172947}.leader-cell{color:#fde68a;font-weight:1000;text-sha
 </section>
 
 <section class="section">
-  <h2>⚡ Podio Hall of Fame</h2>
-  <div id="podium" class="podium"><div class="loading">Cargando Hall of Fame...</div></div>
-
-  <div class="info-card">
-    <h3>🪙 ¿Cómo se calculan los Pts HoF?</h3>
-    <p>El Hall of Fame usa los Puntos Oro como desempate histórico. Cada fecha como #1 suma 1 Punto Oro al score máximo.</p>
-    <div class="formula">
-      <div>⭐ Score máximo<br><small>Base principal del Hall of Fame.</small></div>
-      <div>👑 Fecha como #1<br><small>+1 Punto Oro por cada fecha liderando.</small></div>
-      <div>⚡ Total HoF<br><small>Score máximo + Puntos Oro.</small></div>
-      <div>🏆 Mejor ranking<br><small>Se toma desde la columna Mejor Ranking de la hoja HoF.</small></div>
+  <h2>📊 ADN de Predicciones</h2>
+  <div class="adn-dashboard">
+    <div class="adn-header">
+      <div>
+        <h3>Ranking de habilidades por categoría</h3>
+      </div>
+      <div class="adn-tabs">
+        <button class="adn-tab active" onclick="renderADNRanking('exactitud', this)">🔥 Exactitud</button>
+        <button class="adn-tab" onclick="renderADNRanking('gep', this)">✅ G/E/P</button>
+        <button class="adn-tab" onclick="renderADNRanking('ddg', this)">🎯 DDG</button>
+        <button class="adn-tab" onclick="renderADNRanking('gran', this)">⚽ Gran Cant.</button>
+        <button class="adn-tab" onclick="renderADNRanking('equipo', this)">🏆 Equipo pasa</button>
+        <button class="adn-tab" onclick="renderADNRanking('final', this)">👑 Final</button>
+      </div>
     </div>
-    <p class="quote">“Cuando el score empata, el oro separa a las leyendas.”</p>
+
+    <div id="adnKings" class="adn-kings">
+      <div class="loading">Cargando líderes por categoría...</div>
+    </div>
+
+    <div class="adn-main">
+      <div id="adnFeature" class="adn-feature">
+        <div class="loading">Cargando campeón de categoría...</div>
+      </div>
+
+      <div id="adnRankingBars" class="ranking-bars">
+        <div class="loading">Cargando ranking ADN...</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -145,7 +443,8 @@ function extraerTablas(rows){
 
   return {
     ranking: leerTabla(rows, rankingHeader, scoreHeader),
-    score: leerTabla(rows, scoreHeader, rows.length)
+    score: leerTabla(rows, scoreHeader, rows.length),
+    adn: extraerADN(rows)
   };
 }
 
@@ -190,22 +489,71 @@ function leerTabla(rows, headerIndex, endIndex){
   return {fechas:fechas.map(x=>x.h),data};
 }
 
-function calcularStats(rankingTable, scoreTable){
+
+function extraerADN(rows){
+  const headerIndex = rows.findIndex(r=>{
+    const lower = r.map(x=>String(x||'').toLowerCase().trim());
+    return lower.includes('nombre') &&
+           lower.some(x=>x.includes('gane') || x.includes('empate')) &&
+           lower.some(x=>x.includes('equipo'));
+  });
+
+  if(headerIndex < 0) return {};
+
+  const header = rows[headerIndex].map(x=>String(x||'').toLowerCase().trim());
+
+  const colNombre = header.findIndex(x=>x==='nombre');
+  const colFinal = header.findIndex(x=>x==='final');
+  const colGep = header.findIndex(x=>x.includes('gane') || x.includes('empate'));
+  const colDdg = header.findIndex(x=>x.includes('diferencia'));
+  const colExactitud = header.findIndex(x=>x.includes('exact'));
+  const colGran = header.findIndex(x=>x.includes('gran'));
+  const colEquipo = header.findIndex(x=>x.includes('equipo'));
+
+  const map = {};
+
+  for(let i=headerIndex+1;i<rows.length;i++){
+    const r = rows[i];
+    const nombre = normalizarNombre(r[colNombre]);
+
+    if(!nombre) continue;
+    if(nombre.toLowerCase()==='nombre') continue;
+
+    const tieneAlgo = [colFinal,colGep,colDdg,colExactitud,colGran,colEquipo]
+      .some(c=>c>=0 && String(r[c]||'').trim()!=='');
+
+    if(!tieneAlgo) continue;
+
+    map[nombre] = {
+      final: num(r[colFinal]) || 0,
+      gep: num(r[colGep]) || 0,
+      ddg: num(r[colDdg]) || 0,
+      exactitud: num(r[colExactitud]) || 0,
+      gran: num(r[colGran]) || 0,
+      equipo: num(r[colEquipo]) || 0
+    };
+  }
+
+  return map;
+}
+
+function calcularStats(rankingTable, scoreTable, adnMap){
   const nombres=new Set();
   rankingTable.data.forEach(x=>nombres.add(x.nombre));
   scoreTable.data.forEach(x=>nombres.add(x.nombre));
+  Object.keys(adnMap || {}).forEach(nombre=>nombres.add(nombre));
 
   const scoreMap=Object.fromEntries(scoreTable.data.map(x=>[x.nombre,x.valores]));
   const rankingMap=Object.fromEntries(rankingTable.data.map(x=>[x.nombre,x.valores]));
   const mejorRankingMap=Object.fromEntries(rankingTable.data.map(x=>[x.nombre,x.mejorRanking]));
   const fechas=[...new Set([...rankingTable.fechas,...scoreTable.fechas])];
 
-  return [...nombres].map(nombre=>{
+   return [...nombres].map(nombre=>{
     const rankings=rankingMap[nombre]||{};
     const scores=scoreMap[nombre]||{};
     const mejorRanking=mejorRankingMap[nombre] ?? null;
     let scoreMax=0, puntosOro=0;
-
+    
     fechas.forEach(f=>{
       const r=rankings[f];
       const s=scores[f];
@@ -213,20 +561,108 @@ function calcularStats(rankingTable, scoreTable){
       // Puntos Oro: únicamente suma cuando llega al primer lugar.
       if(r!==null && r!==undefined && r===1) puntosOro++;
 
-      // Score máximo se conserva solo como estadística visual.
-      if(s!==null && s!==undefined && s>scoreMax) scoreMax=s;
+      // Score actual: conserva el mayor/último avance real de Hall of Fame Score.
+      // Esto evita que columnas futuras vacías bajen el score a 0.
+      const scoreNumero = Number(String(s ?? '').replace(/[^0-9.-]/g,''));
+      if(!isNaN(scoreNumero) && scoreNumero > scoreMax) scoreMax = scoreNumero;
     });
 
-    // Total HoF: el Score máximo es la base y los Puntos Oro funcionan como desempate.
+    // Total HoF: el Score actual es la base y los Puntos Oro funcionan como desempate.
     const hofPts=scoreMax + puntosOro;
-    return {nombre,mejorRanking,scoreMax,puntosOro,hofPts,rankings,scores};
-  }).filter(x=>x.scoreMax>0 || x.mejorRanking!==null || x.puntosOro>0)
+    return {nombre,mejorRanking,scoreMax,puntosOro,hofPts,rankings,scores,adn:(adnMap && adnMap[nombre]) ? adnMap[nombre] : null};
+  }).filter(x=>x.scoreMax>0 || x.mejorRanking!==null || x.puntosOro>0 || x.adn)
     .sort((a,b)=> b.hofPts-a.hofPts || b.scoreMax-a.scoreMax || b.puntosOro-a.puntosOro || (a.mejorRanking||999)-(b.mejorRanking||999));
 }
-
 function clasePodio(i){return i===0?'gold':i===1?'silver':'bronze'}
 function tituloPodio(i){return i===0?'👑 Rey del Hall of Fame':i===1?'🥈 Leyenda de Plata':'🥉 Maestro del Podio'}
 function iconoPodio(i){return i===0?'👑':i===1?'🥈':'🥉'}
+
+
+function renderADNBox(p){
+  if(!p.adn) return '';
+  return `
+    <div class="adn-box">
+      <div class="adn-title">📊 ADN del predictor</div>
+      <div class="adn-grid">
+        <div class="adn-item"><span>✅ G/E/P</span><b>${p.adn.gep}</b></div>
+        <div class="adn-item"><span>🎯 DDG</span><b>${p.adn.ddg}</b></div>
+        <div class="adn-item"><span>🔥 Exactos</span><b>${p.adn.exactitud}</b></div>
+        <div class="adn-item"><span>⚽ Gran Cant.</span><b>${p.adn.gran}</b></div>
+        <div class="adn-item"><span>🏆 Equipo pasa</span><b>${p.adn.equipo}</b></div>
+        <div class="adn-item"><span>👑 Final</span><b>${p.adn.final}</b></div>
+      </div>
+    </div>
+  `;
+}
+
+let GLOBAL_STATS = [];
+
+const ADN_LABELS = {
+  exactitud:{titulo:'🔥 Exactitud', desc:'Marcadores exactos conseguidos', icon:'🔥'},
+  gep:{titulo:'✅ G/E/P', desc:'Ganador, empate o perdedor acertado', icon:'✅'},
+  ddg:{titulo:'🎯 DDG', desc:'Diferencia de goles acertada', icon:'🎯'},
+  gran:{titulo:'⚽ Gran Cantidad', desc:'Partidos con gran cantidad de goles acertados', icon:'⚽'},
+  equipo:{titulo:'🏆 Equipo pasa', desc:'Equipos que pasan a la siguiente ronda', icon:'🏆'},
+  final:{titulo:'👑 Final', desc:'Aciertos de final', icon:'👑'}
+};
+
+function renderADNKings(stats){
+  const cats=['exactitud','gep','ddg','gran','equipo','final'];
+  const html = cats.map(cat=>{
+    const label = ADN_LABELS[cat];
+    const sorted = stats.filter(p=>p.adn).sort((a,b)=>(b.adn[cat]||0)-(a.adn[cat]||0));
+    const top = sorted[0];
+    if(!top) return '';
+    return `
+      <div class="king-card">
+        <small>${label.titulo}</small>
+        <strong>${top.nombre}</strong>
+        <span>${top.adn[cat] || 0} aciertos</span>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('adnKings').innerHTML = html || '<div class="error">No hay datos ADN.</div>';
+}
+
+function renderADNRanking(cat='exactitud', btn=null){
+  if(btn){
+    document.querySelectorAll('.adn-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  const label = ADN_LABELS[cat];
+  const data = GLOBAL_STATS
+    .filter(p=>p.adn)
+    .map(p=>({nombre:p.nombre, valor:p.adn[cat] || 0}))
+    .sort((a,b)=>b.valor-a.valor);
+
+  if(!data.length){
+    document.getElementById('adnFeature').innerHTML = '<div class="error">No hay datos ADN.</div>';
+    document.getElementById('adnRankingBars').innerHTML = '';
+    return;
+  }
+
+  const max = Math.max(...data.map(x=>x.valor),1);
+  const top = data[0];
+
+  document.getElementById('adnFeature').innerHTML = `
+    <div class="label">${label.titulo}</div>
+    <h3>${top.nombre}</h3>
+    <div class="big-number">${top.valor}</div>
+    <div class="caption">${label.desc}. Líder actual de esta habilidad.</div>
+  `;
+
+  document.getElementById('adnRankingBars').innerHTML = data.map((p,i)=>`
+    <div class="rank-row">
+      <div class="rank-num">#${i+1}</div>
+      <div class="rank-name">${p.nombre}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${Math.max(4,Math.round((p.valor/max)*100))}%"></div>
+      </div>
+      <div class="rank-value">${p.valor}</div>
+    </div>
+  `).join('');
+}
 
 function renderPodio(stats){
   const top=stats.slice(0,3);
@@ -235,10 +671,11 @@ function renderPodio(stats){
       <small>${tituloPodio(i)}</small>
       <h3>${iconoPodio(i)} ${p.nombre}</h3>
       <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
-      <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
+      <div class="stat">⭐ Score actual: <b>${p.scoreMax}</b></div>
       <div class="stat">🪙 Puntos Oro: <b>${p.puntosOro}</b></div>
       <div class="stat">👑 Fechas como #1: <b>${p.puntosOro}</b></div>
       <div class="stat">⚡ Total HoF: <b>${p.scoreMax} + ${p.puntosOro} = ${p.hofPts}</b></div>
+      ${renderADNBox(p)}
       <div class="hof-points">⚡ ${p.hofPts} pts HoF</div>
     </div>
   `).join('');
@@ -250,10 +687,11 @@ function renderCartas(stats){
       <small>#${i+1} Hall of Fame</small>
       <h3>${i<3?iconoPodio(i):'🎴'} ${p.nombre}</h3>
       <div class="stat">🏆 Mejor ranking: <b>#${p.mejorRanking || '-'}</b></div>
-      <div class="stat">⭐ Score máximo: <b>${p.scoreMax}</b></div>
+      <div class="stat">⭐ Score actual: <b>${p.scoreMax}</b></div>
       <div class="stat">🪙 Puntos Oro: <b>${p.puntosOro}</b></div>
       <div class="stat">👑 Fechas como #1: <b>${p.puntosOro}</b></div>
       <div class="stat">⚡ Total HoF: <b>${p.scoreMax} + ${p.puntosOro} = ${p.hofPts}</b></div>
+      ${renderADNBox(p)}
       <span class="badge">⚡ ${p.hofPts} pts HoF</span>
     </div>
   `).join('');
@@ -267,12 +705,18 @@ function renderTimeline(rankingTable, stats){
       const r=p.valores[f];
       if(r===1) lideresDia.push(p.nombre);
     });
-    return {fecha:f,lideres:lideresDia.length ? lideresDia : ['Sin líder']};
-  });
+    return {fecha:f,lideres:lideresDia};
+  }).filter(x=>x.lideres.length>0);
+
+  if(!lideres.length){
+    document.getElementById('timeline').innerHTML='<div class="loading">Aún no hay líderes históricos registrados.</div>';
+    return;
+  }
+
   document.getElementById('timeline').innerHTML=`
   <table>
     <thead><tr><th>Fecha</th><th>Líder(es) histórico(s)</th><th>Puntos Oro entregados</th></tr></thead>
-    <tbody>${lideres.map(x=>`<tr><td>${x.fecha}</td><td class="leader-cell">👑 ${x.lideres.join(' · ')}</td><td>🪙 ${x.lideres[0]==='Sin líder'?0:x.lideres.length}</td></tr>`).join('')}</tbody>
+    <tbody>${lideres.map(x=>`<tr><td>${x.fecha}</td><td class="leader-cell">👑 ${x.lideres.join(' · ')}</td><td>🪙 ${x.lideres.length}</td></tr>`).join('')}</tbody>
   </table>`;
 }
 
@@ -281,15 +725,18 @@ fetch(hofCSV + '&cache=' + Date.now())
 .then(csv=>{
   const rows=parseCSV(csv);
   const tablas=extraerTablas(rows);
-  const stats=calcularStats(tablas.ranking, tablas.score);
+  const stats=calcularStats(tablas.ranking, tablas.score, tablas.adn);
+  GLOBAL_STATS = stats;
   if(!stats.length) throw new Error('No se encontraron datos HoF');
-  renderPodio(stats);
+  renderADNKings(stats);
+  renderADNRanking('exactitud');
   renderCartas(stats);
   renderTimeline(tablas.ranking, stats);
 })
 .catch(err=>{
   console.error(err);
-  document.getElementById('podium').innerHTML='<div class="error">No se pudo cargar el Hall of Fame.</div>';
+  if(document.getElementById('adnKings')) document.getElementById('adnKings').innerHTML='<div class="error">No se pudo cargar el ADN.</div>';
+  if(document.getElementById('adnRankingBars')) document.getElementById('adnRankingBars').innerHTML='<div class="error">No se pudo cargar el ranking ADN.</div>';
   document.getElementById('legendCards').innerHTML='<div class="error">No se pudieron cargar las cartas.</div>';
   document.getElementById('timeline').innerHTML='<div class="error">No se pudo cargar la línea de tiempo.</div>';
 });
