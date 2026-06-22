@@ -4,344 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>⚽ Predictions</title>
+<title>🌎 World Cup</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
 
 body{
-background:#06111f;
+margin:0;
+background:#08111f;
+font-family:Segoe UI;
+}
+
+header{
+background:#10233d;
+padding:20px;
+}
+
+header a{
 color:white;
-min-height:100vh;
-overflow:hidden;
-}
-
-/* Header principal */
-.header{
-height:78px;
-background:
-linear-gradient(90deg,rgba(6,17,31,.98),rgba(16,35,61,.98)),
-radial-gradient(circle at left,rgba(0,200,83,.22),transparent 35%);
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:18px;
-padding:0 24px;
-border-bottom:1px solid rgba(255,255,255,.10);
-box-shadow:0 8px 26px rgba(0,0,0,.35);
-position:relative;
-z-index:10;
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:14px;
-}
-
-.brand-icon{
-width:48px;
-height:48px;
-border-radius:14px;
-background:#00c853;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:25px;
-box-shadow:0 0 22px rgba(0,200,83,.42);
-}
-
-.brand h1{
-font-size:24px;
-line-height:1.1;
-}
-
-.brand small{
-display:block;
-font-size:12px;
-color:#a7f3d0;
-font-weight:900;
-letter-spacing:.5px;
-text-transform:uppercase;
-margin-top:3px;
-}
-
-.nav{
-display:flex;
-gap:10px;
-align-items:center;
-flex-wrap:wrap;
-}
-
-.btn{
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:12px 16px;
-border-radius:13px;
 text-decoration:none;
-font-weight:1000;
-font-size:14px;
-transition:.25s;
-border:1px solid rgba(255,255,255,.12);
-cursor:pointer;
-}
-
-.btn:hover{
-transform:translateY(-2px);
-}
-
-.btn-green{
-background:#00c853;
-color:white;
-box-shadow:0 0 20px rgba(0,200,83,.30);
-}
-
-.btn-white{
-background:white;
-color:#06111f;
-}
-
-.btn-dark{
-background:rgba(255,255,255,.08);
-color:white;
-}
-
-/* Barra de reglas */
-.rules-bar{
-height:58px;
-background:#0d1a30;
-display:flex;
-align-items:center;
-gap:12px;
-padding:0 24px;
-border-bottom:1px solid rgba(255,255,255,.10);
-box-shadow:0 6px 18px rgba(0,0,0,.22);
-position:relative;
-z-index:9;
-overflow:auto;
-white-space:nowrap;
-}
-
-.rule-pill{
-display:inline-flex;
-align-items:center;
-gap:7px;
-padding:9px 13px;
-border-radius:999px;
-font-size:13px;
-font-weight:1000;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.12);
-color:#e5eefc;
-}
-
-.rule-pill.gold{
-color:#fde68a;
-background:rgba(250,204,21,.14);
-border-color:rgba(250,204,21,.24);
-}
-
-.rule-pill.green{
-color:#86efac;
-background:rgba(34,197,94,.14);
-border-color:rgba(34,197,94,.24);
-}
-
-.rule-pill.blue{
-color:#bae6fd;
-background:rgba(56,189,248,.14);
-border-color:rgba(56,189,248,.24);
-}
-
-/* Área hoja */
-.sheet-shell{
-height:calc(100vh - 136px);
-padding:18px;
-background:
-linear-gradient(rgba(6,17,31,.72),rgba(6,17,31,.92)),
-url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1800&q=80");
-background-size:cover;
-background-position:center;
-}
-
-.sheet-card{
-height:100%;
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 18px 45px rgba(0,0,0,.48);
-border:1px solid rgba(255,255,255,.18);
-display:flex;
-flex-direction:column;
-}
-
-.sheet-top{
-height:46px;
-background:#f8fafc;
-border-bottom:1px solid #e2e8f0;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:12px;
-padding:0 16px;
-color:#0f172a;
-font-weight:900;
-}
-
-.sheet-top span{
-color:#64748b;
-font-size:13px;
-font-weight:800;
-}
-
-.sheet-actions{
-display:flex;
-gap:8px;
-align-items:center;
-}
-
-.mini-btn{
-border:0;
-border-radius:10px;
-padding:8px 12px;
-font-weight:1000;
-cursor:pointer;
-background:#e8f0ff;
-color:#004b9b;
-transition:.2s;
-text-decoration:none;
-font-size:13px;
-}
-
-.mini-btn:hover{
-transform:translateY(-1px);
-background:#dce9ff;
+font-weight:bold;
+font-size:18px;
 }
 
 iframe{
 width:100%;
-flex:1;
+height:calc(100vh - 70px);
 border:0;
 background:white;
 }
 
-/* Pantalla completa */
-body.fullscreen-mode .header,
-body.fullscreen-mode .rules-bar{
-display:none;
-}
-
-body.fullscreen-mode .sheet-shell{
-height:100vh;
-padding:0;
-}
-
-body.fullscreen-mode .sheet-card{
-border-radius:0;
-}
-
-@media(max-width:850px){
-body{overflow:auto}
-
-.header{
-height:auto;
-padding:16px;
-align-items:flex-start;
-flex-direction:column;
-}
-
-.nav{
-width:100%;
-}
-
-.btn{
-flex:1;
-justify-content:center;
-}
-
-.rules-bar{
-height:auto;
-padding:12px 16px;
-}
-
-.sheet-shell{
-height:calc(100vh - 210px);
-padding:10px;
-}
-
-.brand h1{
-font-size:21px;
-}
-}
 </style>
 </head>
 
 <body>
 
-<header class="header">
-<div class="brand">
-<div class="brand-icon">⚽</div>
-<div>
-<h1>Predictions</h1>
-<small>Centro oficial de predicciones</small>
-</div>
-</div>
-
-<nav class="nav">
-<a class="btn btn-green" href="index.html">🏆 Quiniela</a>
-<a class="btn btn-white" href="hof.html">🏛️ Hall of Fame</a>
-<a class="btn btn-dark" href="worldcup.html">🌎 World Cup</a>
-<a class="btn btn-dark" target="_blank" rel="noopener noreferrer"
-href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pubhtml?gid=405538692&single=true">
-🔗 Abrir hoja
-
-</a>
+<header>
+<a href="index.html">⬅ Volver</a>
 </header>
 
-<section class="rules-bar">
-<span class="rule-pill gold">📌 Usa Ctrl + F para buscar tu nombre</span>
-<span class="rule-pill green">✅ G/E/P +5</span>
-<span class="rule-pill blue">🎯 DDG +5</span>
-<span class="rule-pill gold">🔥 Exacto +10</span>
-<span class="rule-pill blue">⚽ Gran Cant. +3</span>
-<span class="rule-pill green">🏆 Avanza +10</span>
-<span class="rule-pill green">🏆 Sale -10</span>
-</section>
-
-<main class="sheet-shell">
-<section class="sheet-card">
-<div class="sheet-top">
-<div>
-📄 Predictions_1
-<span>Hoja oficial publicada para comparar resultados y predicciones</span>
-</div>
-
-<div class="sheet-actions">
-<a class="mini-btn" target="_blank" rel="noopener noreferrer"
-href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pubhtml?gid=405538692&single=true">
-Abrir aparte
-</a>
-<button class="mini-btn" onclick="recargarHoja()">Recargar</button>
-</div>
-</div>
-
-<iframe id="predFrame"
+<iframe
 src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgNQJc_5QdBEmHxVHaAR-xFDwpiYYV4leVk8oHQ-eCZ_OZW9_KYiUj_y2ssw_G6A/pubhtml?gid=405538692&single=true">
 </iframe>
-</section>
-</main>
-
-<script>
-function toggleFullscreen(){
-document.body.classList.toggle("fullscreen-mode");
-}
-
-function recargarHoja(){
-const frame=document.getElementById("predFrame");
-frame.src = frame.src;
-}
-</script>
 
 </body>
 </html>
