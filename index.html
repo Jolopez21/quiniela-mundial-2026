@@ -1018,7 +1018,7 @@ hora: String(row[7] || "").trim(),
 estadio: String(row[9] || "").trim(),
 local: String(row[10] || "").trim(),
 visitante: String(row[11] || "").trim(),
-fifaLink: (String(row[15] || "").trim() || (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim())
+fifaLink: (String(row[17] || "").trim() || (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim())
 })).filter(p =>
 p.activo === "TRUE" &&
 p.numero &&
