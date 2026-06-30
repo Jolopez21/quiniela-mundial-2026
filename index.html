@@ -1014,7 +1014,18 @@ display:block;
 }.team-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slot-team.dim{color:transparent;text-shadow:none}
 .slot-meta{margin-top:5px;font-size:10px;font-weight:800;color:#cbd5e1;line-height:1.18}.bracket-fifa-link{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;background:rgba(0,200,83,.14);border:1px solid rgba(0,200,83,.50);color:#86efac;font-size:17px;font-weight:1000;box-shadow:0 0 16px rgba(0,200,83,.20);transition:.25s}.bracket-fifa-link:hover{background:#00c853;color:#06111f;transform:translateY(-50%) scale(1.08)}
 .final-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}.final-match-card{position:relative;width:100%;border-radius:22px;padding:20px 16px;background:radial-gradient(circle at top,rgba(250,204,21,.30),transparent 44%),linear-gradient(145deg,rgba(6,17,31,.88),rgba(2,6,23,.80));border:1px solid rgba(250,204,21,.62);box-shadow:0 0 40px rgba(250,204,21,.34),0 16px 32px rgba(0,0,0,.38);text-align:center;overflow:hidden}.final-match-card::before{content:"🏆";display:block;font-size:42px;filter:drop-shadow(0 0 18px rgba(250,204,21,.92));animation:bracketCup 1.3s ease-in-out infinite alternate}@keyframes bracketCup{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-7px) rotate(2deg)}}.final-match-card small{display:block;color:#fde68a;font-weight:1000;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}.final-match-card h3{font-size:20px;margin:10px 0;line-height:1.15}.final-vs{display:inline-flex;margin:6px 0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:1000;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 20px rgba(250,204,21,.30)}.final-meta{font-size:11px;color:#dbeafe;font-weight:850;line-height:1.3}
-.bracket-note{margin-top:14px;color:#a7f3d0;font-weight:900;font-size:13px;text-align:center}@media(max-width:900px){.bracket-pro-card{padding:0 16px}.bracket-pro-box{padding:22px}.bracket-board{min-width:1480px}}
+.bracket-note{margin-top:14px;color:#a7f3d0;font-weight:900;font-size:13px;text-align:center}
+
+/* MARCADOR DEL PARTIDO EN EL BRACKET */
+.score-box{min-width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;font-size:15px;font-weight:1000;color:#fde68a;background:rgba(250,204,21,.10);border:1px solid rgba(250,204,21,.45);box-shadow:0 0 12px rgba(250,204,21,.16);margin-left:auto}.score-box.empty-score{color:#64748b;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);box-shadow:none}.bracket-slot.has-result{border-color:rgba(250,204,21,.55)}.bracket-slot.has-result .slot-team.winner-team .team-text{color:#fff7ad;text-shadow:0 0 12px rgba(250,204,21,.65),0 0 22px rgba(250,204,21,.32)}.bracket-slot.has-result .slot-team.winner-team .score-box{background:linear-gradient(145deg,#facc15,#00c853);color:#06111f;border-color:rgba(250,204,21,.80);box-shadow:0 0 18px rgba(250,204,21,.45)}
+/* PARTIDOS DE HOY DENTRO DEL BRACKET */
+.bracket-slot.today-game{border-color:rgba(250,204,21,.95)!important;box-shadow:0 0 24px rgba(250,204,21,.52),0 0 42px rgba(0,200,83,.22),0 12px 26px rgba(0,0,0,.42);animation:todayPulse 1.45s ease-in-out infinite alternate;background:radial-gradient(circle at top left,rgba(250,204,21,.22),transparent 42%),linear-gradient(145deg,rgba(6,17,31,.90),rgba(15,23,42,.82))}
+.bracket-slot.today-game::before{content:"🔥 HOY";position:absolute;top:-12px;left:12px;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:1000;letter-spacing:.5px;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 18px rgba(250,204,21,.55);z-index:4}
+.bracket-slot.today-game .slot-match{color:#fde68a}.bracket-slot.today-game .bracket-fifa-link{background:linear-gradient(145deg,#facc15,#00c853);color:#06111f;border-color:rgba(250,204,21,.75);box-shadow:0 0 24px rgba(250,204,21,.45)}
+@keyframes todayPulse{from{transform:translateY(0) scale(1);filter:brightness(1)}to{transform:translateY(-2px) scale(1.015);filter:brightness(1.15)}}
+.today-summary{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.today-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:1000;color:#fde68a;background:rgba(250,204,21,.14);border:1px solid rgba(250,204,21,.30);box-shadow:0 0 18px rgba(250,204,21,.16)}.today-chip.empty{color:#cbd5e1;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);box-shadow:none}
+
+@media(max-width:900px){.bracket-pro-card{padding:0 16px}.bracket-pro-box{padding:22px}.bracket-board{min-width:1480px}}
 
 .qr-box small{color:#a7f3d0;font-weight:900}
 .match-box h2{margin-top:8px;font-size:34px}
@@ -1256,13 +1267,15 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
     <div class="bracket-pro-head">
       <small>🏆 Fase Eliminatoria</small>
       <h2>🏆 Camino a la <span>Gloria</span></h2>
-      <p>Bracket oficial. Los cruces pendientes quedan en blanco hasta que se llenen.</p>
+      <p>Bracket oficial leído desde la hoja Matches. Los cruces pendientes quedan en blanco hasta que se llenen.</p>
       <div class="bracket-legend">
         <span>🟢 Cruce definido</span>
+        <span>🏳️ Banderas automáticas</span>
         <span>🔗 Link FIFA</span>
         <span>🏆 Final al centro</span>
       </div>
     </div>
+    <div id="todayBracketSummary" class="today-summary"><span class="today-chip empty">Cargando partidos de hoy...</span></div>
     <div class="bracket-scroll">
       <div id="bracketBoard" class="bracket-board">
         <div class="bracket-note">Cargando bracket eliminatorio...</div>
@@ -1871,39 +1884,38 @@ function flagImg(nombre){
   `;
 }
 
-function slotHTML(matchNum, label, side="left"){
-  const m = getMatchByNumber(matchNum);
-  const teams = matchTeamsText(m);
-  const filled = teams.a || teams.b;
-  const fecha = m && m.fecha ? m.fecha : "";
-  const hora = m && m.hora ? m.hora : "";
-  const estadio = m && m.estadio ? m.estadio : "";
-  const link = m && m.fifaLink
-    ? `<a class="bracket-fifa-link" href="${m.fifaLink}" target="_blank" rel="noopener noreferrer" title="Ver resultado FIFA">🔗</a>`
-    : "";
 
-  const teamAName = limpiarNombreEquipo(teams.a);
-  const teamBName = limpiarNombreEquipo(teams.b);
+function parseResultadoMatch(valor){const raw=String(valor||"").trim();if(!raw)return {a:"",b:"",has:false};const nums=raw.match(/-?\d+/g);if(!nums||nums.length<2)return {a:"",b:"",has:false};return {a:nums[0],b:nums[1],has:true};}
+function scoreHTML(score){return `<span class="score-box ${score===""?"empty-score":""}">${score===""?"-":score}</span>`;}
+function slotHTML(matchNum, label, side="left"){
+  const m=getMatchByNumber(matchNum);
+  const teams=matchTeamsText(m);
+  const filled=teams.a||teams.b;
+  const fecha=m&&m.fecha?m.fecha:"";
+  const hora=m&&m.hora?m.hora:"";
+  const estadio=m&&m.estadio?m.estadio:"";
+  const esHoy=m&&String(m.activo||"").trim().toUpperCase()==="TRUE";
+  const resultado=parseResultadoMatch(m?m.resultado:"");
+  const scoreA=resultado.has?resultado.a:"";
+  const scoreB=resultado.has?resultado.b:"";
+  const ganaA=resultado.has&&Number(scoreA)>Number(scoreB);
+  const ganaB=resultado.has&&Number(scoreB)>Number(scoreA);
+  const link=m&&m.fifaLink?`<a class="bracket-fifa-link" href="${m.fifaLink}" target="_blank" rel="noopener noreferrer" title="Ver resultado FIFA">🔗</a>`:"";
+  const teamAName=limpiarNombreEquipo(teams.a);
+  const teamBName=limpiarNombreEquipo(teams.b);
 
   return `
-    <div class="bracket-slot ${filled ? "filled" : "empty"}">
+    <div class="bracket-slot ${filled?"filled":"empty"} ${esHoy?"today-game":""} ${resultado.has?"has-result":""}">
       <div class="slot-match"><span>${label}</span><span>#${matchNum}</span></div>
-
-      <div class="slot-team ${teamAName ? "" : "dim"}">
-        <span class="team-left">
-          ${teamAName ? flagImg(teams.a) : ""}
-          <span class="team-text">${teamAName || "&nbsp;"}</span>
-        </span>
+      <div class="slot-team ${teamAName?"":"dim"} ${ganaA?"winner-team":""}">
+        <span class="team-left">${teamAName?flagImg(teams.a):""}<span class="team-text">${teamAName||"&nbsp;"}</span></span>
+        ${resultado.has?scoreHTML(scoreA):""}
       </div>
-
-      <div class="slot-team ${teamBName ? "" : "dim"}">
-        <span class="team-left">
-          ${teamBName ? flagImg(teams.b) : ""}
-          <span class="team-text">${teamBName || "&nbsp;"}</span>
-        </span>
+      <div class="slot-team ${teamBName?"":"dim"} ${ganaB?"winner-team":""}">
+        <span class="team-left">${teamBName?flagImg(teams.b):""}<span class="team-text">${teamBName||"&nbsp;"}</span></span>
+        ${resultado.has?scoreHTML(scoreB):""}
       </div>
-
-      <div class="slot-meta">${fecha || "&nbsp;"} ${hora ? "· " + hora : ""}${estadio ? "<br>" + estadio : ""}</div>
+      <div class="slot-meta">${fecha||"&nbsp;"} ${hora?"· "+hora:""}${estadio?"<br>"+estadio:""}</div>
       ${link}
     </div>
   `;
@@ -1934,6 +1946,18 @@ function finalCardHTML(){
       </div>
     </div>
   `;
+}
+
+function renderTodayBracketSummary(){
+  const cont=document.getElementById("todayBracketSummary");
+  if(!cont) return;
+  const hoy=(window.bracketMatches||[]).filter(p=>String(p.activo||"").trim().toUpperCase()==="TRUE").sort((a,b)=>(Number(a.numero)||0)-(Number(b.numero)||0));
+  if(!hoy.length){cont.innerHTML=`<span class="today-chip empty">⚪ No hay partidos marcados como TRUE hoy</span>`;return;}
+  cont.innerHTML=hoy.map(p=>{
+    const a=limpiarNombreEquipo(p.local);
+    const b=limpiarNombreEquipo(p.visitante);
+    const r=parseResultadoMatch(p.resultado);const marcador=r.has?` · ${r.a}-${r.b}`:"";return `<span class="today-chip">🔥 Hoy #${p.numero}: ${a} vs ${b}${marcador}</span>`;
+  }).join("");
 }
 
 function renderBracketBoard(){
@@ -2024,10 +2048,12 @@ hora: String(row[7] || "").trim(),
 estadio: String(row[9] || "").trim(),
 local: String(row[10] || "").trim(),
 visitante: String(row[11] || "").trim(),
+resultado: String(row[13] || "").trim(),
 fifaLink: (String(row[17] || "").trim() || (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim())
 })).filter(p => p.numero);
 
 window.bracketMatches = todosLosPartidos;
+renderTodayBracketSummary();
 renderBracketBoard();
 
 const partidosHoy = todosLosPartidos.filter(p =>
