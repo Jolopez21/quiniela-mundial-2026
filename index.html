@@ -972,7 +972,51 @@ box-shadow:0 14px 35px rgba(0,0,0,.45);
 border:1px solid rgba(255,255,255,.15);
 }
 
-.match-box small,.qr-box small{color:#a7f3d0;font-weight:900}
+.match-box small,
+
+
+/* BRACKET PRO - CAMINO A LA GLORIA 3.0 */
+.bracket-pro-card{max-width:1760px;margin:0 auto 40px;padding:0 26px}
+.bracket-pro-box{position:relative;overflow:hidden;border-radius:34px;padding:34px;background:linear-gradient(rgba(2,6,23,.88),rgba(2,6,23,.94)),url("Ceremonia.png?v=1");background-size:cover;background-position:center;border:1px solid rgba(250,204,21,.36);box-shadow:0 0 65px rgba(250,204,21,.16),0 24px 58px rgba(0,0,0,.56)}
+.bracket-pro-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 5%,rgba(250,204,21,.18),transparent 24%),radial-gradient(circle at 50% 45%,rgba(34,197,94,.10),transparent 42%),linear-gradient(90deg,rgba(0,200,83,.10),transparent 18%,transparent 82%,rgba(0,200,83,.10));pointer-events:none}
+.bracket-pro-box::after{content:"";position:absolute;inset:-40%;background:conic-gradient(from 90deg,transparent,rgba(250,204,21,.12),transparent,rgba(0,200,83,.10),transparent,rgba(56,189,248,.10),transparent);animation:bracketProAura 12s linear infinite;mix-blend-mode:screen;pointer-events:none}
+@keyframes bracketProAura{to{transform:rotate(360deg)}}.bracket-pro-box>*{position:relative;z-index:2}
+.bracket-pro-head{text-align:center;margin-bottom:28px}.bracket-pro-head small{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:rgba(0,200,83,.14);border:1px solid rgba(0,200,83,.45);color:#86efac;font-weight:1000;text-transform:uppercase;letter-spacing:.7px;box-shadow:0 0 24px rgba(0,200,83,.22)}
+.bracket-pro-head h2{font-size:clamp(34px,4vw,56px);margin:12px 0 8px;line-height:1.02;text-transform:uppercase;color:#f8fafc;text-shadow:0 0 18px rgba(255,255,255,.34),0 0 32px rgba(0,200,83,.38)}
+.bracket-pro-head h2 span{color:#fde68a;text-shadow:0 0 28px rgba(250,204,21,.55)}.bracket-pro-head p{color:#f8fafc;font-weight:900;text-shadow:0 0 12px rgba(0,0,0,.85)}
+.bracket-legend{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px}.bracket-legend span{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;font-size:12px;font-weight:1000;background:rgba(6,17,31,.55);border:1px solid rgba(255,255,255,.14);color:#e5eefc;backdrop-filter:blur(5px)}
+.bracket-scroll{overflow-x:auto;padding:12px 0 20px}.bracket-scroll::-webkit-scrollbar{height:11px}.bracket-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.08);border-radius:999px}.bracket-scroll::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#00c853,#facc15);border-radius:999px}
+.bracket-board{min-width:1580px;display:grid;grid-template-columns:1.32fr 1.08fr .94fr .85fr 1.05fr .85fr .94fr 1.08fr 1.32fr;gap:20px;align-items:center;padding:8px 4px 6px}
+.bracket-col{display:flex;flex-direction:column;gap:18px}.bracket-col-title{text-align:center;font-size:13px;font-weight:1000;letter-spacing:.8px;text-transform:uppercase;color:#22c55e;margin-bottom:10px;text-shadow:0 0 14px rgba(34,197,94,.55)}.bracket-col-title span{display:block;color:#e5eefc;font-size:11px;margin-top:3px;text-shadow:none}
+.bracket-col.r32{gap:11px}.bracket-col.r16{gap:43px}.bracket-col.qf{gap:103px}.bracket-col.sf{gap:220px}
+.bracket-slot{position:relative;min-height:82px;border-radius:15px;padding:9px 44px 9px 10px;background:linear-gradient(145deg,rgba(6,17,31,.82),rgba(15,23,42,.74));border:1px solid rgba(250,204,21,.30);box-shadow:0 10px 24px rgba(0,0,0,.34),inset 0 0 18px rgba(255,255,255,.025);backdrop-filter:blur(5px);display:flex;flex-direction:column;justify-content:center;transition:.25s}
+.bracket-slot::after{content:"";position:absolute;top:50%;width:20px;height:2px;background:linear-gradient(90deg,rgba(34,197,94,.85),rgba(250,204,21,.55));box-shadow:0 0 13px rgba(34,197,94,.55)}.bracket-board .bracket-col:nth-child(-n+4) .bracket-slot::after{right:-20px}.bracket-board .bracket-col:nth-child(n+6) .bracket-slot::after{left:-20px}
+.bracket-slot:hover{transform:translateY(-2px) scale(1.01);border-color:rgba(34,197,94,.65);box-shadow:0 0 28px rgba(34,197,94,.18),0 12px 26px rgba(0,0,0,.38)}.bracket-slot.filled{border-color:rgba(34,197,94,.42)}.bracket-slot.empty{opacity:.46;border-style:dashed}
+.slot-match{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:10px;font-weight:1000;color:#a7f3d0;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.slot-team{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;font-weight:1000;line-height:1.15;color:white;text-shadow:0 0 10px rgba(0,0,0,.85);padding:3px 0}.team-left{display:flex;align-items:center;gap:7px;min-width:0}.flag{
+width:25px;
+height:18px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+flex:0 0 25px;
+border-radius:3px;
+overflow:hidden;
+box-shadow:0 0 8px rgba(255,255,255,.22);
+background:rgba(255,255,255,.10);
+}
+
+.flag img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}.team-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slot-team.dim{color:transparent;text-shadow:none}
+.slot-meta{margin-top:5px;font-size:10px;font-weight:800;color:#cbd5e1;line-height:1.18}.bracket-fifa-link{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;background:rgba(0,200,83,.14);border:1px solid rgba(0,200,83,.50);color:#86efac;font-size:17px;font-weight:1000;box-shadow:0 0 16px rgba(0,200,83,.20);transition:.25s}.bracket-fifa-link:hover{background:#00c853;color:#06111f;transform:translateY(-50%) scale(1.08)}
+.final-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}.final-match-card{position:relative;width:100%;border-radius:22px;padding:20px 16px;background:radial-gradient(circle at top,rgba(250,204,21,.30),transparent 44%),linear-gradient(145deg,rgba(6,17,31,.88),rgba(2,6,23,.80));border:1px solid rgba(250,204,21,.62);box-shadow:0 0 40px rgba(250,204,21,.34),0 16px 32px rgba(0,0,0,.38);text-align:center;overflow:hidden}.final-match-card::before{content:"🏆";display:block;font-size:42px;filter:drop-shadow(0 0 18px rgba(250,204,21,.92));animation:bracketCup 1.3s ease-in-out infinite alternate}@keyframes bracketCup{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-7px) rotate(2deg)}}.final-match-card small{display:block;color:#fde68a;font-weight:1000;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}.final-match-card h3{font-size:20px;margin:10px 0;line-height:1.15}.final-vs{display:inline-flex;margin:6px 0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:1000;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 20px rgba(250,204,21,.30)}.final-meta{font-size:11px;color:#dbeafe;font-weight:850;line-height:1.3}
+.bracket-note{margin-top:14px;color:#a7f3d0;font-weight:900;font-size:13px;text-align:center}@media(max-width:900px){.bracket-pro-card{padding:0 16px}.bracket-pro-box{padding:22px}.bracket-board{min-width:1480px}}
+
+.qr-box small{color:#a7f3d0;font-weight:900}
 .match-box h2{margin-top:8px;font-size:34px}
 .match-box p{margin-top:8px;color:#dbeafe;font-size:18px}
 
@@ -1203,44 +1247,29 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
 <span id="tickerText">🏆 Cargando líderes de la quiniela...</span>
 </div>
 
-<section class="cards">
-<div id="cardLider" class="card gold">
-<small>🥇 Primer Lugar</small>
-<h2 id="liderNombre">Cargando...</h2>
-<p id="liderPuntos">0 puntos</p>
-<div class="card-rank-meta">
-<span id="liderMovimiento" class="card-move move-equal">═ Igual</span>
-<span id="liderEstado" class="card-status">👑 Líder</span>
-</div>
-</div>
 
-<div id="cardSegundo" class="card silver">
-<small>🥈 Segundo Lugar</small>
-<h2 id="segundoNombre">Cargando...</h2>
-<p id="segundoPuntos">0 puntos</p>
-<div class="card-rank-meta">
-<span id="segundoMovimiento" class="card-move move-equal">═ Igual</span>
-<span id="segundoEstado" class="card-status">➖ Se mantiene</span>
-</div>
-</div>
 
-<div id="cardTercero" class="card bronze">
-<small>🥉 Tercer Lugar</small>
-<h2 id="terceroNombre">Cargando...</h2>
-<p id="terceroPuntos">0 puntos</p>
-<div class="card-rank-meta">
-<span id="terceroMovimiento" class="card-move move-equal">═ Igual</span>
-<span id="terceroEstado" class="card-status">➖ Se mantiene</span>
-</div>
-</div>
-</section>
 
-<section class="match-card">
-<div class="match-box">
-<small>⚽ Próximo Partido</small>
-<h2 id="proximoPartido">Cargando próximo partido...</h2>
-<p id="proximoDetalle">Leyendo calendario World Cup...</p>
-</div>
+
+<section class="bracket-pro-card">
+  <div class="bracket-pro-box">
+    <div class="bracket-pro-head">
+      <small>🏆 Fase Eliminatoria</small>
+      <h2>🏆 Camino a la <span>Gloria</span></h2>
+      <p>Bracket oficial. Los cruces pendientes quedan en blanco hasta que se llenen.</p>
+      <div class="bracket-legend">
+        <span>🟢 Cruce definido</span>
+        <span>🔗 Link FIFA</span>
+        <span>🏆 Final al centro</span>
+      </div>
+    </div>
+    <div class="bracket-scroll">
+      <div id="bracketBoard" class="bracket-board">
+        <div class="bracket-note">Cargando bracket eliminatorio...</div>
+      </div>
+    </div>
+    <div class="bracket-note">Desliza horizontalmente para ver todo el camino hacia la final.</div>
+  </div>
 </section>
 
 
@@ -1744,6 +1773,228 @@ document.getElementById("rankingBody").innerHTML =
 `<tr><td colspan="5">No se pudo cargar el ranking.</td></tr>`;
 });
 
+
+window.bracketMatches = [];
+
+function getMatchByNumber(num){
+  return (window.bracketMatches || []).find(p => Number(p.numero) === Number(num)) || null;
+}
+
+function cleanTeamName(name){
+  const n = String(name || "").trim();
+  if(!n || n.toLowerCase()==="tbd" || n === "-" || n.toLowerCase().includes("winner of") || n.toLowerCase().includes("loser of")){
+    return "";
+  }
+  return n;
+}
+
+function matchTeamsText(match){
+  if(!match) return {a:"", b:""};
+  return {
+    a: cleanTeamName(match.local),
+    b: cleanTeamName(match.visitante)
+  };
+}
+
+
+
+
+function normalizarEquipoFlag(nombre){
+  return String(nombre || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/\./g,"")
+    .trim();
+}
+
+function obtenerCodigoEquipo(nombre){
+  const raw = String(nombre || "").trim();
+  const first = raw.split(/\s+/)[0] || "";
+  if(/^[A-Z]{2,3}$/.test(first)) return first.toUpperCase();
+  return "";
+}
+
+function limpiarNombreEquipo(nombre){
+  return String(nombre || "").trim().replace(/^[A-Z]{2,3}\s+/, "").trim();
+}
+
+/*
+  Bandera con imagen real.
+  Usa FlagCDN: https://flagcdn.com
+  La hoja trae códigos tipo ZA Canadá / CA Canadá / NL Países Bajos.
+*/
+function flagImg(nombre){
+  const rawCode = obtenerCodigoEquipo(nombre);
+  const clean = normalizarEquipoFlag(limpiarNombreEquipo(nombre));
+
+  const codeMap = {
+    "ZA":"za","CA":"ca","NL":"nl","MA":"ma","DE":"de","PY":"py",
+    "AR":"ar","AU":"au","JP":"jp","HR":"hr","BR":"br","KR":"kr",
+    "GB":"gb","EN":"gb-eng","SN":"sn","FR":"fr","PL":"pl","PT":"pt",
+    "ES":"es","US":"us","USA":"us","MX":"mx","BE":"be","DK":"dk",
+    "UY":"uy","RS":"rs","CO":"co","IT":"it","CH":"ch","SE":"se",
+    "TR":"tr","AT":"at","CZ":"cz","PA":"pa","GH":"gh","DZ":"dz",
+    "SA":"sa","NZ":"nz","IR":"ir","CI":"ci","CD":"cd","UZ":"uz",
+    "JO":"jo","QA":"qa","BA":"ba","HT":"ht","CR":"cr","NO":"no",
+    "CW":"cw","TN":"tn","EC":"ec","SC":"gb-sct"
+  };
+
+  const nameMap = {
+    "mexico":"mx","sudafrica":"za","rep de corea":"kr","corea del sur":"kr",
+    "rep checa":"cz","canada":"ca","qatar":"qa","suiza":"ch","bosnia":"ba",
+    "brasil":"br","haiti":"ht","escocia":"gb-sct","marruecos":"ma",
+    "eeuu":"us","estados unidos":"us","paraguay":"py","australia":"au",
+    "turquia":"tr","alemania":"de","curazao":"cw","costa rica":"cr",
+    "argelia":"dz","inglaterra":"gb-eng","panama":"pa","croacia":"hr","ghana":"gh",
+    "noruega":"no","japon":"jp","francia":"fr","polonia":"pl",
+    "paises bajos":"nl","belgica":"be","colombia":"co","rd congo":"cd",
+    "uzbekistan":"uz","portugal":"pt","espana":"es","españa":"es",
+    "uruguay":"uy","serbia":"rs","italia":"it","dinamarca":"dk",
+    "austria":"at","argentina":"ar","senegal":"sn","tunez":"tn",
+    "arabia saudita":"sa","nueva zelanda":"nz","ir iran":"ir","iran":"ir",
+    "costa de marfil":"ci","jordania":"jo"
+  };
+
+  const flagCode = codeMap[rawCode] || nameMap[clean];
+
+  if(!flagCode){
+    return `<span class="flag">🏳️</span>`;
+  }
+
+  const url = `https://flagcdn.com/w40/${flagCode}.png`;
+
+  return `
+    <span class="flag">
+      <img src="${url}" alt="${limpiarNombreEquipo(nombre)}" loading="lazy"
+           onerror="this.parentElement.innerHTML='🏳️'">
+    </span>
+  `;
+}
+
+function slotHTML(matchNum, label, side="left"){
+  const m = getMatchByNumber(matchNum);
+  const teams = matchTeamsText(m);
+  const filled = teams.a || teams.b;
+  const fecha = m && m.fecha ? m.fecha : "";
+  const hora = m && m.hora ? m.hora : "";
+  const estadio = m && m.estadio ? m.estadio : "";
+  const link = m && m.fifaLink
+    ? `<a class="bracket-fifa-link" href="${m.fifaLink}" target="_blank" rel="noopener noreferrer" title="Ver resultado FIFA">🔗</a>`
+    : "";
+
+  const teamAName = limpiarNombreEquipo(teams.a);
+  const teamBName = limpiarNombreEquipo(teams.b);
+
+  return `
+    <div class="bracket-slot ${filled ? "filled" : "empty"}">
+      <div class="slot-match"><span>${label}</span><span>#${matchNum}</span></div>
+
+      <div class="slot-team ${teamAName ? "" : "dim"}">
+        <span class="team-left">
+          ${teamAName ? flagImg(teams.a) : ""}
+          <span class="team-text">${teamAName || "&nbsp;"}</span>
+        </span>
+      </div>
+
+      <div class="slot-team ${teamBName ? "" : "dim"}">
+        <span class="team-left">
+          ${teamBName ? flagImg(teams.b) : ""}
+          <span class="team-text">${teamBName || "&nbsp;"}</span>
+        </span>
+      </div>
+
+      <div class="slot-meta">${fecha || "&nbsp;"} ${hora ? "· " + hora : ""}${estadio ? "<br>" + estadio : ""}</div>
+      ${link}
+    </div>
+  `;
+}
+
+function finalCardHTML(){
+  const final = getMatchByNumber(104) || getMatchByNumber(103);
+  const teams = matchTeamsText(final);
+  const hasFinal = final && Number(final.numero) === 104;
+
+  return `
+    <div class="final-center">
+      <div class="final-match-card">
+        <small>🏆 Gran Final</small>
+        <h3>${teams.a || "Finalista"}<br><span class="final-vs">VS</span><br>${teams.b || "Finalista"}</h3>
+        <div class="final-meta">
+          ${hasFinal ? `Partido #104` : `Final pendiente`}<br>
+          ${final && final.fecha ? final.fecha : ""} ${final && final.hora ? "· " + final.hora : ""}<br>
+          ${final && final.estadio ? final.estadio : ""}
+        </div>
+      </div>
+
+      <div class="bracket-slot champion ${teams.a || teams.b ? "filled" : "empty"}">
+        <div class="champion-cup">🏆</div>
+        <div class="slot-match">Campeón</div>
+        <div class="slot-team">${""}</div>
+        <div class="slot-meta">Se ilumina al terminar la final</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderBracketBoard(){
+  const board = document.getElementById("bracketBoard");
+  if(!board) return;
+
+  const leftR32 = [73,75,74,77,76,78,79,80];
+  const leftR16 = [89,90,91,92];
+  const leftQF = [97,99];
+  const leftSF = [101];
+
+  const rightSF = [102];
+  const rightQF = [98,100];
+  const rightR16 = [93,94,95,96];
+  const rightR32 = [83,84,81,82,86,88,85,87];
+
+  board.innerHTML = `
+    <div class="bracket-col r32">
+      <div class="bracket-col-title">Ronda 32</div>
+      ${leftR32.map(n=>slotHTML(n,"R32")).join("")}
+    </div>
+
+    <div class="bracket-col r16">
+      <div class="bracket-col-title">Octavos</div>
+      ${leftR16.map(n=>slotHTML(n,"Octavos")).join("")}
+    </div>
+
+    <div class="bracket-col qf">
+      <div class="bracket-col-title">Cuartos</div>
+      ${leftQF.map(n=>slotHTML(n,"Cuartos")).join("")}
+    </div>
+
+    <div class="bracket-col sf">
+      <div class="bracket-col-title">Semifinal</div>
+      ${leftSF.map(n=>slotHTML(n,"Semi")).join("")}
+    </div>
+
+    ${finalCardHTML()}
+
+    <div class="bracket-col sf">
+      <div class="bracket-col-title">Semifinal</div>
+      ${rightSF.map(n=>slotHTML(n,"Semi")).join("")}
+    </div>
+
+    <div class="bracket-col qf">
+      <div class="bracket-col-title">Cuartos</div>
+      ${rightQF.map(n=>slotHTML(n,"Cuartos")).join("")}
+    </div>
+
+    <div class="bracket-col r16">
+      <div class="bracket-col-title">Octavos</div>
+      ${rightR16.map(n=>slotHTML(n,"Octavos")).join("")}
+    </div>
+
+    <div class="bracket-col r32">
+      <div class="bracket-col-title">Ronda 32</div>
+      ${rightR32.map(n=>slotHTML(n,"R32")).join("")}
+    </div>
+  `;
+}
+
 fetch(matchesCSV + "&cache=" + Date.now())
 .then(response => response.text())
 .then(csv => {
@@ -1765,7 +2016,7 @@ L = Team 2
 P = FIFA Link
 */
 
-const partidosHoy = rows.map(row => ({
+const todosLosPartidos = rows.map(row => ({
 activo: String(row[0] || "").trim().toUpperCase(),
 numero: String(row[1] || "").trim(),
 fecha: String(row[6] || "").trim(),
@@ -1774,14 +2025,22 @@ estadio: String(row[9] || "").trim(),
 local: String(row[10] || "").trim(),
 visitante: String(row[11] || "").trim(),
 fifaLink: (String(row[17] || "").trim() || (row.find(cell => String(cell || "").includes("https://www.fifa.com")) || "").trim())
-})).filter(p =>
+})).filter(p => p.numero);
+
+window.bracketMatches = todosLosPartidos;
+renderBracketBoard();
+
+const partidosHoy = todosLosPartidos.filter(p =>
 p.activo === "TRUE" &&
 p.numero &&
 p.local &&
 p.visitante
 );
 
-if(partidosHoy.length > 0){
+const proximoPartidoEl = document.getElementById("proximoPartido");
+const proximoDetalleEl = document.getElementById("proximoDetalle");
+
+if(proximoPartidoEl && proximoDetalleEl && partidosHoy.length > 0){
 
 const minNumero = Math.min(...partidosHoy.map(p => Number(p.numero) || 0));
 let fase = "Fase de grupos", faseIcono = "⚽", fraseFase = "Suma puntos y escala posiciones.";
@@ -1792,7 +2051,7 @@ else if(minNumero >= 97 && minNumero <= 100){fase="Cuartos de final";faseIcono="
 else if(minNumero >= 101 && minNumero <= 102){fase="Semifinales";faseIcono="👑";fraseFase="A un paso de la final.";}
 else if(minNumero >= 103){fase="Finales";faseIcono="🏆";fraseFase="Aquí nacen las leyendas.";}
 
-document.getElementById("proximoPartido").textContent =
+proximoPartidoEl.textContent =
 partidosHoy.length > 1 ? `${faseIcono} ${fase}` : `${faseIcono} Próximo Partido`;
 
 const faseHeader = `
@@ -1807,7 +2066,7 @@ const faseHeader = `
   <span class="phase-step ${fase === "Finales" ? "active" : ""}">🏆 Final</span>
 </div>`;
 
-document.getElementById("proximoDetalle").innerHTML =
+proximoDetalleEl.innerHTML =
 faseHeader + `<div class="matches-grid">` +
 partidosHoy.map(p => {
 const boton = p.fifaLink
@@ -1842,17 +2101,19 @@ ${boton}
 }).join("") + `</div>`;
 
 } else {
-document.getElementById("proximoPartido").textContent =
+if(proximoPartidoEl) proximoPartidoEl.textContent =
 "No hay partido marcado como TRUE";
 
-document.getElementById("proximoDetalle").textContent =
+if(proximoDetalleEl) proximoDetalleEl.textContent =
 "Revisa la columna A de la hoja Matches.";
 }
 })
 .catch(error => {
 console.error("Error leyendo Matches:", error);
-document.getElementById("proximoPartido").textContent = "No se pudo leer Matches";
-document.getElementById("proximoDetalle").textContent = "Revisa el enlace publicado como CSV.";
+if(proximoPartidoEl) proximoPartidoEl.textContent = "No se pudo leer Matches";
+if(proximoDetalleEl) proximoDetalleEl.textContent = "Revisa el enlace publicado como CSV.";
+const bracket = document.getElementById("bracketBoard");
+if(bracket) bracket.innerHTML = `<div class="bracket-note">No se pudo cargar el bracket desde Matches.</div>`;
 });
 </script>
 
