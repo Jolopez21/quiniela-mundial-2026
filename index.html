@@ -1013,7 +1013,7 @@ object-fit:cover;
 display:block;
 }.team-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slot-team.dim{color:transparent;text-shadow:none}
 .slot-meta{margin-top:5px;font-size:10px;font-weight:800;color:#cbd5e1;line-height:1.18}.bracket-fifa-link{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;background:rgba(0,200,83,.14);border:1px solid rgba(0,200,83,.50);color:#86efac;font-size:17px;font-weight:1000;box-shadow:0 0 16px rgba(0,200,83,.20);transition:.25s}.bracket-fifa-link:hover{background:#00c853;color:#06111f;transform:translateY(-50%) scale(1.08)}
-.final-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}.final-match-card{position:relative;width:100%;border-radius:22px;padding:20px 16px;background:radial-gradient(circle at top,rgba(250,204,21,.30),transparent 44%),linear-gradient(145deg,rgba(6,17,31,.88),rgba(2,6,23,.80));border:1px solid rgba(250,204,21,.62);box-shadow:0 0 40px rgba(250,204,21,.34),0 16px 32px rgba(0,0,0,.38);text-align:center;overflow:hidden}.final-match-card::before{content:"🏆";display:block;font-size:42px;filter:drop-shadow(0 0 18px rgba(250,204,21,.92));animation:bracketCup 1.3s ease-in-out infinite alternate}@keyframes bracketCup{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-7px) rotate(2deg)}}.final-match-card small{display:block;color:#fde68a;font-weight:1000;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}.final-match-card h3{font-size:20px;margin:10px 0;line-height:1.15}.final-vs{display:inline-flex;margin:6px 0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:1000;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 20px rgba(250,204,21,.30)}.final-meta{font-size:11px;color:#dbeafe;font-weight:850;line-height:1.3}
+.final-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}.final-match-card{position:relative;width:100%;border-radius:22px;padding:20px 16px;background:radial-gradient(circle at top,rgba(250,204,21,.30),transparent 44%),linear-gradient(145deg,rgba(6,17,31,.88),rgba(2,6,23,.80));border:1px solid rgba(250,204,21,.62);box-shadow:0 0 40px rgba(250,204,21,.34),0 16px 32px rgba(0,0,0,.38);text-align:center;overflow:hidden}.final-match-card::before{content:"";display:block;font-size:42px;filter:drop-shadow(0 0 18px rgba(250,204,21,.92));animation:bracketCup 1.3s ease-in-out infinite alternate}@keyframes bracketCup{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-7px) rotate(2deg)}}.final-match-card small{display:block;color:#fde68a;font-weight:1000;text-transform:uppercase;letter-spacing:.6px;margin-top:4px}.final-match-card h3{font-size:20px;margin:10px 0;line-height:1.15}.final-vs{display:inline-flex;margin:6px 0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:1000;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 20px rgba(250,204,21,.30)}.final-meta{font-size:11px;color:#dbeafe;font-weight:850;line-height:1.3}
 .bracket-note{margin-top:14px;color:#a7f3d0;font-weight:900;font-size:13px;text-align:center}
 
 /* MARCADOR DEL PARTIDO EN EL BRACKET */
@@ -1024,6 +1024,121 @@ display:block;
 .bracket-slot.today-game .slot-match{color:#fde68a}.bracket-slot.today-game .bracket-fifa-link{background:linear-gradient(145deg,#facc15,#00c853);color:#06111f;border-color:rgba(250,204,21,.75);box-shadow:0 0 24px rgba(250,204,21,.45)}
 @keyframes todayPulse{from{transform:translateY(0) scale(1);filter:brightness(1)}to{transform:translateY(-2px) scale(1.015);filter:brightness(1.15)}}
 .today-summary{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.today-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:1000;color:#fde68a;background:rgba(250,204,21,.14);border:1px solid rgba(250,204,21,.30);box-shadow:0 0 18px rgba(250,204,21,.16)}.today-chip.empty{color:#cbd5e1;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);box-shadow:none}
+
+
+/* AJUSTE FINAL DEL BRACKET - ORDEN CORRECTO */
+.bracket-board{
+grid-template-columns:1.28fr 1.04fr .95fr .85fr 1.08fr .85fr .95fr 1.04fr 1.28fr !important;
+align-items:center !important;
+}
+
+.bracket-col.r32,
+.bracket-col.r16,
+.bracket-col.qf,
+.bracket-col.sf{
+justify-content:center;
+}
+
+.bracket-slot{
+min-height:86px;
+}
+
+.bracket-slot.empty{
+opacity:.35;
+}
+
+.bracket-slot.has-result{
+background:
+radial-gradient(circle at top left,rgba(250,204,21,.16),transparent 45%),
+linear-gradient(145deg,rgba(6,17,31,.90),rgba(15,23,42,.80));
+}
+
+.bracket-slot .slot-team{
+min-height:25px;
+}
+
+.today-summary{
+max-width:820px;
+margin:18px auto 8px !important;
+padding:10px 12px;
+border-radius:18px;
+background:rgba(6,17,31,.62);
+border:1px solid rgba(250,204,21,.32);
+box-shadow:0 0 24px rgba(250,204,21,.14);
+backdrop-filter:blur(5px);
+}
+
+.today-summary::before{
+content:"📅 PARTIDOS DE HOY";
+font-weight:1000;
+color:#fde68a;
+letter-spacing:.6px;
+margin-right:10px;
+}
+
+.today-chip{
+background:rgba(0,200,83,.12) !important;
+border-color:rgba(0,200,83,.28) !important;
+color:#e5fff0 !important;
+}
+
+.final-match-card{
+min-height:190px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.third-place-card{
+width:100%;
+border-radius:18px;
+padding:14px;
+background:rgba(6,17,31,.60);
+border:1px solid rgba(255,255,255,.18);
+box-shadow:0 12px 28px rgba(0,0,0,.32);
+text-align:center;
+}
+
+.third-place-card small{
+display:block;
+font-weight:1000;
+color:#e5e7eb;
+text-transform:uppercase;
+margin-bottom:8px;
+}
+
+.third-place-card .final-vs{
+margin:5px auto;
+}
+
+.third-place-card .final-meta{
+font-size:10px;
+}
+
+.bracket-link{
+display:inline-flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+margin-top:10px;
+padding:7px 11px;
+border-radius:10px;
+background:#00c853;
+color:#06111f;
+font-weight:1000;
+font-size:12px;
+text-decoration:none;
+box-shadow:0 0 14px rgba(0,200,83,.24);
+}
+
+
+/* ORDEN SEGÚN PLANTILLA ENVIADA */
+.bracket-col.r32{gap:11px !important}
+.bracket-col.r16{gap:56px !important}
+.bracket-col.qf{gap:150px !important}
+.bracket-col.sf{gap:0 !important}
+.bracket-col.sf .bracket-slot{margin-top:0}
+.final-center{justify-content:center}
 
 @media(max-width:900px){.bracket-pro-card{padding:0 16px}.bracket-pro-box{padding:22px}.bracket-board{min-width:1480px}}
 
@@ -1266,13 +1381,11 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
   <div class="bracket-pro-box">
     <div class="bracket-pro-head">
       <small>🏆 Fase Eliminatoria</small>
-      <h2>🏆 Camino a la <span>Gloria</span></h2>
-      <p>Bracket oficial leído desde la hoja Matches. Los cruces pendientes quedan en blanco hasta que se llenen.</p>
+      <h2> Favoritos <span ><img src="https://flagcdn.com/w40/fr.png" alt="Francia"><img src="https://flagcdn.com/w40/ar.png" alt="Argentina"><img src="https://flagcdn.com/w40/es.png" alt="España"><img src="https://flagcdn.com/w40/br.png" alt="Brasil"></span></h2>
+      <p>Bracket oficial</p>
       <div class="bracket-legend">
         <span>🟢 Cruce definido</span>
-        <span>🏳️ Banderas automáticas</span>
         <span>🔗 Link FIFA</span>
-        <span>🏆 Final al centro</span>
       </div>
     </div>
     <div id="todayBracketSummary" class="today-summary"><span class="today-chip empty">Cargando partidos de hoy...</span></div>
@@ -1922,41 +2035,74 @@ function slotHTML(matchNum, label, side="left"){
 }
 
 function finalCardHTML(){
-  const final = getMatchByNumber(104) || getMatchByNumber(103);
-  const teams = matchTeamsText(final);
-  const hasFinal = final && Number(final.numero) === 104;
+  const final = getMatchByNumber(104);
+  const third = getMatchByNumber(103);
+
+  const finalTeams = matchTeamsText(final);
+  const thirdTeams = matchTeamsText(third);
+
+  const fa = limpiarNombreEquipo(finalTeams.a) || "Finalista";
+  const fb = limpiarNombreEquipo(finalTeams.b) || "Finalista";
+  const ta = limpiarNombreEquipo(thirdTeams.a) || "Pendiente";
+  const tb = limpiarNombreEquipo(thirdTeams.b) || "Pendiente";
+
+  const finalLink = final && final.fifaLink
+    ? `<a class="bracket-link" href="${final.fifaLink}" target="_blank" rel="noopener noreferrer">🔗 FIFA</a>`
+    : "";
+
+  const thirdLink = third && third.fifaLink
+    ? `<a class="bracket-link" href="${third.fifaLink}" target="_blank" rel="noopener noreferrer">🔗 FIFA</a>`
+    : "";
 
   return `
     <div class="final-center">
       <div class="final-match-card">
-        <small>🏆 Gran Final</small>
-        <h3>${teams.a || "Finalista"}<br><span class="final-vs">VS</span><br>${teams.b || "Finalista"}</h3>
+        <img id="introTrophy" class="trophy-img level-1" src="trophy-level-1.png?v=22" alt="Gran Final">
+        <h3>${finalTeams.a ? flagImg(finalTeams.a) : ""} ${fa}<br><span class="final-vs">VS</span><br>${finalTeams.b ? flagImg(finalTeams.b) : ""} ${fb}</h3>
         <div class="final-meta">
-          ${hasFinal ? `Partido #104` : `Final pendiente`}<br>
+          Partido #104<br>
           ${final && final.fecha ? final.fecha : ""} ${final && final.hora ? "· " + final.hora : ""}<br>
           ${final && final.estadio ? final.estadio : ""}
         </div>
+        ${finalLink}
       </div>
 
-      <div class="bracket-slot champion ${teams.a || teams.b ? "filled" : "empty"}">
-        <div class="champion-cup">🏆</div>
-        <div class="slot-match">Campeón</div>
-        <div class="slot-team">${""}</div>
-        <div class="slot-meta">Se ilumina al terminar la final</div>
+      <div class="third-place-card">
+        <small>🥉 Tercer Lugar</small>
+        <div>${thirdTeams.a ? flagImg(thirdTeams.a) : ""} ${ta}</div>
+        <span class="final-vs">VS</span>
+        <div>${thirdTeams.b ? flagImg(thirdTeams.b) : ""} ${tb}</div>
+        <div class="final-meta">
+          Partido #103<br>
+          ${third && third.fecha ? third.fecha : ""} ${third && third.hora ? "· " + third.hora : ""}<br>
+          ${third && third.estadio ? third.estadio : ""}
+        </div>
+        ${thirdLink}
       </div>
     </div>
   `;
 }
 
+
 function renderTodayBracketSummary(){
-  const cont=document.getElementById("todayBracketSummary");
+  const cont = document.getElementById("todayBracketSummary");
   if(!cont) return;
-  const hoy=(window.bracketMatches||[]).filter(p=>String(p.activo||"").trim().toUpperCase()==="TRUE").sort((a,b)=>(Number(a.numero)||0)-(Number(b.numero)||0));
-  if(!hoy.length){cont.innerHTML=`<span class="today-chip empty">⚪ No hay partidos marcados como TRUE hoy</span>`;return;}
-  cont.innerHTML=hoy.map(p=>{
-    const a=limpiarNombreEquipo(p.local);
-    const b=limpiarNombreEquipo(p.visitante);
-    const r=parseResultadoMatch(p.resultado);const marcador=r.has?` · ${r.a}-${r.b}`:"";return `<span class="today-chip">🔥 Hoy #${p.numero}: ${a} vs ${b}${marcador}</span>`;
+
+  const hoy = (window.bracketMatches || [])
+    .filter(p => String(p.activo || "").trim().toUpperCase() === "TRUE")
+    .sort((a,b)=>(Number(a.numero)||0)-(Number(b.numero)||0));
+
+  if(!hoy.length){
+    cont.innerHTML = `<span class="today-chip empty">⚪ No hay partidos marcados como TRUE hoy</span>`;
+    return;
+  }
+
+  cont.innerHTML = hoy.map(p=>{
+    const a = limpiarNombreEquipo(p.local);
+    const b = limpiarNombreEquipo(p.visitante);
+    const r = parseResultadoMatch(p.resultado);
+    const marcador = r.has ? ` · ${r.a}-${r.b}` : "";
+    return `<span class="today-chip">🔥 #${p.numero}: ${a} vs ${b}${marcador}</span>`;
   }).join("");
 }
 
@@ -1964,60 +2110,75 @@ function renderBracketBoard(){
   const board = document.getElementById("bracketBoard");
   if(!board) return;
 
-  const leftR32 = [73,75,74,77,76,78,79,80];
-  const leftR16 = [89,90,91,92];
-  const leftQF = [97,99];
+  /*
+    Orden según tu plantilla:
+    C: Izquierdo 32      = 73,75,74,77,83,84,81,82
+    D: Izquierdo Octavos = 90,89,93,94
+    E: Izquierda Cuartos = 97,98
+    F: Izquierda Semi    = 101
+    G: Final             = 104 / Tercer lugar 103
+    H: Derecha Semi      = 102
+    I: Derecha Cuartos   = 99,100
+    J: Derecho Octavos   = 91,92,95,96
+    K: Derecho 32        = 76,78,79,80,86,88,85,87
+  */
+
+  const leftR32 = [73,75,74,77,83,84,81,82];
+  const leftR16 = [90,89,93,94];
+  const leftQF = [97,98];
   const leftSF = [101];
 
   const rightSF = [102];
-  const rightQF = [98,100];
-  const rightR16 = [93,94,95,96];
-  const rightR32 = [83,84,81,82,86,88,85,87];
+  const rightQF = [99,100];
+  const rightR16 = [91,92,95,96];
+  const rightR32 = [76,78,79,80,86,88,85,87];
 
   board.innerHTML = `
     <div class="bracket-col r32">
-      <div class="bracket-col-title">Ronda 32</div>
+      <div class="bracket-col-title">Ronda 32<span>Izquierdo 32</span></div>
       ${leftR32.map(n=>slotHTML(n,"R32")).join("")}
     </div>
 
     <div class="bracket-col r16">
-      <div class="bracket-col-title">Octavos</div>
+      <div class="bracket-col-title">Octavos<span>Izquierdo Octavos</span></div>
       ${leftR16.map(n=>slotHTML(n,"Octavos")).join("")}
     </div>
 
     <div class="bracket-col qf">
-      <div class="bracket-col-title">Cuartos</div>
+      <div class="bracket-col-title">Cuartos<span>Izquierda Cuartos</span></div>
       ${leftQF.map(n=>slotHTML(n,"Cuartos")).join("")}
     </div>
 
     <div class="bracket-col sf">
-      <div class="bracket-col-title">Semifinal</div>
+      <div class="bracket-col-title">Semifinal<span>Izquierda Semi</span></div>
       ${leftSF.map(n=>slotHTML(n,"Semi")).join("")}
     </div>
 
     ${finalCardHTML()}
 
     <div class="bracket-col sf">
-      <div class="bracket-col-title">Semifinal</div>
+      <div class="bracket-col-title">Semifinal<span>Derecha Semi</span></div>
       ${rightSF.map(n=>slotHTML(n,"Semi")).join("")}
     </div>
 
     <div class="bracket-col qf">
-      <div class="bracket-col-title">Cuartos</div>
+      <div class="bracket-col-title">Cuartos<span>Derecha Cuartos</span></div>
       ${rightQF.map(n=>slotHTML(n,"Cuartos")).join("")}
     </div>
 
     <div class="bracket-col r16">
-      <div class="bracket-col-title">Octavos</div>
+      <div class="bracket-col-title">Octavos<span>Derecho Octavos</span></div>
       ${rightR16.map(n=>slotHTML(n,"Octavos")).join("")}
     </div>
 
     <div class="bracket-col r32">
-      <div class="bracket-col-title">Ronda 32</div>
+      <div class="bracket-col-title">Ronda 32<span>Derecho 32</span></div>
       ${rightR32.map(n=>slotHTML(n,"R32")).join("")}
     </div>
   `;
 }
+
+
 
 fetch(matchesCSV + "&cache=" + Date.now())
 .then(response => response.text())
@@ -2136,8 +2297,10 @@ if(proximoDetalleEl) proximoDetalleEl.textContent =
 })
 .catch(error => {
 console.error("Error leyendo Matches:", error);
-if(proximoPartidoEl) proximoPartidoEl.textContent = "No se pudo leer Matches";
-if(proximoDetalleEl) proximoDetalleEl.textContent = "Revisa el enlace publicado como CSV.";
+const proximoPartidoCatch = document.getElementById("proximoPartido");
+if(proximoPartidoCatch) proximoPartidoCatch.textContent = "No se pudo leer Matches";
+const proximoDetalleCatch = document.getElementById("proximoDetalle");
+if(proximoDetalleCatch) proximoDetalleCatch.textContent = "Revisa el enlace publicado como CSV.";
 const bracket = document.getElementById("bracketBoard");
 if(bracket) bracket.innerHTML = `<div class="bracket-note">No se pudo cargar el bracket desde Matches.</div>`;
 });
