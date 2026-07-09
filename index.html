@@ -1286,6 +1286,336 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
 .cinematic-meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;max-width:260px}.cinematic-meta span,.cinematic-meta a{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:1000;text-decoration:none;color:#e5eefc;background:rgba(6,17,31,.50);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(5px)}.cinematic-meta a{color:#06111f;background:linear-gradient(145deg,#00c853,#facc15);border:0;box-shadow:0 0 16px rgba(250,204,21,.28)}
 @media(max-width:880px){.hero{min-height:auto;padding:64px 16px 72px!important}.cinematic-card{grid-template-columns:1fr;gap:12px}.cinematic-center{order:2}.cinematic-team.left{order:1;justify-content:center;text-align:center}.cinematic-team.right{order:3;justify-content:center;text-align:center}.cinematic-team{min-height:180px}.cinematic-name{font-size:46px}.cinematic-beast{font-size:130px;left:50%!important;right:auto!important;transform:translateX(-50%)}.cinematic-flag,.cinematic-team.right .cinematic-flag{transform-origin:center;transform:scale(1.15)}.cinematic-vs{width:88px;height:88px;font-size:28px}}
 
+
+
+/* ==========================================================
+   HERO VERSUS - IDENTIDAD PROPIA, SIN RECUADROS PESADOS
+   Enfoque: el centro manda. Los equipos se integran al estadio.
+========================================================== */
+.hero{
+  min-height:680px!important;
+  padding:76px 20px 86px!important;
+  background:
+    linear-gradient(180deg,rgba(2,6,23,.54),rgba(2,6,23,.78) 54%,rgba(2,6,23,.93)),
+    radial-gradient(circle at 50% 43%,rgba(250,204,21,.18),transparent 25%),
+    radial-gradient(circle at 24% 48%,rgba(37,99,235,.22),transparent 31%),
+    radial-gradient(circle at 76% 48%,rgba(239,68,68,.18),transparent 31%),
+    url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2200&q=80")!important;
+  background-size:cover!important;
+  background-position:center!important;
+  isolation:isolate;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(30,64,175,.42),transparent 34%,transparent 66%,rgba(153,27,27,.34)),
+    radial-gradient(circle at center,rgba(0,200,83,.11),transparent 36%),
+    linear-gradient(180deg,transparent 0%,rgba(0,200,83,.10) 100%);
+  mix-blend-mode:screen;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:2px;
+  transform:translateX(-50%);
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(250,204,21,.78),rgba(0,200,83,.50),transparent);
+  box-shadow:0 0 22px rgba(250,204,21,.70),0 0 58px rgba(0,200,83,.34);
+  animation:centerLinePulse 1.6s ease-in-out infinite alternate;
+}
+@keyframes centerLinePulse{from{opacity:.38}to{opacity:.95}}
+.hero-content{width:min(1420px,97vw)!important;position:relative;z-index:4}
+.hero h1{
+  font-size:clamp(38px,4.9vw,72px)!important;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:8px!important;
+  text-shadow:0 8px 28px rgba(0,0,0,.75),0 0 18px rgba(255,255,255,.18);
+}
+.hero p{font-size:clamp(16px,1.45vw,22px)!important;color:#f8fafc!important;text-shadow:0 2px 14px rgba(0,0,0,.80)}
+.cinematic-duel{
+  width:min(1320px,98vw)!important;
+  min-height:330px!important;
+  margin:34px auto 26px!important;
+  position:relative;
+}
+.cinematic-duel::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(720px,70vw);
+  height:min(720px,70vw);
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    radial-gradient(circle,rgba(250,204,21,.20),rgba(0,200,83,.13) 27%,rgba(56,189,248,.09) 42%,transparent 66%);
+  filter:blur(3px);
+  z-index:0;
+  animation:versusCoreBreath 2.2s ease-in-out infinite alternate;
+}
+@keyframes versusCoreBreath{from{opacity:.62;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+.cinematic-card{
+  position:relative!important;
+  z-index:2;
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:1fr 260px 1fr!important;
+  gap:22px!important;
+  align-items:center!important;
+  animation:versusArrive .65s ease both!important;
+}
+@keyframes versusArrive{from{opacity:0;transform:translateY(18px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.cinematic-card::before,
+.cinematic-card::after{display:none!important}
+.cinematic-team{
+  min-height:285px!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  padding:10px 8px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.cinematic-team.left{justify-content:flex-end!important;text-align:right!important;animation:teamEnterLeft .75s cubic-bezier(.2,.8,.2,1) both!important}
+.cinematic-team.right{justify-content:flex-start!important;text-align:left!important;animation:teamEnterRight .75s cubic-bezier(.2,.8,.2,1) both!important}
+@keyframes teamEnterLeft{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:translateX(0)}}
+@keyframes teamEnterRight{from{opacity:0;transform:translateX(70px)}to{opacity:1;transform:translateX(0)}}
+.cinematic-team::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:118%;
+  height:170px;
+  transform:translateY(-50%) skewX(-14deg);
+  opacity:.70;
+  filter:blur(.2px);
+  z-index:-1;
+}
+.cinematic-team.left::before{
+  right:-8px;
+  background:linear-gradient(90deg,transparent,rgba(37,99,235,.16),rgba(59,130,246,.42),rgba(255,255,255,.08));
+  border-right:2px solid rgba(147,197,253,.70);
+  box-shadow:22px 0 48px rgba(59,130,246,.34);
+}
+.cinematic-team.right::before{
+  left:-8px;
+  background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(239,68,68,.40),rgba(153,27,27,.18),transparent);
+  border-left:2px solid rgba(252,165,165,.68);
+  box-shadow:-22px 0 48px rgba(239,68,68,.28);
+}
+.cinematic-beast{display:none!important}
+.cinematic-info{max-width:560px!important;position:relative;z-index:2}
+.cinematic-flag{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:54px!important;
+  height:40px!important;
+  margin-bottom:9px!important;
+  border-radius:9px!important;
+  transform:none!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:0 0 22px rgba(255,255,255,.15)!important;
+  overflow:hidden!important;
+}
+.cinematic-flag img{width:100%!important;height:100%!important;object-fit:cover!important}
+.cinematic-name{
+  font-size:clamp(46px,6.4vw,96px)!important;
+  line-height:.86!important;
+  letter-spacing:-3px!important;
+  color:#fff!important;
+  text-transform:uppercase!important;
+  text-shadow:
+    0 7px 0 rgba(0,0,0,.32),
+    0 0 22px rgba(0,0,0,.95),
+    0 0 36px rgba(255,255,255,.18)!important;
+}
+.cinematic-team.left .cinematic-name{
+  background:linear-gradient(180deg,#ffffff,#dbeafe,#60a5fa);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+  filter:drop-shadow(0 0 18px rgba(59,130,246,.28));
+}
+.cinematic-team.right .cinematic-name{
+  background:linear-gradient(180deg,#ffffff,#fee2e2,#ef4444);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+  filter:drop-shadow(0 0 18px rgba(239,68,68,.24));
+}
+.cinematic-role{
+  margin-top:13px!important;
+  font-size:13px!important;
+  letter-spacing:1.1px!important;
+  color:#bbf7d0!important;
+  text-shadow:0 0 12px rgba(0,0,0,.9)!important;
+}
+.cinematic-score{
+  min-width:74px!important;
+  height:62px!important;
+  border-radius:999px!important;
+  margin-top:14px!important;
+  background:rgba(2,6,23,.50)!important;
+  border:1px solid rgba(250,204,21,.42)!important;
+  box-shadow:0 0 20px rgba(250,204,21,.18)!important;
+}
+.cinematic-team.winner .cinematic-name{filter:drop-shadow(0 0 22px rgba(250,204,21,.55))!important}
+.cinematic-center{
+  min-width:0!important;
+  height:290px!important;
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:13px!important;
+  z-index:4!important;
+}
+.cinematic-center::before{
+  content:"";
+  position:absolute;
+  inset:50% auto auto 50%;
+  width:220px;
+  height:220px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,#facc15 0%,#facc15 24%,#00c853 62%,rgba(0,200,83,0) 70%);
+  box-shadow:0 0 38px rgba(250,204,21,.74),0 0 90px rgba(0,200,83,.32);
+  z-index:-1;
+  animation:vsOrb 1.15s ease-in-out infinite alternate;
+}
+.cinematic-center::after{
+  content:"";
+  position:absolute;
+  left:50%;top:50%;
+  width:270px;height:270px;
+  transform:translate(-50%,-50%) rotate(0deg);
+  border-radius:50%;
+  border:2px dashed rgba(255,255,255,.25);
+  box-shadow:inset 0 0 28px rgba(255,255,255,.08);
+  z-index:-1;
+  animation:vsRing 10s linear infinite;
+}
+@keyframes vsOrb{from{transform:translate(-50%,-50%) scale(.96)}to{transform:translate(-50%,-50%) scale(1.05)}}
+@keyframes vsRing{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cinematic-vs{
+  width:auto!important;
+  height:auto!important;
+  border-radius:0!important;
+  padding:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#06111f!important;
+  font-size:clamp(52px,6.5vw,96px)!important;
+  line-height:.82!important;
+  font-weight:1000!important;
+  letter-spacing:-6px!important;
+  text-transform:uppercase!important;
+  text-shadow:0 3px 0 rgba(255,255,255,.55),0 0 22px rgba(250,204,21,.85)!important;
+  animation:vsHit 1s ease-in-out infinite alternate!important;
+}
+@keyframes vsHit{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.07) rotate(2deg)}}
+.cinematic-kicker{
+  padding:9px 17px!important;
+  border-radius:999px!important;
+  background:rgba(2,6,23,.58)!important;
+  color:#fde68a!important;
+  border:1px solid rgba(250,204,21,.56)!important;
+  box-shadow:0 0 22px rgba(250,204,21,.22)!important;
+  backdrop-filter:blur(6px)!important;
+  white-space:nowrap!important;
+}
+.cinematic-meta{
+  display:flex!important;
+  justify-content:center!important;
+  gap:8px!important;
+  flex-wrap:wrap!important;
+  max-width:320px!important;
+}
+.cinematic-meta span,.cinematic-meta a{
+  padding:8px 12px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+  color:#f8fafc!important;
+  background:rgba(2,6,23,.52)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.20)!important;
+}
+.cinematic-meta a{
+  color:#06111f!important;
+  background:linear-gradient(145deg,#00c853,#facc15)!important;
+  border:0!important;
+}
+.contador.hall-link{
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.20)!important;
+}
+.buttons .btn{border-radius:14px!important;box-shadow:0 10px 28px rgba(0,0,0,.24)!important}
+@media(max-width:980px){
+  .hero{min-height:auto!important;padding:62px 14px 72px!important}
+  .cinematic-card{grid-template-columns:1fr!important;gap:6px!important}
+  .cinematic-team{min-height:148px!important;justify-content:center!important;text-align:center!important}
+  .cinematic-team.left,.cinematic-team.right{justify-content:center!important;text-align:center!important}
+  .cinematic-team::before{width:100%;height:120px;left:0!important;right:0!important;transform:translateY(-50%) skewX(-8deg)!important;border:0!important}
+  .cinematic-team.left::before{background:linear-gradient(90deg,transparent,rgba(59,130,246,.35),transparent)!important}
+  .cinematic-team.right::before{background:linear-gradient(90deg,transparent,rgba(239,68,68,.32),transparent)!important}
+  .cinematic-center{height:190px!important;order:2!important}
+  .cinematic-team.left{order:1!important}.cinematic-team.right{order:3!important}
+  .cinematic-name{font-size:clamp(38px,12vw,58px)!important;letter-spacing:-1.5px!important}
+  .cinematic-center::before{width:150px!important;height:150px!important}
+  .cinematic-center::after{width:184px!important;height:184px!important}
+  .cinematic-vs{font-size:64px!important;letter-spacing:-3px!important}
+}
+
+
+
+/* =========================================================
+   VERSUS ARENA 3.0 - Identidad propia + fondo por enfrentamiento
+   Limpio, sin recuadros pesados, centrado en el choque del partido
+========================================================= */
+.hero{
+  --left1:#2563eb;--left2:#60a5fa;--right1:#dc2626;--right2:#f97316;--leftText:#dbeafe;--rightText:#fee2e2;
+  background:
+    linear-gradient(180deg,rgba(2,6,23,.30),rgba(2,6,23,.78) 58%,rgba(2,6,23,.96)),
+    radial-gradient(circle at 28% 44%,color-mix(in srgb,var(--left1) 54%,transparent),transparent 31%),
+    radial-gradient(circle at 72% 44%,color-mix(in srgb,var(--right1) 54%,transparent),transparent 31%),
+    linear-gradient(115deg,color-mix(in srgb,var(--left1) 46%,#020617) 0%,#020617 45%,#020617 55%,color-mix(in srgb,var(--right1) 46%,#020617) 100%)!important;
+  isolation:isolate;
+}
+.hero::before{background:radial-gradient(circle at 50% 46%,rgba(250,204,21,.24),transparent 18%),linear-gradient(90deg,color-mix(in srgb,var(--left2) 22%,transparent),transparent 35%,transparent 65%,color-mix(in srgb,var(--right2) 22%,transparent)),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 82px)!important;opacity:.95}
+.hero::after{background:conic-gradient(from 225deg at 50% 50%,transparent,color-mix(in srgb,var(--left2) 18%,transparent),transparent 22%,rgba(250,204,21,.16) 35%,transparent 48%,color-mix(in srgb,var(--right2) 18%,transparent),transparent)!important;opacity:.8}
+.cinematic-duel{min-height:360px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.cinematic-duel::before{width:min(680px,78vw)!important;height:min(680px,78vw)!important;background:radial-gradient(circle,rgba(255,255,255,.16) 0 6%,rgba(250,204,21,.34) 7% 16%,transparent 17% 23%,rgba(0,200,83,.15) 24% 34%,transparent 58%)!important;filter:blur(1px)!important;opacity:.95!important}
+.cinematic-duel::after{content:"";position:absolute;left:50%;top:50%;width:min(1120px,94vw);height:2px;transform:translate(-50%,-50%) rotate(-8deg);background:linear-gradient(90deg,transparent,var(--left2),#fff7ad,var(--right2),transparent);box-shadow:0 0 28px rgba(250,204,21,.45);z-index:1;opacity:.75}
+.cinematic-card{grid-template-columns:minmax(0,1fr) 220px minmax(0,1fr)!important;gap:8px!important;align-items:center!important}
+.cinematic-team{min-height:300px!important;padding:0!important}.cinematic-team::before{display:none!important}
+.cinematic-team::after{content:"";position:absolute;top:50%;width:92%;height:225px;transform:translateY(-50%);border-radius:50%;filter:blur(22px);opacity:.42;z-index:-1}
+.cinematic-team.left::after{right:0;background:radial-gradient(ellipse,color-mix(in srgb,var(--left2) 70%,transparent),transparent 68%)}
+.cinematic-team.right::after{left:0;background:radial-gradient(ellipse,color-mix(in srgb,var(--right2) 70%,transparent),transparent 68%)}
+.cinematic-team.left{justify-content:flex-end!important;text-align:right!important;padding-right:8px!important}.cinematic-team.right{justify-content:flex-start!important;text-align:left!important;padding-left:8px!important}
+.cinematic-info{max-width:600px!important}.cinematic-flag{width:62px!important;height:44px!important;border-radius:8px!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 14px 38px rgba(0,0,0,.28),0 0 18px rgba(255,255,255,.10)!important}
+.cinematic-name{font-size:clamp(52px,7.2vw,112px)!important;line-height:.78!important;letter-spacing:-4px!important;text-shadow:0 8px 0 rgba(0,0,0,.30),0 0 18px rgba(0,0,0,.95),0 0 40px rgba(255,255,255,.12)!important}
+.cinematic-team.left .cinematic-name{background:linear-gradient(180deg,#ffffff 0%,var(--leftText) 42%,var(--left2) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+.cinematic-team.right .cinematic-name{background:linear-gradient(180deg,#ffffff 0%,var(--rightText) 42%,var(--right2) 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;color:transparent!important}
+.cinematic-role{color:#d1fae5!important;opacity:.82;font-size:12px!important;letter-spacing:2px!important}.cinematic-center{height:320px!important;gap:10px!important}
+.cinematic-center::before{width:190px!important;height:190px!important;background:radial-gradient(circle,#fff7ad 0 18%,#facc15 19% 37%,#00c853 38% 58%,transparent 59%)!important;box-shadow:0 0 36px rgba(250,204,21,.75),0 0 86px rgba(0,200,83,.36)!important}
+.cinematic-center::after{width:248px!important;height:248px!important;border:1px solid rgba(255,255,255,.25)!important;border-left-color:var(--left2)!important;border-right-color:var(--right2)!important;border-style:solid!important}
+.cinematic-vs{font-size:clamp(68px,8vw,116px)!important;letter-spacing:-7px!important;color:#07111f!important;text-shadow:0 2px 0 rgba(255,255,255,.72),0 0 22px rgba(250,204,21,.92),0 0 50px rgba(255,255,255,.26)!important}
+.cinematic-kicker{transform:translateY(-6px);background:rgba(2,6,23,.48)!important;border:1px solid rgba(250,204,21,.45)!important;color:#fff7ad!important;box-shadow:0 0 22px rgba(250,204,21,.16)!important}.cinematic-meta span,.cinematic-meta a{background:rgba(2,6,23,.42)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:none!important}
+.cinematic-arena-name{position:absolute;left:50%;top:6px;transform:translateX(-50%);font-size:12px;font-weight:1000;letter-spacing:2.2px;color:rgba(255,255,255,.72);text-transform:uppercase;text-shadow:0 0 14px rgba(0,0,0,.9);z-index:5;white-space:nowrap}
+.cinematic-emblem{position:absolute;top:50%;font-size:150px;line-height:1;opacity:.10;transform:translateY(-50%);filter:drop-shadow(0 0 22px rgba(255,255,255,.14));z-index:-1}.cinematic-team.left .cinematic-emblem{right:4%}.cinematic-team.right .cinematic-emblem{left:4%}
+@media(max-width:980px){.cinematic-card{grid-template-columns:1fr!important;gap:0!important}.cinematic-duel{min-height:620px!important}.cinematic-duel::after{transform:translate(-50%,-50%) rotate(0deg);width:84vw;opacity:.42}.cinematic-team{min-height:150px!important;padding:0!important}.cinematic-team.left,.cinematic-team.right{text-align:center!important;justify-content:center!important;padding:0!important}.cinematic-name{font-size:clamp(42px,13vw,64px)!important;letter-spacing:-2px!important}.cinematic-center{height:210px!important}.cinematic-center::before{width:146px!important;height:146px!important}.cinematic-center::after{width:188px!important;height:188px!important}.cinematic-vs{font-size:72px!important;letter-spacing:-4px!important}.cinematic-emblem{font-size:105px;left:50%!important;right:auto!important;transform:translate(-50%,-50%)}}
+
 </style>
 </head>
 
@@ -2112,15 +2442,57 @@ function mascotaEquipo(nombre){
   return mascots[n] || "⚽";
 }
 
+
+
+function getVersusTheme(aRaw,bRaw){
+  function key(n){return normalizarEquipoFlag(limpiarNombreEquipo(n));}
+  const themes={
+    "francia":{c1:"#1d4ed8",c2:"#60a5fa",text:"#dbeafe",emblem:"🐓",arena:"Les Bleus"},
+    "marruecos":{c1:"#b91c1c",c2:"#22c55e",text:"#fee2e2",emblem:"🦁",arena:"Rugido del Atlas"},
+    "espana":{c1:"#b91c1c",c2:"#facc15",text:"#fef3c7",emblem:"🐂",arena:"Furia roja"},
+    "españa":{c1:"#b91c1c",c2:"#facc15",text:"#fef3c7",emblem:"🐂",arena:"Furia roja"},
+    "belgica":{c1:"#111827",c2:"#ef4444",text:"#fee2e2",emblem:"🦁",arena:"Diablos rojos"},
+    "inglaterra":{c1:"#e5e7eb",c2:"#ef4444",text:"#ffffff",emblem:"🦁",arena:"Corona inglesa"},
+    "argentina":{c1:"#38bdf8",c2:"#ffffff",text:"#e0f2fe",emblem:"☀️",arena:"La Albiceleste"},
+    "suiza":{c1:"#dc2626",c2:"#ffffff",text:"#fee2e2",emblem:"✚",arena:"Muralla alpina"},
+    "noruega":{c1:"#1d4ed8",c2:"#ef4444",text:"#dbeafe",emblem:"🫎",arena:"Vikingos"},
+    "brasil":{c1:"#16a34a",c2:"#facc15",text:"#dcfce7",emblem:"🐆",arena:"Samba dorada"},
+    "portugal":{c1:"#166534",c2:"#dc2626",text:"#dcfce7",emblem:"🐓",arena:"Escudo lusitano"},
+    "alemania":{c1:"#111827",c2:"#facc15",text:"#f8fafc",emblem:"🦅",arena:"Máquina alemana"},
+    "mexico":{c1:"#15803d",c2:"#ef4444",text:"#dcfce7",emblem:"🦅",arena:"Tricolor bravo"},
+    "canada":{c1:"#dc2626",c2:"#ffffff",text:"#fee2e2",emblem:"🍁",arena:"Hoja de fuego"},
+    "colombia":{c1:"#facc15",c2:"#2563eb",text:"#fef9c3",emblem:"🦅",arena:"Tricolor cafetero"},
+    "paraguay":{c1:"#2563eb",c2:"#ef4444",text:"#dbeafe",emblem:"🦁",arena:"Garra guaraní"}
+  };
+  const left=themes[key(aRaw)]||{c1:"#2563eb",c2:"#60a5fa",text:"#dbeafe",emblem:mascotaEquipo(aRaw),arena:"Campo de batalla"};
+  const right=themes[key(bRaw)]||{c1:"#dc2626",c2:"#fb7185",text:"#fee2e2",emblem:mascotaEquipo(bRaw),arena:"Campo de batalla"};
+  return {left,right,arena:`${left.arena} vs ${right.arena}`};
+}
+
+function applyVersusTheme(cont,theme){
+  const root=document.querySelector('.hero') || cont;
+  root.style.setProperty('--left1',theme.left.c1);
+  root.style.setProperty('--left2',theme.left.c2);
+  root.style.setProperty('--leftText',theme.left.text);
+  root.style.setProperty('--right1',theme.right.c1);
+  root.style.setProperty('--right2',theme.right.c2);
+  root.style.setProperty('--rightText',theme.right.text);
+}
+
 function renderCinematicDuel(){
   const cont = document.getElementById("cinematicDuel");
   if(!cont) return;
-  const juegos = (window.bracketMatches || []).filter(p => String(p.activo || "").trim().toUpperCase() === "TRUE").sort((a,b)=>(Number(a.numero)||0)-(Number(b.numero)||0));
+  const juegos = (window.bracketMatches || [])
+    .filter(p => String(p.activo || "").trim().toUpperCase() === "TRUE")
+    .sort((a,b)=>(Number(a.numero)||0)-(Number(b.numero)||0));
+
   if(!juegos.length){
     cont.innerHTML = `<div class="duel-loading">⚪ No hay partido para mostrar</div>`;
     return;
   }
+
   let index = 0;
+
   function pintar(){
     const p = juegos[index % juegos.length];
     const aRaw = p.local || "";
@@ -2133,41 +2505,50 @@ function renderCinematicDuel(){
     const scoreB = r.has ? r.b : "";
     const ganaA = r.has && Number(scoreA) > Number(scoreB);
     const ganaB = r.has && Number(scoreB) > Number(scoreA);
-    const centro = r.has ? `${scoreA} - ${scoreB}` : "VS";
+    const centro = r.has ? `${scoreA}<span style="font-size:.42em;letter-spacing:0;margin:0 8px;vertical-align:middle">-</span>${scoreB}` : "VS";
     const fifa = p.fifaLink ? `<a href="${p.fifaLink}" target="_blank" rel="noopener noreferrer">🔗 FIFA</a>` : "";
+    const theme = getVersusTheme(aRaw,bRaw);
+    applyVersusTheme(cont,theme);
+
     cont.innerHTML = `
       <div class="cinematic-card">
+        <div class="cinematic-arena-name">${theme.arena}</div>
         <div class="cinematic-team left ${ganaA ? "winner" : ""}">
-          <div class="cinematic-beast">${mascotaEquipo(aRaw)}</div>
+          <div class="cinematic-emblem">${theme.left.emblem}</div>
           <div class="cinematic-info">
             <div class="cinematic-flag">${aRaw ? flagImg(aRaw) : ""}</div>
             <div class="cinematic-name">${a}</div>
-            <div class="cinematic-role">Local</div>
+            <div class="cinematic-role">LOCAL</div>
             ${r.has ? `<div class="cinematic-score">${scoreA}</div>` : ""}
           </div>
         </div>
+
         <div class="cinematic-center">
           <div class="cinematic-kicker">🔥 Duelo del día · #${p.numero} · ${fase}</div>
           <div class="cinematic-vs">${centro}</div>
           <div class="cinematic-meta">
-            ${p.fecha ? `<span>📅 ${p.fecha}</span>` : ""}
+            ${p.dia ? `<span>📅 ${p.dia}</span>` : ""}
+            ${p.fecha ? `<span>🗓️ ${p.fecha}</span>` : ""}
             ${p.hora ? `<span>🕒 ${p.hora}</span>` : ""}
             ${p.estadio ? `<span>📍 ${p.estadio}</span>` : ""}
             ${fifa}
           </div>
         </div>
+
         <div class="cinematic-team right ${ganaB ? "winner" : ""}">
-          <div class="cinematic-beast">${mascotaEquipo(bRaw)}</div>
+          <div class="cinematic-emblem">${theme.right.emblem}</div>
           <div class="cinematic-info">
             <div class="cinematic-flag">${bRaw ? flagImg(bRaw) : ""}</div>
             <div class="cinematic-name">${b}</div>
-            <div class="cinematic-role">Visitante</div>
+            <div class="cinematic-role">VISITANTE</div>
             ${r.has ? `<div class="cinematic-score">${scoreB}</div>` : ""}
           </div>
         </div>
       </div>`;
+
     index++;
   }
+
   pintar();
   if(juegos.length > 1){
     if(window.cinematicDuelInterval) clearInterval(window.cinematicDuelInterval);
