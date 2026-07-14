@@ -2165,6 +2165,84 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
  .ff-main-title{letter-spacing:-2px!important}.ff-semifinal{grid-template-columns:1fr 52px 1fr;gap:4px}.ff-mini-vs{width:50px;height:50px;font-size:17px}.ff-team img{width:58px;height:39px}.ff-team-name{font-size:22px}.ff-team-alias{font-size:8px}.ff-arena::after{width:360px;height:360px}
 }
 
+
+
+/* ==========================================================
+   FASE 2 AFINADA · CENTRO DE BATALLA
+   Mantiene intactos el bracket y el ranking general originales.
+========================================================== */
+.battle-zone{max-width:1400px;margin:0 auto;padding:42px 40px 12px;position:relative}
+.battle-zone::before{content:"";position:absolute;inset:4% 10%;background:radial-gradient(circle,rgba(250,204,21,.10),transparent 66%);filter:blur(14px);pointer-events:none}
+.battle-heading{text-align:center;position:relative;z-index:2;margin-bottom:24px}
+.battle-heading small{display:inline-flex;padding:8px 13px;border-radius:999px;background:rgba(0,200,83,.12);border:1px solid rgba(0,200,83,.34);color:#86efac;font-weight:1000;letter-spacing:1px;text-transform:uppercase}
+.battle-heading h2{font-size:clamp(34px,5vw,62px);line-height:.96;margin:12px 0 8px;letter-spacing:-2px;text-transform:uppercase;background:linear-gradient(180deg,#fff,#fff7ad,#facc15);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 30px rgba(250,204,21,.16)}
+.battle-heading p{color:#cbd5e1;font-weight:800}
+.battle-scoreboard{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:18px;margin-bottom:28px}
+.battle-scoreboard.single{max-width:920px;margin-left:auto;margin-right:auto}
+.battle-match{position:relative;overflow:hidden;min-height:250px;border-radius:26px;padding:22px;background:linear-gradient(145deg,rgba(7,17,32,.94),rgba(15,23,42,.78));border:1px solid rgba(250,204,21,.58);box-shadow:0 0 34px rgba(250,204,21,.18),0 22px 48px rgba(0,0,0,.45);isolation:isolate;animation:battleActive 1.7s ease-in-out infinite alternate}
+.battle-match::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,var(--teamA,rgba(30,64,175,.26)),transparent 42%,transparent 58%,var(--teamB,rgba(185,28,28,.26)));opacity:.9;z-index:-2}
+.battle-match::after{content:"";position:absolute;left:50%;top:-40%;width:2px;height:180%;transform:rotate(18deg);background:linear-gradient(transparent,#fff7ad,transparent);box-shadow:0 0 30px #facc15;opacity:.55;z-index:-1}
+@keyframes battleActive{to{filter:brightness(1.10);transform:translateY(-3px)}}
+.battle-status-row{display:flex;justify-content:space-between;align-items:center;gap:12px}.battle-match-no{font-size:11px;font-weight:1000;letter-spacing:1.5px;color:#cbd5e1;text-transform:uppercase}.battle-state{padding:7px 11px;border-radius:999px;font-size:10px;font-weight:1000;letter-spacing:1px;color:#06111f;background:linear-gradient(145deg,#facc15,#00c853);box-shadow:0 0 18px rgba(250,204,21,.28)}
+.battle-duel-row{display:grid;grid-template-columns:1fr 92px 1fr;align-items:center;gap:12px;margin-top:23px}.battle-side{text-align:center}.battle-side .flag{width:64px;height:44px;display:inline-flex;flex-basis:64px}.battle-side .flag img{width:100%;height:100%;object-fit:cover}.battle-side strong{display:block;margin-top:10px;font-size:clamp(22px,2.6vw,38px);font-weight:1000;text-transform:uppercase;line-height:.95}.battle-side span.battle-alias{display:block;margin-top:7px;font-size:10px;color:#cbd5e1;font-weight:900;letter-spacing:.7px;text-transform:uppercase}.battle-score{font-size:46px;font-weight:1000;color:#fff7ad;text-shadow:0 0 22px rgba(250,204,21,.6)}
+.battle-vs-core{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:1000;color:#06111f;background:radial-gradient(circle at 30% 20%,#fff,#facc15 36%,#00c853);box-shadow:0 0 28px rgba(250,204,21,.52),0 0 60px rgba(0,200,83,.20);animation:battleVs 1.1s ease-in-out infinite alternate}@keyframes battleVs{to{transform:scale(1.08) rotate(3deg)}}
+.battle-meta{text-align:center;margin-top:16px;font-size:12px;color:#dbeafe;font-weight:850}.battle-empty{position:relative;z-index:2;text-align:center;padding:26px;border-radius:20px;background:rgba(6,17,31,.58);border:1px dashed rgba(255,255,255,.18);color:#cbd5e1;font-weight:900}
+@media(max-width:700px){.battle-zone{padding:32px 16px 8px}.battle-scoreboard{grid-template-columns:1fr}.battle-duel-row{grid-template-columns:1fr 68px 1fr}.battle-vs-core{width:64px;height:64px;font-size:21px}.battle-side strong{font-size:20px}.battle-side .flag{width:54px;height:37px;flex-basis:54px}}
+
+
+
+/* ==========================================================
+   VERSIÓN DEFINITIVA · MOTOR AUTOMÁTICO DE MODOS
+   FINAL FOUR → GRAND FINAL / TERCER LUGAR → CHAMPION
+========================================================== */
+body[data-tournament-mode="grand-final"]{
+  background:radial-gradient(circle at 50% 0,rgba(250,204,21,.12),transparent 34%),#06111f;
+}
+.hero.mode-grand-final{
+  --ff-left:#facc15;--ff-right:#f8fafc;
+  min-height:760px!important;
+  background:
+    linear-gradient(180deg,rgba(2,6,23,.35),rgba(2,6,23,.80) 58%,rgba(2,6,23,.96)),
+    radial-gradient(circle at 50% 40%,rgba(250,204,21,.34),transparent 28%),
+    radial-gradient(circle at 20% 45%,color-mix(in srgb,var(--ff-left) 30%,transparent),transparent 34%),
+    radial-gradient(circle at 80% 45%,color-mix(in srgb,var(--ff-right) 30%,transparent),transparent 34%),
+    url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2200&q=80")!important;
+  background-size:cover!important;background-position:center!important;
+}
+.mode-grand-final .ff-stage-pill{background:linear-gradient(135deg,#facc15,#fff7ad);color:#291900;border:0;box-shadow:0 0 34px rgba(250,204,21,.48)}
+.mode-grand-final .ff-main-title{background:linear-gradient(180deg,#fff,#fff2a8,#facc15);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 45px rgba(250,204,21,.34)}
+.grand-final-arena{position:relative;display:grid;grid-template-columns:1fr 280px 1fr;align-items:center;gap:28px;width:min(1260px,96vw);margin:34px auto 22px;min-height:380px}
+.gf-team{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:310px;padding:24px;text-align:center;isolation:isolate}
+.gf-team::before{content:"";position:absolute;inset:8% 0;border-radius:50%;background:radial-gradient(circle,var(--gf-color),transparent 68%);opacity:.26;filter:blur(22px);z-index:-1;animation:gfAura 2s ease-in-out infinite alternate}
+@keyframes gfAura{to{opacity:.52;transform:scale(1.08)}}
+.gf-team img{width:120px;height:80px;object-fit:cover;border-radius:10px;box-shadow:0 0 28px var(--gf-color);margin-bottom:18px}
+.gf-team-name{font-size:clamp(38px,5.2vw,78px);line-height:.92;font-weight:1000;text-transform:uppercase;text-shadow:0 8px 28px #000,0 0 24px var(--gf-color)}
+.gf-team-legend{margin-top:13px;font-size:14px;font-weight:1000;letter-spacing:.8px;text-transform:uppercase;color:#f8fafc}
+.gf-score{margin-top:18px;min-width:84px;padding:8px 18px;border-radius:18px;font-size:46px;font-weight:1000;color:#06111f;background:linear-gradient(145deg,#fff7ad,#facc15);box-shadow:0 0 32px rgba(250,204,21,.55)}
+.gf-center{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:2}
+.gf-trophy{width:190px;max-height:245px;object-fit:contain;filter:drop-shadow(0 0 28px #facc15) drop-shadow(0 0 70px rgba(250,204,21,.75));animation:gfTrophy 1.5s ease-in-out infinite alternate}
+@keyframes gfTrophy{to{transform:translateY(-12px) scale(1.04)}}
+.gf-vs{width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:1000;color:#06111f;background:radial-gradient(circle at 30% 20%,#fff,#fff7ad 30%,#facc15 72%);box-shadow:0 0 38px rgba(250,204,21,.70)}
+.gf-meta{font-weight:900;color:#fde68a;text-align:center;text-shadow:0 2px 12px #000}
+.third-place-showcase{width:min(840px,94vw);margin:18px auto 0;padding:17px 22px;border-radius:22px;background:linear-gradient(145deg,rgba(30,41,59,.78),rgba(6,17,31,.72));border:1px solid rgba(217,119,6,.46);box-shadow:0 0 28px rgba(217,119,6,.16);backdrop-filter:blur(7px)}
+.third-place-title{font-size:12px;font-weight:1000;letter-spacing:.8px;text-transform:uppercase;color:#fdba74}
+.third-place-duel{display:grid;grid-template-columns:1fr auto 1fr;gap:15px;align-items:center;margin-top:8px;font-size:clamp(19px,2.4vw,30px);font-weight:1000}
+.third-place-duel .tp-vs{color:#fdba74}.third-place-meta{margin-top:8px;color:#cbd5e1;font-weight:800;font-size:13px}
+.hero.mode-champion{min-height:800px!important;background:linear-gradient(180deg,rgba(2,6,23,.25),rgba(2,6,23,.78)),radial-gradient(circle at 50% 38%,rgba(250,204,21,.42),transparent 28%),url("Ceremonia.png?v=1")!important;background-size:cover!important;background-position:center!important}
+.champion-hero{position:relative;width:min(1100px,96vw);margin:26px auto;display:flex;flex-direction:column;align-items:center;text-align:center}
+.champion-crown{font-size:58px;filter:drop-shadow(0 0 24px #facc15);animation:champCrown 1.1s ease-in-out infinite alternate}@keyframes champCrown{to{transform:translateY(-8px) rotate(3deg)}}
+.champion-trophy{width:230px;max-width:55vw;filter:drop-shadow(0 0 30px #facc15) drop-shadow(0 0 90px rgba(250,204,21,.85));animation:gfTrophy 1.4s ease-in-out infinite alternate}
+.champion-flag{width:145px;height:92px;object-fit:cover;border-radius:12px;margin:14px 0;box-shadow:0 0 36px var(--champ-color)}
+.champion-name{font-size:clamp(52px,8vw,112px);line-height:.88;font-weight:1000;text-transform:uppercase;background:linear-gradient(180deg,#fff,#fff7ad,#facc15);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 50px rgba(250,204,21,.34)}
+.champion-result{margin-top:18px;padding:10px 18px;border-radius:999px;background:rgba(6,17,31,.58);border:1px solid rgba(250,204,21,.55);color:#fff7ad;font-weight:1000}
+.mode-champion .ff-hero-actions{margin-top:20px}
+.mode-grand-final .ff-arena,.mode-champion .ff-arena{display:none!important}
+.mode-grand-final #ffActiveMatch,.mode-champion #ffActiveMatch{display:none!important}
+.mode-champion + .ticker{background:linear-gradient(90deg,#d97706,#facc15,#fff7ad,#facc15,#d97706);color:#211500}
+.battle-zone.mode-final-battle .battle-heading small{color:#fde68a}.battle-zone.mode-final-battle{border-color:rgba(250,204,21,.40)}
+.bracket-pro-head.mode-final-head small{background:rgba(250,204,21,.14);border-color:rgba(250,204,21,.45);color:#fde68a}
+@media(max-width:900px){.grand-final-arena{grid-template-columns:1fr;gap:6px}.gf-center{order:2}.gf-team:first-child{order:1}.gf-team:last-child{order:3}.gf-team{min-height:210px}.gf-trophy{width:125px}.gf-team-name{font-size:46px}.third-place-duel{grid-template-columns:1fr}.tp-vs{margin:auto}.hero.mode-grand-final,.hero.mode-champion{min-height:auto!important}}
+
 </style>
 </head>
 
@@ -2271,14 +2349,12 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
           <img src="https://flagcdn.com/w160/fr.png" alt="Francia">
           <span class="ff-team-name">Francia</span>
           <span class="ff-team-alias">El Imperio Azul</span>
-          <span class="ff-team-alias">🐢 "La Tortuga Dictadora"</span>
         </div>
         <div class="ff-mini-vs">VS</div>
         <div class="ff-team" style="--team-color:#ef233c">
           <img src="https://flagcdn.com/w160/es.png" alt="España">
           <span class="ff-team-name">España</span>
           <span class="ff-team-alias">La Furia Roja</span>
-          <span class="ff-team-alias">🎮 "Modo Lamine"</span>
         </div>
       </div>
 
@@ -2294,14 +2370,12 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
           <img src="https://flagcdn.com/w160/gb-eng.png" alt="Inglaterra">
           <span class="ff-team-name">Inglaterra</span>
           <span class="ff-team-alias">Los Caballeros del Reino</span>
-          <span class="ff-team-alias">"It's Coming Home... desde 1966"</span>
         </div>
         <div class="ff-mini-vs">VS</div>
         <div class="ff-team" style="--team-color:#75d7ff">
           <img src="https://flagcdn.com/w160/ar.png" alt="Argentina">
           <span class="ff-team-name">Argentina</span>
           <span class="ff-team-alias">El Último Campeón</span>
-          <span class="ff-team-alias">🐐 "Messi"</span>
         </div>
       </div>
     </div>
@@ -2326,6 +2400,18 @@ to{filter:drop-shadow(0 0 12px rgba(250,204,21,.32))}
 
 
 
+
+
+<section class="battle-zone" id="battleZone">
+  <div class="battle-heading">
+    <small>🎮 Battle UI · Semifinal activa</small>
+    <h2>Centro de Batalla</h2>
+    <p>Solo se muestra el partido marcado como TRUE en la hoja Matches.</p>
+  </div>
+  <div class="battle-scoreboard single" id="battleScoreboard">
+    <div class="battle-empty">Cargando partido activo...</div>
+  </div>
+</section>
 
 <section class="bracket-pro-card">
   <div class="bracket-pro-box">
@@ -3312,6 +3398,8 @@ fifaLink: (String(row[17] || "").trim() || (row.find(cell => String(cell || "").
 
 window.bracketMatches = todosLosPartidos;
 activarFinalFour(todosLosPartidos);
+applyTournamentMode(todosLosPartidos);
+renderBattleCenter(todosLosPartidos);
 renderCinematicDuel();
 renderTodayBracketSummary();
 renderBracketBoard();
@@ -3433,6 +3521,134 @@ function activarFinalFour(matches){
   }else{
     estado.innerHTML='👑 <b>Final Four:</b> Francia · España · Inglaterra · Argentina';
   }
+}
+
+
+/* FASE 2 AFINADA · Renderiza únicamente partidos marcados TRUE */
+function aliasEquipoBatalla(nombre){
+  const n=normalizarFF(limpiarNombreEquipo(nombre));
+  if(n.includes("francia")) return "El Imperio Azul";
+  if(n.includes("espana")) return "La Furia Roja";
+  if(n.includes("inglaterra")) return "Los Caballeros del Reino";
+  if(n.includes("argentina")) return "El Último Campeón";
+  return "Semifinalista";
+}
+function battleMatchMarkup(match){
+  const numero=Number(match.numero)||0;
+  const a=limpiarNombreEquipo(match.local)||"Por definir";
+  const b=limpiarNombreEquipo(match.visitante)||"Por definir";
+  const result=parseResultadoMatch(match.resultado);
+  const state=result.has?"FINAL":"BATTLE DAY";
+  const scoreA=result.has?`<div class="battle-score">${result.a}</div>`:"";
+  const scoreB=result.has?`<div class="battle-score">${result.b}</div>`:"";
+  return `<article class="battle-match" style="--teamA:${colorEquipoFF(a)}44;--teamB:${colorEquipoFF(b)}44">
+    <div class="battle-status-row"><div class="battle-match-no">Semifinal · Partido #${numero}</div><div class="battle-state">${state}</div></div>
+    <div class="battle-duel-row">
+      <div class="battle-side">${flagImg(match.local)}<strong>${a}</strong><span class="battle-alias">${aliasEquipoBatalla(a)}</span>${scoreA}</div>
+      <div class="battle-vs-core">VS</div>
+      <div class="battle-side">${flagImg(match.visitante)}<strong>${b}</strong><span class="battle-alias">${aliasEquipoBatalla(b)}</span>${scoreB}</div>
+    </div>
+    <div class="battle-meta">${match.fecha?`📅 ${match.fecha}`:""}${match.hora?` · ⏰ ${match.hora}`:""}${match.estadio?` · 📍 ${match.estadio}`:""}</div>
+  </article>`;
+}
+function renderBattleCenter(matches){
+  const board=document.getElementById("battleScoreboard");
+  if(!board) return;
+  const activos=(matches||[]).filter(p=>String(p.activo||"").trim().toUpperCase()==="TRUE" && p.numero && p.local && p.visitante);
+  if(!activos.length){
+    board.classList.add("single");
+    board.innerHTML='<div class="battle-empty">No hay ningún partido marcado como TRUE en la hoja Matches.</div>';
+    return;
+  }
+  board.classList.toggle("single",activos.length===1);
+  board.innerHTML=activos.map(battleMatchMarkup).join("");
+}
+
+
+
+/* ==========================================================
+   MOTOR AUTOMÁTICO DE MODOS · VERSIÓN DEFINITIVA
+========================================================== */
+function teamPlain(n){return limpiarNombreEquipo(n)||"Por definir";}
+function teamFlagURL(nombre,size=160){
+  const rawCode=obtenerCodigoEquipo(nombre); const clean=normalizarEquipoFlag(limpiarNombreEquipo(nombre));
+  const codeMap={"ZA":"za","CA":"ca","NL":"nl","MA":"ma","DE":"de","PY":"py","AR":"ar","AU":"au","JP":"jp","HR":"hr","BR":"br","KR":"kr","GB":"gb","EN":"gb-eng","SN":"sn","FR":"fr","PL":"pl","PT":"pt","ES":"es","US":"us","USA":"us","MX":"mx","BE":"be","DK":"dk","UY":"uy","RS":"rs","CO":"co","IT":"it","CH":"ch","SE":"se","TR":"tr","AT":"at","CZ":"cz","PA":"pa","GH":"gh","DZ":"dz","SA":"sa","NZ":"nz","IR":"ir","CI":"ci","CD":"cd","UZ":"uz","JO":"jo","QA":"qa","BA":"ba","HT":"ht","CR":"cr","NO":"no","CW":"cw","TN":"tn","EC":"ec","SC":"gb-sct"};
+  const nameMap={"argentina":"ar","francia":"fr","espana":"es","inglaterra":"gb-eng","marruecos":"ma","noruega":"no","belgica":"be","suiza":"ch","brasil":"br","portugal":"pt","colombia":"co","mexico":"mx","paises bajos":"nl","alemania":"de","paraguay":"py","japon":"jp","suecia":"se","canada":"ca","estados unidos":"us","eeuu":"us","egipto":"eg","cabo verde":"cv"};
+  const c=codeMap[rawCode]||nameMap[clean]; return c?`https://flagcdn.com/w${size}/${c}.png`:"";
+}
+function matchOutcome(match){
+  const r=parseResultadoMatch(match&&match.resultado); if(!match||!r.has) return null;
+  const a=Number(r.a),b=Number(r.b); if(a===b) return null;
+  return {winner:a>b?match.local:match.visitante,loser:a>b?match.visitante:match.local,a:r.a,b:r.b};
+}
+function resolveFinalists(matches){
+  const m104=(matches||[]).find(x=>Number(x.numero)===104);
+  if(m104&&cleanTeamName(m104.local)&&cleanTeamName(m104.visitante)) return [m104.local,m104.visitante];
+  const o101=matchOutcome((matches||[]).find(x=>Number(x.numero)===101));
+  const o102=matchOutcome((matches||[]).find(x=>Number(x.numero)===102));
+  return o101&&o102?[o101.winner,o102.winner]:[];
+}
+function resolveThirdTeams(matches){
+  const m103=(matches||[]).find(x=>Number(x.numero)===103);
+  if(m103&&cleanTeamName(m103.local)&&cleanTeamName(m103.visitante)) return [m103.local,m103.visitante];
+  const o101=matchOutcome((matches||[]).find(x=>Number(x.numero)===101));
+  const o102=matchOutcome((matches||[]).find(x=>Number(x.numero)===102));
+  return o101&&o102?[o101.loser,o102.loser]:[];
+}
+function matchStateLabel(match){return parseResultadoMatch(match&&match.resultado).has?"FINAL":(String(match&&match.activo).toUpperCase()==="TRUE"?"EN JUEGO / ACTIVO":"PRÓXIMAMENTE");}
+function modeTeamBlock(team,side,score){
+  const name=teamPlain(team),url=teamFlagURL(team),color=colorEquipoFF(name);
+  return `<div class="gf-team ${side}" style="--gf-color:${color}">${url?`<img src="${url}" alt="${name}">`:""}<div class="gf-team-name">${name}</div><div class="gf-team-legend">${aliasEquipoBatalla(name)}</div>${score!==""?`<div class="gf-score">${score}</div>`:""}</div>`;
+}
+function renderGrandFinalMode(matches){
+  const hero=document.getElementById("finalFourHero"),arena=document.getElementById("finalFourArena"); if(!hero||!arena)return;
+  const finalMatch=(matches||[]).find(x=>Number(x.numero)===104)||{}; const third=(matches||[]).find(x=>Number(x.numero)===103)||{};
+  const finalists=resolveFinalists(matches); const thirds=resolveThirdTeams(matches); const fr=parseResultadoMatch(finalMatch.resultado);
+  const a=finalists[0]||finalMatch.local||"Finalista 1",b=finalists[1]||finalMatch.visitante||"Finalista 2";
+  hero.className="hero final-four-hero mode-grand-final"; hero.style.setProperty('--ff-left',colorEquipoFF(a));hero.style.setProperty('--ff-right',colorEquipoFF(b));
+  document.querySelector('.ff-stage-pill').textContent='The Grand Final';
+  document.querySelector('.ff-main-title').textContent='LA GRAN FINAL';
+  document.querySelector('.ff-tagline').textContent='Solo quedan dos. Noventa minutos separan la historia de la eternidad.';
+  arena.style.display='grid';arena.className='grand-final-arena';
+  const tpA=thirds[0]||third.local||"Por definir",tpB=thirds[1]||third.visitante||"Por definir"; const tr=parseResultadoMatch(third.resultado);
+  arena.innerHTML=`${modeTeamBlock(a,'left',fr.has?fr.a:'')}<div class="gf-center"><img class="gf-trophy" src="trophy-level-3.png?v=22" alt="Trofeo"><div class="gf-vs">VS</div><div class="gf-meta">${matchStateLabel(finalMatch)}${finalMatch.fecha?` · ${finalMatch.fecha}`:''}${finalMatch.hora?` · ${finalMatch.hora}`:''}</div></div>${modeTeamBlock(b,'right',fr.has?fr.b:'')}<div class="third-place-showcase" style="grid-column:1/-1"><div class="third-place-title">🥉 Batalla por el honor · Tercer lugar</div><div class="third-place-duel"><span>${teamPlain(tpA)}${tr.has?` · ${tr.a}`:''}</span><span class="tp-vs">VS</span><span>${teamPlain(tpB)}${tr.has?` · ${tr.b}`:''}</span></div><div class="third-place-meta">${matchStateLabel(third)}${third.fecha?` · ${third.fecha}`:''}${third.hora?` · ${third.hora}`:''}</div></div>`;
+  const active=document.getElementById('ffActiveMatch');if(active)active.style.display='none';
+}
+function renderChampionMode(matches){
+  const hero=document.getElementById("finalFourHero"),arena=document.getElementById("finalFourArena"); if(!hero||!arena)return;
+  const finalMatch=(matches||[]).find(x=>Number(x.numero)===104); const out=matchOutcome(finalMatch); if(!out)return;
+  const champion=teamPlain(out.winner),url=teamFlagURL(out.winner),color=colorEquipoFF(champion);
+  hero.className="hero final-four-hero mode-champion";
+  document.querySelector('.ff-stage-pill').textContent='Champions';
+  document.querySelector('.ff-main-title').textContent='CAMPEÓN DEL MUNDO';
+  document.querySelector('.ff-tagline').textContent='La batalla terminó. Una selección alcanzó la eternidad.';
+  arena.style.display='flex';arena.className='champion-hero';
+  arena.innerHTML=`<div class="champion-crown"></div><img class="champion-trophy" src="trophy-level-3.png?v=22" alt="Trofeo">${url?`<img class="champion-flag" style="--champ-color:${color}" src="${url}" alt="${champion}">`:''}<div class="champion-name">${champion}</div><div class="champion-result">Final · ${teamPlain(finalMatch.local)} ${out.a}–${out.b} ${teamPlain(finalMatch.visitante)}</div>`;
+  const active=document.getElementById('ffActiveMatch');if(active)active.style.display='none';
+  const ticker=document.getElementById('tickerText');if(ticker)ticker.textContent=`🏆 ${champion.toUpperCase()} ES CAMPEÓN DEL MUNDO · La gloria ya tiene dueño`;
+}
+function updateModeLabels(mode){
+  const heading=document.querySelector('#battleZone .battle-heading'); const bz=document.getElementById('battleZone');
+  const bh=document.querySelector('.bracket-pro-head');
+  if(mode==='grand-final'){
+    if(heading){heading.querySelector('small').textContent='🎮 Battle UI · Recta definitiva';heading.querySelector('h2').textContent='Centro de la Gran Final';heading.querySelector('p').textContent='';}
+    if(bz)bz.classList.add('mode-final-battle');if(bh)bh.classList.add('mode-final-head');
+    const h=document.querySelector('.bracket-pro-head h1');if(h)h.innerHTML='CAMINO A <span>LA COPA</span>';
+  }else if(mode==='champion'){
+    if(heading){heading.querySelector('small').textContent='🏆 Torneo concluido';heading.querySelector('h2').textContent='Batalla Finalizada';heading.querySelector('p').textContent='Consulta el resultado definitivo y el camino completo del campeón.';}
+    if(bz)bz.classList.add('mode-final-battle');
+    const h=document.querySelector('.bracket-pro-head h1');if(h)h.innerHTML='HISTORIA DEL <span>CAMPEÓN</span>';
+  }
+}
+function detectTournamentMode(matches){
+  const finalMatch=(matches||[]).find(x=>Number(x.numero)===104); if(matchOutcome(finalMatch))return 'champion';
+  if(resolveFinalists(matches).length===2)return 'grand-final';
+  return 'final-four';
+}
+function applyTournamentMode(matches){
+  const mode=detectTournamentMode(matches);document.body.dataset.tournamentMode=mode;window.currentTournamentMode=mode;
+  if(mode==='grand-final')renderGrandFinalMode(matches);else if(mode==='champion')renderChampionMode(matches);
+  updateModeLabels(mode);
 }
 
 </script>
